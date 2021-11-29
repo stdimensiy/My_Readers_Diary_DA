@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.vdv.myapp.myreadersdiary.R
 import ru.vdv.myapp.myreadersdiary.domain.Book
 
-class HomeAdapter: RecyclerView.Adapter<HomeViewHolder>() {
+class HomeAdapter : RecyclerView.Adapter<HomeViewHolder>() {
     var items: List<Book> = listOf()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
         val root = LayoutInflater.from(parent.context)
