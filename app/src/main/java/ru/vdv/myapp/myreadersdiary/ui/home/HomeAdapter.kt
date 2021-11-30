@@ -17,6 +17,9 @@ class HomeAdapter : RecyclerView.Adapter<HomeViewHolder>() {
     override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
         val item = items[position]
         holder.titleBook.text = item.title
+        ("${item.producerName} ${item.producerPatronymic} ${item.producerSurname}").also {
+            holder.authorBook.text = it
+        }
     }
 
     override fun onViewDetachedFromWindow(holder: HomeViewHolder) {
