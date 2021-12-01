@@ -9,5 +9,17 @@
 
     <string name="menu_home">Список книг</string>
     <string name="menu_reading_process">Чтение(процесс)</string>
-    <string name="menu_slideshow">Статистика</string>
+    <string name="menu_statistics">Статистика</string>
+    <string name="ImageView_contentDescription_book_cover">Изображение обложки книги</string>
+    <string name="textView_book_title_plug">Наименование книги...</string>
+    <string name="textView_authors_of_the_book_plug">Автор или авторы книги</string>
+    <string name="textView_book_status_plug">Статус прочтения книги</string>
+    <string name="ImageView_contentDescription_sign_of_approval">Иконкф-Флаг признак одобрения</string>
+    <string name="menu_bookDetailsFragment">Информацция о книге</string>
+    <string name="textView_book_details_stub">жанр / группа</string>
+    <string name="textView_book_details_duration">1000 страниц</string>
+    <string name="textView_book_details_rating">Одобрена папой</string>
+    <string name="default_text_book_details_budget">Ориентировочное коичество 100000 слов</string>
+    <string name="default_text_book_details_revenue">Средняя плотнотсь слов на страницу 200</string>
+    <string name="default_text_book_details">Книга запланирована к прочтению в ближайшее время</string>
 </resources>
