@@ -22,4 +22,19 @@
     <string name="default_text_book_details_budget">Ориентировочное коичество 100000 слов</string>
     <string name="default_text_book_details_revenue">Средняя плотнотсь слов на страницу 200</string>
     <string name="default_text_book_details">Книга запланирована к прочтению в ближайшее время</string>
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="settings_title">Общие настройки</string>
 </resources>
