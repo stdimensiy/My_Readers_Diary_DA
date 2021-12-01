@@ -1,8 +1,11 @@
 package ru.vdv.myapp.myreadersdiary.ui.home
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import ru.vdv.myapp.myreadersdiary.R
 import ru.vdv.myapp.myreadersdiary.domain.Book
@@ -24,11 +27,24 @@ class HomeAdapter : RecyclerView.Adapter<HomeViewHolder>() {
         ("${item.producerName} ${item.producerPatronymic} ${item.producerSurname}").also {
             holder.authorBook.text = it
         }
-        imageLoader.loadBookCover("https://dadapproves.ru/usercontent/book/covers/${item.bookCover}" , holder.coverBook)
+        imageLoader.loadBookCover(
+            "https://dadapproves.ru/usercontent/book/covers/${item.bookCover}",
+            holder.coverBook
+        )
+    }
+
+    override fun onViewAttachedToWindow(holder: HomeViewHolder) {
+        val item = items[holder.adapterPosition]
+        holder.itemView.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putParcelable("ARG_BOOK", item)
+            holder.itemView.findNavController().navigate(R.id.bookDetailsFragment, bundle)
+        }
+        super.onViewAttachedToWindow(holder)
     }
 
     override fun onViewDetachedFromWindow(holder: HomeViewHolder) {
-        // не забыть занулить лисенеры
+        holder.itemView.setOnClickListener(null)
         super.onViewDetachedFromWindow(holder)
     }
 

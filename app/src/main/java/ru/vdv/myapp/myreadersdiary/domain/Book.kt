@@ -1,6 +1,8 @@
 package ru.vdv.myapp.myreadersdiary.domain
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
 /**
  * Класс DataModelFD - это модель данных, получаемых от **[Free Dictionary API](https://dictionaryapi.dev/)**
@@ -15,6 +17,7 @@ import com.google.gson.annotations.SerializedName
  * @constructor     создает объект, содержащий информацию о книге
  */
 
+@Parcelize
 data class Book(
     @SerializedName("id")
     val id: String,
@@ -28,4 +31,4 @@ data class Book(
     val producerPatronymic: String,
     @SerializedName("bookCover")
     val bookCover: String,
-)
+) : Parcelable
