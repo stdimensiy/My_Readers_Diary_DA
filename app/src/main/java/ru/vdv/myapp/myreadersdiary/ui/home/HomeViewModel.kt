@@ -19,4 +19,21 @@ class HomeViewModel : ViewModel() {
     }
     val prepareItems: LiveData<List<Book>> = _prepareItems
 
+
+    private val _postResult = MutableLiveData<String>()
+
+//    fun testPost() {
+//        repository.postBook(object : CallBack<Any> {
+//            override fun onResult(result: Any) {
+//                _postResult.value = if (result) {
+//                    "Объект отправлен"
+//                } else {
+//                    "Объект НЕ отправлен"
+//                }
+//            }
+//        })
+//    }
+
+    val postResult: LiveData<String> = _postResult
+
 }

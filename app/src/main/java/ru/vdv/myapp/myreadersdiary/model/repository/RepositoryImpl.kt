@@ -1,5 +1,6 @@
 package ru.vdv.myapp.myreadersdiary.model.repository
 
+import android.util.Log
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -21,5 +22,52 @@ class RepositoryImpl() : Repository {
                 //TODO("Not yet implemented")
             }
         })
+    }
+
+    override fun postBook(callBack: CallBack<Any>) {
+        networkService.postBook(
+            "test-user",
+            Book(
+                "id123",
+                "Тестовое наименование",
+                "тестовый автор",
+                "Имя тестового автора",
+                "Отчество",
+                ""
+            )
+        ).enqueue(object :Callback<Any>{
+            override fun onResponse(call: Call<Any>, response: Response<Any>) {
+                response.body()?.let {callBack.onResult(true)}
+            }
+
+            override fun onFailure(call: Call<Any>, t: Throwable) {
+                //TODO("Not yet implemented")
+                Log.d("Моя проверка", "Чтото пошло не так $t")
+            }
+        })
+    }
+
+    override fun patchBook(callBack: CallBack<Any>) {
+        TODO("Not yet implemented")
+    }
+
+    override fun deleteBook(callBack: CallBack<Any>) {
+        TODO("Not yet implemented")
+    }
+
+    override fun putBook(callBack: CallBack<Any>) {
+        TODO("Not yet implemented")
+    }
+
+    override fun headBook(callBack: CallBack<Any>) {
+        TODO("Not yet implemented")
+    }
+
+    override fun optionsBook(callBack: CallBack<Any>) {
+        TODO("Not yet implemented")
+    }
+
+    override fun httpBook(callBack: CallBack<Any>) {
+        TODO("Not yet implemented")
     }
 }
