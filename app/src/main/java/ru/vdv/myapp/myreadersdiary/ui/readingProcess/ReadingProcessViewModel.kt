@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import ru.vdv.myapp.myreadersdiary.domain.Book
 import ru.vdv.myapp.myreadersdiary.domain.CallBack
 import ru.vdv.myapp.myreadersdiary.model.repository.RepositoryImpl
 
@@ -27,14 +28,9 @@ class ReadingProcessViewModel : ViewModel() {
 
     fun testGet(){
         Log.d("Моя проверка", "VM / Запущен метод TestGet")
-        repository.postBook(object : CallBack<Any> {
-            override fun onResult(result: Any) {
-                Log.d("Моя проверка", "VM результат: $result")
-//                value = if (result) {
-//                    "Объект отправлен"
-//                } else {
-//                    "Объект НЕ отправлен"
-//                }
+        repository.getListOfBooks(object : CallBack<List<Book>> {
+            override fun onResult(value: List<Book>) {
+                Log.d("Моя проверка", "VM результат: $value")
             }
         })
     }

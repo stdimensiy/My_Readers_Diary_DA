@@ -72,15 +72,7 @@ class RepositoryImpl() : Repository {
 
     override fun deleteBook(callBack: CallBack<Any>) {
         networkService.deleteBook(
-            "test-user",
-            Book(
-                "id123",
-                "Тестовое наименование",
-                "тестовый автор",
-                "Имя тестового автора",
-                "Отчество",
-                ""
-            )
+            "test-user"
         ).enqueue(object : Callback<Any> {
             override fun onResponse(call: Call<Any>, response: Response<Any>) {
                 response.body()?.let { callBack.onResult(true) }

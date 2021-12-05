@@ -36,7 +36,6 @@ interface ApiService {
     @DELETE("books")
     fun deleteBook(
         @Header("dauser") user: String,
-        @Body book: Book
     ): Call<Any>
 
     @PUT("books")
