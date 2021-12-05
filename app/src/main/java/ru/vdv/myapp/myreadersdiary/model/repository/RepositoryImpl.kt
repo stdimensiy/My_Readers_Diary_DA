@@ -35,9 +35,9 @@ class RepositoryImpl() : Repository {
                 "Отчество",
                 ""
             )
-        ).enqueue(object :Callback<Any>{
+        ).enqueue(object : Callback<Any> {
             override fun onResponse(call: Call<Any>, response: Response<Any>) {
-                response.body()?.let {callBack.onResult(true)}
+                response.body()?.let { callBack.onResult(true) }
             }
 
             override fun onFailure(call: Call<Any>, t: Throwable) {
@@ -48,26 +48,140 @@ class RepositoryImpl() : Repository {
     }
 
     override fun patchBook(callBack: CallBack<Any>) {
-        TODO("Not yet implemented")
+        networkService.patchBook(
+            "test-user",
+            Book(
+                "id123",
+                "Тестовое наименование",
+                "тестовый автор",
+                "Имя тестового автора",
+                "Отчество",
+                ""
+            )
+        ).enqueue(object : Callback<Any> {
+            override fun onResponse(call: Call<Any>, response: Response<Any>) {
+                response.body()?.let { callBack.onResult(true) }
+            }
+
+            override fun onFailure(call: Call<Any>, t: Throwable) {
+                //TODO("Not yet implemented")
+                Log.d("Моя проверка", "Чтото пошло не так $t")
+            }
+        })
     }
 
     override fun deleteBook(callBack: CallBack<Any>) {
-        TODO("Not yet implemented")
+        networkService.deleteBook(
+            "test-user",
+            Book(
+                "id123",
+                "Тестовое наименование",
+                "тестовый автор",
+                "Имя тестового автора",
+                "Отчество",
+                ""
+            )
+        ).enqueue(object : Callback<Any> {
+            override fun onResponse(call: Call<Any>, response: Response<Any>) {
+                response.body()?.let { callBack.onResult(true) }
+            }
+
+            override fun onFailure(call: Call<Any>, t: Throwable) {
+                //TODO("Not yet implemented")
+                Log.d("Моя проверка", "Чтото пошло не так $t")
+            }
+        })
     }
 
     override fun putBook(callBack: CallBack<Any>) {
-        TODO("Not yet implemented")
+        networkService.putBook(
+            "test-user",
+            Book(
+                "id123",
+                "Тестовое наименование",
+                "тестовый автор",
+                "Имя тестового автора",
+                "Отчество",
+                ""
+            )
+        ).enqueue(object : Callback<Any> {
+            override fun onResponse(call: Call<Any>, response: Response<Any>) {
+                response.body()?.let { callBack.onResult(true) }
+            }
+
+            override fun onFailure(call: Call<Any>, t: Throwable) {
+                //TODO("Not yet implemented")
+                Log.d("Моя проверка", "Чтото пошло не так $t")
+            }
+        })
     }
 
     override fun headBook(callBack: CallBack<Any>) {
-        TODO("Not yet implemented")
+        networkService.headBook(
+            "test-user",
+            Book(
+                "id123",
+                "Тестовое наименование",
+                "тестовый автор",
+                "Имя тестового автора",
+                "Отчество",
+                ""
+            )
+        ).enqueue(object : Callback<Any> {
+            override fun onResponse(call: Call<Any>, response: Response<Any>) {
+                response.body()?.let { callBack.onResult(true) }
+            }
+
+            override fun onFailure(call: Call<Any>, t: Throwable) {
+                //TODO("Not yet implemented")
+                Log.d("Моя проверка", "Чтото пошло не так $t")
+            }
+        })
     }
 
     override fun optionsBook(callBack: CallBack<Any>) {
-        TODO("Not yet implemented")
+        networkService.optionsBook(
+            "test-user",
+            Book(
+                "id123",
+                "Тестовое наименование",
+                "тестовый автор",
+                "Имя тестового автора",
+                "Отчество",
+                ""
+            )
+        ).enqueue(object : Callback<Any> {
+            override fun onResponse(call: Call<Any>, response: Response<Any>) {
+                response.body()?.let { callBack.onResult(true) }
+            }
+
+            override fun onFailure(call: Call<Any>, t: Throwable) {
+                //TODO("Not yet implemented")
+                Log.d("Моя проверка", "Чтото пошло не так $t")
+            }
+        })
     }
 
     override fun httpBook(callBack: CallBack<Any>) {
-        TODO("Not yet implemented")
+        networkService.httpBook(
+            "test-user",
+            Book(
+                "id123",
+                "Тестовое наименование",
+                "тестовый автор",
+                "Имя тестового автора",
+                "Отчество",
+                ""
+            )
+        ).enqueue(object : Callback<Any> {
+            override fun onResponse(call: Call<Any>, response: Response<Any>) {
+                response.body()?.let { callBack.onResult(true) }
+            }
+
+            override fun onFailure(call: Call<Any>, t: Throwable) {
+                //TODO("Not yet implemented")
+                Log.d("Моя проверка", "Чтото пошло не так $t")
+            }
+        })
     }
 }
