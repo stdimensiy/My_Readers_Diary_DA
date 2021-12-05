@@ -23,18 +23,23 @@
     <string name="default_text_book_details_revenue">Средняя плотнотсь слов на страницу 200</string>
     <string name="default_text_book_details">Книга запланирована к прочтению в ближайшее время</string>
     <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="sync_header">Sync</string>
+    <string name="main_settings_header">Основные настройки пользователя</string>
+    <string name="approves_header">Разрешения для куратора</string>
 
     <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
+    <string name="login_title">Ник - логин пользователя</string>
+    <string name="reply_title">Одобрение событий и записей</string>
 
     <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    <string name="view_the_list_of_books_title">Просмотр списка книг</string>
+    <string name="view_the_list_of_books_on">Куратор (родитель) может просматривать мой список книг
     </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="view_the_list_of_books_off">Никто не может получить список книг кроме самого пользователя</string>
+    <string name="edit_the_list_of_books_title">Изменение списка книг</string>
+    <string name="edit_the_list_of_books_on">Куратор (родитель) может вносить изменения в мой список книг
+    </string>
+    <string name="edit_the_list_of_books_off">Никто не может вносить изменения, удалять и добавлять книги в мой список</string>
     <string name="settings_title">Общие настройки</string>
+    <string name="name_title">Имя пользователя</string>
+    <string name="surname_title">Фамилия</string>
 </resources>

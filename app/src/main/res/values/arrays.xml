@@ -1,12 +1,12 @@
 <resources>
     <!-- Reply Preference -->
-    <string-array name="reply_entries">
-        <item>Reply</item>
-        <item>Reply to all</item>
+    <string-array name="approved_entries">
+        <item>Одобряемые</item>
+        <item>НЕ требуют одобрения</item>
     </string-array>
 
-    <string-array name="reply_values">
-        <item>reply</item>
-        <item>reply_all</item>
+    <string-array name="approved_values">
+        <item>approved</item>
+        <item>disapproved</item>
     </string-array>
 </resources>
