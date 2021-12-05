@@ -22,4 +22,24 @@
     <string name="default_text_book_details_budget">Ориентировочное коичество 100000 слов</string>
     <string name="default_text_book_details_revenue">Средняя плотнотсь слов на страницу 200</string>
     <string name="default_text_book_details">Книга запланирована к прочтению в ближайшее время</string>
+    <!-- Preference Titles -->
+    <string name="main_settings_header">Основные настройки пользователя</string>
+    <string name="approves_header">Разрешения для куратора</string>
+
+    <!-- Messages Preferences -->
+    <string name="login_title">Ник - логин пользователя</string>
+    <string name="reply_title">Одобрение событий и записей</string>
+
+    <!-- Sync Preferences -->
+    <string name="view_the_list_of_books_title">Просмотр списка книг</string>
+    <string name="view_the_list_of_books_on">Куратор (родитель) может просматривать мой список книг
+    </string>
+    <string name="view_the_list_of_books_off">Никто не может получить список книг кроме самого пользователя</string>
+    <string name="edit_the_list_of_books_title">Изменение списка книг</string>
+    <string name="edit_the_list_of_books_on">Куратор (родитель) может вносить изменения в мой список книг
+    </string>
+    <string name="edit_the_list_of_books_off">Никто не может вносить изменения, удалять и добавлять книги в мой список</string>
+    <string name="settings_title">Общие настройки</string>
+    <string name="name_title">Имя пользователя</string>
+    <string name="surname_title">Фамилия</string>
 </resources>

@@ -28,7 +28,11 @@
         tools:layout="@layout/fragment_statistics" />
     <fragment
         android:id="@+id/bookDetailsFragment"
-        android:name="ru.vdv.myapp.myreadersdiary.ui.details.BookDetailsFragment"
+        android:name="ru.vdv.myapp.myreadersdiary.ui.book.BookDetailsFragment"
         android:label="@string/menu_bookDetailsFragment"
         tools:layout="@layout/book_details_fragment" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="ru.vdv.myapp.myreadersdiary.ui.user.SettingsFragment"
+        android:label="@string/settings_title" />
 </navigation>
