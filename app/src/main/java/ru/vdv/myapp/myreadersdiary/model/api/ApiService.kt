@@ -3,6 +3,7 @@ package ru.vdv.myapp.myreadersdiary.model.api
 import retrofit2.Call
 import retrofit2.http.*
 import ru.vdv.myapp.myreadersdiary.domain.Book
+import ru.vdv.myapp.myreadersdiary.domain.User
 
 interface ApiService {
     /**
@@ -20,6 +21,13 @@ interface ApiService {
         @Header("user") user: String,
         @Header("page") page: Int,
     ): Call<List<Book>>
+
+    //для целей тестирования реализованы 8 основных методов (REST протоколов)
+    @GET("user")
+    fun getUserInfo(
+        @Header("api_key") key: String,
+        @Header("login") user: String,
+    ): Call<User>
 
     @POST("books")
     fun postBook(
