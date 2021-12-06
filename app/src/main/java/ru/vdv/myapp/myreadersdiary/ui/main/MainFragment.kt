@@ -31,23 +31,24 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
-        viewModel.fetchCurrentUser(PreferenceManager.getDefaultSharedPreferences(context).getString("login","132"))
+        viewModel.fetchCurrentUser(
+            PreferenceManager.getDefaultSharedPreferences(context).getString("login", "132")
+        )
 
         _binding = MainFragmentBinding.inflate(inflater, container, false)
-        val root:View = binding.root
+        val root: View = binding.root
         return root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //запрос данных пользователя подписка на результат
-        viewModel.currentUser.observe(viewLifecycleOwner, Observer{
+        viewModel.currentUser.observe(viewLifecycleOwner, Observer {
             setName(it.name)
             setImageAvatar(it.avatarUrl)
             setCustomBackgroundImage(it.backgroundUrl)
         })
 
-        //binding.tvMain.text = PreferenceManager.getDefaultSharedPreferences(context).getString("login","Логин")
         val section1 = DonutSection(
             name = "section_1",
             color = Color.parseColor("#FFB98E"),
@@ -82,11 +83,10 @@ class MainFragment : Fragment() {
     fun setDonatChartData(section1: DonutSection, section2: DonutSection): Unit =
         with(binding) {
             donutView.cap = 5f
-            donutView.gapAngleDegrees =-45f
+            donutView.gapAngleDegrees = -45f
             donutView.gapWidthDegrees = 60f
             donutView.submitData(listOf(section1, section2))
         }
-
 
 
 }

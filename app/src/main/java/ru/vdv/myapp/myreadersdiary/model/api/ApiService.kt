@@ -17,7 +17,7 @@ interface ApiService {
     //для целей тестирования реализованы 8 основных методов (REST протоколов)
     @GET("books")
     fun getListOfBooks(
-        @Header("api_key") key: String,
+        @Header("apiKey") key: String,
         @Header("user") user: String,
         @Header("page") page: Int,
     ): Call<List<Book>>
@@ -25,8 +25,8 @@ interface ApiService {
     //для целей тестирования реализованы 8 основных методов (REST протоколов)
     @GET("user")
     fun getUserInfo(
-        @Header("api_key") key: String,
-        @Header("login") user: String,
+        @Header("apiKey") key: String,
+        @Header("daUserLogin") user: String,
     ): Call<User>
 
     @POST("books")

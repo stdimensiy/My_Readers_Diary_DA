@@ -26,9 +26,13 @@ class RepositoryImpl() : Repository {
     }
 
     override fun getUserInfo(userLogin: String, callBack: CallBack<User>) {
-        networkService.getUserInfo("123-321321321","DarthVerteliy").enqueue(object : Callback<User> {
+        Log.d("Моя проверка", "Передан параметр: $userLogin")
+        networkService.getUserInfo("123-321321321",userLogin).enqueue(object : Callback<User> {
             override fun onResponse(call: Call<User>, response: Response<User>) {
-                response.body()?.let { callBack.onResult(it) }
+                response.body()?.let {
+                    //callBack.onResult(it)
+                    Log.d("Моя проверка", "Результат вернулься: $it")
+                }
             }
 
             override fun onFailure(call: Call<User>, t: Throwable) {
