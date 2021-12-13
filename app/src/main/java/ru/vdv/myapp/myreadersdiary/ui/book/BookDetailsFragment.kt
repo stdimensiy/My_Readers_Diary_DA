@@ -1,4 +1,4 @@
-package ru.vdv.myapp.myreadersdiary.ui.details
+package ru.vdv.myapp.myreadersdiary.ui.book
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle

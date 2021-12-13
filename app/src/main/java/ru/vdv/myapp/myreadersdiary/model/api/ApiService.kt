@@ -1,9 +1,9 @@
 package ru.vdv.myapp.myreadersdiary.model.api
 
 import retrofit2.Call
-import retrofit2.http.GET
-import retrofit2.http.Header
+import retrofit2.http.*
 import ru.vdv.myapp.myreadersdiary.domain.Book
+import ru.vdv.myapp.myreadersdiary.domain.User
 
 interface ApiService {
     /**
@@ -13,10 +13,60 @@ interface ApiService {
      * @param page ......... - номер запрашиваемой страницы ( >=1 )
      * @return возвращает список книг пользователя...
      */
+
+    //для целей тестирования реализованы 8 основных методов (REST протоколов)
     @GET("books")
     fun getListOfBooks(
-        @Header("api_key") key: String,
+        @Header("apiKey") key: String,
         @Header("user") user: String,
         @Header("page") page: Int,
     ): Call<List<Book>>
+
+    //для целей тестирования реализованы 8 основных методов (REST протоколов)
+    @GET("user")
+    fun getUserInfo(
+        @Header("apiKey") key: String,
+        @Header("daUserLogin") user: String,
+    ): Call<User>
+
+    @POST("books")
+    fun postBook(
+        @Header("dauser") user: String,
+        @Body book: Book
+    ): Call<Any>
+
+    @PATCH("books")
+    fun patchBook(
+        @Header("dauser") user: String,
+        @Body book: Book
+    ): Call<Any>
+
+    @DELETE("books")
+    fun deleteBook(
+        @Header("dauser") user: String,
+    ): Call<Any>
+
+    @PUT("books")
+    fun putBook(
+        @Header("dauser") user: String,
+        @Body book: Book
+    ): Call<Any>
+
+    @HEAD("books")
+    fun headBook(
+        @Header("dauser") user: String,
+        @Body book: Book
+    ): Call<Any>
+
+    @OPTIONS("books")
+    fun optionsBook(
+        @Header("dauser") user: String,
+        @Body book: Book
+    ): Call<Any>
+
+    @HTTP(method = "get", path = "books", hasBody = false)
+    fun httpBook(
+        @Header("dauser") user: String,
+        @Body book: Book
+    ): Call<Any>
 }

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
+    app:startDestination="@id/nav_main">
 
     <fragment
         android:id="@+id/nav_home"
@@ -28,7 +28,29 @@
         tools:layout="@layout/fragment_statistics" />
     <fragment
         android:id="@+id/bookDetailsFragment"
-        android:name="ru.vdv.myapp.myreadersdiary.ui.details.BookDetailsFragment"
+        android:name="ru.vdv.myapp.myreadersdiary.ui.book.BookDetailsFragment"
         android:label="@string/menu_bookDetailsFragment"
         tools:layout="@layout/book_details_fragment" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="ru.vdv.myapp.myreadersdiary.ui.user.SettingsFragment"
+        android:label="@string/settings_title" />
+    <fragment
+        android:id="@+id/nav_main"
+        android:name="ru.vdv.myapp.myreadersdiary.ui.main.MainFragment"
+        android:label="@string/main_fragment_title"
+        tools:layout="@layout/main_fragment" >
+        <action
+            android:id="@+id/action_nav_main_to_nav_home"
+            app:destination="@id/nav_home" />
+        <action
+            android:id="@+id/action_nav_main_to_nav_reading_process"
+            app:destination="@id/nav_reading_process" />
+        <action
+            android:id="@+id/action_nav_main_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_nav_main_to_nav_statistics"
+            app:destination="@id/nav_statistics" />
+    </fragment>
 </navigation>

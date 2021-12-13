@@ -1,6 +1,7 @@
 package ru.vdv.myapp.myreadersdiary.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,6 +46,10 @@ class HomeFragment : Fragment() {
         homeViewModel.prepareItems.observe(viewLifecycleOwner, Observer {
             adapter.items = it
             adapter.notifyDataSetChanged()
+        })
+
+        homeViewModel.postResult.observe(viewLifecycleOwner, Observer {
+            Log.d("Моя проверка", "Фрагмент. Результат получен $it")
         })
 
     }
