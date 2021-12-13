@@ -42,4 +42,7 @@
     <string name="settings_title">Общие настройки</string>
     <string name="name_title">Имя пользователя</string>
     <string name="surname_title">Фамилия</string>
+    <string name="main_fragment_title">Мой прогресс</string>
+    <string name="menu_main">Главная</string>
+    <string name="iv_userListItem_contentDescription">Рамочка вокруг аваатара</string>
 </resources>
