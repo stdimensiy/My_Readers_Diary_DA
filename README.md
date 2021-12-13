@@ -14,7 +14,7 @@
 так и для родителя. Ряд отчетов для всех видов пользователей одинаковый, часть функций имеет
 существенные отличия.
 ## Мои проекты
-| <video src="https://user-images.githubusercontent.com/73497940/145891700-49e7ac00-5174-4433-8af8-216719b7ea7b.mp4"></video> |  | <video src="https://user-images.githubusercontent.com/73497940/118872693-843ab080-b8f1-11eb-91a3-fe212b9bfac7.mp4"></video> |
+| <video src="https://user-images.githubusercontent.com/73497940/145891700-49e7ac00-5174-4433-8af8-216719b7ea7b.mp4"></video> |  | <img src="https://raw.githubusercontent.com/stdimensiy/My_Readers_Diary_DA/develop/snapshots/my_readers_diary_menu.jpg" width="300" title="Домашний фрагмент"> |
 |:--------------------------------:|:--------------------------------:|:--------------------------------:|
 | Запуск и настройки | Меню| Список книг |
 | `в разработке` | `в разработке` | `в разработке` |
