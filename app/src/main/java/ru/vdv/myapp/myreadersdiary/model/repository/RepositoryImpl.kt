@@ -6,6 +6,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import ru.vdv.myapp.myreadersdiary.domain.Book
 import ru.vdv.myapp.myreadersdiary.domain.CallBack
+import ru.vdv.myapp.myreadersdiary.domain.User
 import ru.vdv.myapp.myreadersdiary.model.api.ApiService
 import ru.vdv.myapp.myreadersdiary.model.retrofit.Common
 
@@ -21,6 +22,23 @@ class RepositoryImpl() : Repository {
             override fun onFailure(call: Call<List<Book>>, t: Throwable) {
                 //TODO("Not yet implemented")
             }
+        })
+    }
+
+    override fun getUserInfo(userLogin: String, callBack: CallBack<User>) {
+        Log.d("Моя проверка", "Передан параметр: $userLogin")
+        networkService.getUserInfo("123-321321321",userLogin).enqueue(object : Callback<User> {
+            override fun onResponse(call: Call<User>, response: Response<User>) {
+                response.body()?.let {
+                    //callBack.onResult(it)
+                    Log.d("Моя проверка", "Результат вернулься: $it")
+                }
+            }
+
+            override fun onFailure(call: Call<User>, t: Throwable) {
+                //TODO("Not yet implemented")
+            }
+
         })
     }
 

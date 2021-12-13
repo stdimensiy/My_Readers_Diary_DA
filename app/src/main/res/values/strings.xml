@@ -43,4 +43,7 @@
     <string name="name_title">Имя пользователя</string>
     <string name="surname_title">Фамилия</string>
     <string name="main_curator_title">Основной куратор</string>
+    <string name="main_fragment_title">Мой прогресс</string>
+    <string name="menu_main">Главная</string>
+    <string name="iv_userListItem_contentDescription">Рамочка вокруг аваатара</string>
 </resources>

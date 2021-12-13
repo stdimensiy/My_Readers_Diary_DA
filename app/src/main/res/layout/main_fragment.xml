@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="450dp"
+    android:layout_margin="8dp"
+    android:checkable="true"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="4dp"
+    app:contentPadding="0dp"
+    app:rippleColor="#837A33F8">
+
+    <!-- Media -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- Фон медиачасти карточки-->
+        <ImageView
+            android:id="@+id/iv_user_custom_bg_image"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:alpha="0.3"
+            android:contentDescription="бубубу"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/bg1_01_2"
+            tools:ignore="MissingConstraints" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <!-- Title, secondary and supporting text -->
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Имя пользователя"
+                android:textAppearance="?attr/textAppearanceHeadline6" />
+
+            <app.futured.donut.DonutProgressView
+                android:id="@+id/donut_view"
+                android:layout_width="78dp"
+                android:layout_height="91dp"
+                android:layout_margin="4dp"
+                app:donut_bgLineColor="@color/purple_500"
+                app:donut_gapAngle="90"
+                app:donut_gapWidth="70"
+                app:donut_strokeCap="round"
+                app:donut_strokeWidth="4dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Второстепенный тескт"
+                android:textAppearance="?attr/textAppearanceBody2"
+                android:textColor="?android:attr/textColorSecondary" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Описание еще больше текста аот както так"
+                android:textAppearance="?attr/textAppearanceBody2"
+                android:textColor="?android:attr/textColorSecondary" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:orientation="vertical"
+        android:padding="16dp"
+        tools:ignore="MissingClass">
+
+        <ImageView
+            android:id="@+id/iv_user_avatar"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center|center_horizontal"
+            android:layout_margin="0dp"
+            android:background="@drawable/round_border_style"
+            android:contentDescription="@string/iv_userListItem_contentDescription"
+            android:cropToPadding="false"
+            android:padding="4dp"
+            android:src="@drawable/ic_baseline_account_circle_24" />
+
+<!--        <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            tools:ignore="MissingClass">-->
+
+        <!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:gravity="center"-->
+<!--                android:text="1"-->
+<!--                android:textAlignment="center"-->
+<!--                android:textColor="@color/purple_500"-->
+<!--                android:textSize="20sp"-->
+<!--                android:textStyle="bold"-->
+<!--                android:typeface="normal"-->
+<!--                app:layout_constraintBottom_toBottomOf="@+id/donut_view3"-->
+<!--                app:layout_constraintEnd_toEndOf="@+id/donut_view3"-->
+<!--                app:layout_constraintStart_toStartOf="@+id/donut_view3"-->
+<!--                app:layout_constraintTop_toTopOf="@+id/donut_view3" />-->
+
+
+<!--            <app.futured.donut.DonutProgressView-->
+<!--                android:id="@+id/donut_view2"-->
+<!--                android:layout_width="40dp"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:layout_margin="4dp"-->
+<!--                app:donut_bgLineColor="@color/purple_500"-->
+<!--                app:donut_gapAngle="90"-->
+<!--                app:donut_gapWidth="70"-->
+<!--                app:donut_strokeCap="butt"-->
+<!--                app:donut_strokeWidth="4dp"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toStartOf="@+id/donut_view"-->
+<!--                app:layout_constraintTop_toTopOf="parent" />-->
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:gravity="center"-->
+<!--                android:text="99"-->
+<!--                android:textAlignment="center"-->
+<!--                android:textColor="@color/purple_500"-->
+<!--                android:textSize="20sp"-->
+<!--                android:textStyle="bold"-->
+<!--                android:typeface="normal"-->
+<!--                app:layout_constraintBottom_toBottomOf="@+id/donut_view2"-->
+<!--                app:layout_constraintEnd_toEndOf="@+id/donut_view2"-->
+<!--                app:layout_constraintStart_toStartOf="@+id/donut_view2"-->
+<!--                app:layout_constraintTop_toTopOf="@+id/donut_view2" />-->
+
+<!--            <app.futured.donut.DonutProgressView-->
+<!--                android:id="@+id/donut_view3"-->
+<!--                android:layout_width="40dp"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:layout_margin="4dp"-->
+<!--                app:donut_bgLineColor="@color/purple_500"-->
+<!--                app:donut_gapAngle="90"-->
+<!--                app:donut_gapWidth="70"-->
+<!--                app:donut_strokeCap="butt"-->
+<!--                app:donut_strokeWidth="4dp"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toStartOf="@+id/donut_view2"-->
+<!--                app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:gravity="center"-->
+<!--                android:text="999"-->
+<!--                android:textAlignment="center"-->
+<!--                android:textColor="@color/purple_500"-->
+<!--                android:textSize="16sp"-->
+<!--                android:textStyle="bold"-->
+<!--                android:typeface="normal"-->
+<!--                app:layout_constraintBottom_toBottomOf="@+id/donut_view"-->
+<!--                app:layout_constraintEnd_toEndOf="@+id/donut_view"-->
+<!--                app:layout_constraintStart_toStartOf="@+id/donut_view"-->
+<!--                app:layout_constraintTop_toTopOf="@+id/donut_view" />-->
+<!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
+    </LinearLayout>
+
+    <!--            <TextView-->
+    <!--                android:id="@+id/tv_name"-->
+    <!--                android:layout_width="0dp"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:layout_marginStart="4dp"-->
+    <!--                android:layout_marginEnd="4dp"-->
+    <!--                android:text="@string/tv_userListItem_text_plug"-->
+    <!--                android:textAlignment="textStart"-->
+    <!--                android:textSize="16sp"-->
+    <!--                android:textStyle="bold|italic"-->
+    <!--                app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--                app:layout_constraintEnd_toEndOf="parent"-->
+    <!--                app:layout_constraintStart_toEndOf="@id/iv_user_avatar"-->
+    <!--                app:layout_constraintTop_toTopOf="parent" />-->
+
+    <!--        </LinearLayout>-->
+
+
+    <!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
+</com.google.android.material.card.MaterialCardView>
