@@ -23,6 +23,11 @@
             app:title="@string/reply_title"
             app:useSimpleSummaryProvider="true" />
 
+        <EditTextPreference
+            app:key="main_curator"
+            app:title="@string/main_curator_title"
+            app:useSimpleSummaryProvider="true" />
+
     </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/approves_header">
