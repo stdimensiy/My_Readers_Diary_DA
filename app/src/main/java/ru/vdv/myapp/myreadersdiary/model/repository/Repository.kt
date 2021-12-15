@@ -15,6 +15,7 @@ interface Repository {
     fun headBook(callBack: CallBack<Any>)
     fun optionsBook(callBack: CallBack<Any>)
     fun httpBook(callBack: CallBack<Any>)
+
     //модуль EVENT
     fun getEventsList(callBack: CallBack<List<Event>>)
     fun setEvent(callBack: CallBack<Event>)

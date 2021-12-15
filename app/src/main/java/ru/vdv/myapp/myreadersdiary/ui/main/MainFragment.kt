@@ -48,11 +48,12 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val listOfEvent = binding.listOfEvents
         listOfEvent.adapter = adapter
-        listOfEvent.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
-        viewModel.prepareEventList.observe(viewLifecycleOwner, {
+        listOfEvent.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        viewModel.prepareEventList.observe(viewLifecycleOwner) {
             adapter.items = it
             adapter.notifyDataSetChanged()
-        })
+        }
         //запрос данных пользователя подписка на результат
         viewModel.currentUser.observe(viewLifecycleOwner, Observer {
             setName(it.name)
