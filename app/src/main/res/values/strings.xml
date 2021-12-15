@@ -46,4 +46,7 @@
     <string name="main_fragment_title">Мой прогресс</string>
     <string name="menu_main">Главная</string>
     <string name="iv_userListItem_contentDescription">Рамочка вокруг аваатара</string>
+    <string name="textView_event_title_plug">Выполнено такое-то действие</string>
+    <string name="textView_fix_data_event_plug">" день нед. / 15.12.2021 (18:20)"</string>
+    <string name="textView_event_body_plug">Описание события (коротко)</string>
 </resources>

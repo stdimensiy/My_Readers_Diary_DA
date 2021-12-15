@@ -10,13 +10,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.preference.PreferenceManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import app.futured.donut.DonutSection
 import ru.vdv.myapp.myreadersdiary.databinding.MainFragmentBinding
 import ru.vdv.myapp.myreadersdiary.glide.GlideImageLoader
+import ru.vdv.myapp.myreadersdiary.ui.home.HomeAdapter
 
 class MainFragment : Fragment() {
     private val imageLoader = GlideImageLoader()
     private var _binding: MainFragmentBinding? = null
+    private lateinit var adapter: MainEventsAdapter
 
     companion object {
         fun newInstance() = MainFragment()
@@ -30,6 +33,7 @@ class MainFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        adapter = MainEventsAdapter()
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         viewModel.fetchCurrentUser(
             PreferenceManager.getDefaultSharedPreferences(context).getString("login", "132")
@@ -42,6 +46,13 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val listOfEvent = binding.listOfEvents
+        listOfEvent.adapter = adapter
+        listOfEvent.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
+        viewModel.prepareEventList.observe(viewLifecycleOwner, {
+            adapter.items = it
+            adapter.notifyDataSetChanged()
+        })
         //запрос данных пользователя подписка на результат
         viewModel.currentUser.observe(viewLifecycleOwner, Observer {
             setName(it.name)

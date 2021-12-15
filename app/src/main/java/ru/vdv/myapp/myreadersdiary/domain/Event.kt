@@ -3,6 +3,7 @@ package ru.vdv.myapp.myreadersdiary.domain
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
+import java.util.*
 
 /**
  * Класс Event - это модель данных, получаемых от **[Dad Approves API](https://dadapproves.ru/)**
@@ -23,9 +24,9 @@ data class Event(
     @SerializedName("title")
     val title: String,
     @SerializedName("dateTime")
-    val dateTime: String,
+    val dateTime: Date,
     @SerializedName("representedDateTime")
-    val representedDateTime: String,
+    val representedDateTime: Date,
     @SerializedName("type")
     val type: String,
     @SerializedName("baseObject")
