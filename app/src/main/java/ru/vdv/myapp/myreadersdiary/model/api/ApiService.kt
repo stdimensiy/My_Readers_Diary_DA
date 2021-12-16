@@ -8,14 +8,14 @@ import ru.vdv.myapp.myreadersdiary.domain.User
 
 interface ApiService {
     /**
-     * Режим: API/BOOKS      - при таком запросе возвращается список книг пользователя
-     * @param user ......... - Идентификатор пользователя, список книг которого запрашивается
-     * @param key .......... - базовый ключ пользователя API key
-     * @param page ......... - номер запрашиваемой страницы ( >=1 )
-     * @return возвращает список книг пользователя...
-     */
-
-    //для целей тестирования реализованы 8 основных методов (REST протоколов)
+    ## Компонент **BOOKS**   - (Книги / списки книг)
+    >### Интерфейс обращения API Service **GET** .../books в документации **[Dad Approves API Docs](https://dadapproves.ru/docs/reference-users.php#patch-user)**
+     * @param user Идентификатор пользователя, список книг которого запрашивается
+     * @param key Ключ <code>пользователя API</code> key
+     * @param page номер запрашиваемой страницы ( >=1 )
+     * @return возвращает список объектов *[Book]*
+     * @throws NullPointerException
+     **/
     @GET("books")
     fun getListOfBooks(
         @Header("apiKey") key: String,
