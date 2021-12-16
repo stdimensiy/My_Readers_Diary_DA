@@ -26,7 +26,7 @@ class ReadingProcessViewModel : ViewModel() {
 
     val text: LiveData<String> = _text
 
-    fun testGet(){
+    fun testGet() {
         Log.d("Моя проверка", "VM / Запущен метод TestGet")
         repository.getListOfBooks(object : CallBack<List<Book>> {
             override fun onResult(value: List<Book>) {
@@ -34,7 +34,8 @@ class ReadingProcessViewModel : ViewModel() {
             }
         })
     }
-    fun testPost(){
+
+    fun testPost() {
         Log.d("Моя проверка", "VM / Запущен метод TestPost")
         repository.postBook(object : CallBack<Any> {
             override fun onResult(result: Any) {
@@ -47,7 +48,8 @@ class ReadingProcessViewModel : ViewModel() {
             }
         })
     }
-    fun testPatch(){
+
+    fun testPatch() {
         Log.d("Моя проверка", "VM / Запущен метод TestPatch")
         repository.patchBook(object : CallBack<Any> {
             override fun onResult(result: Any) {
@@ -60,7 +62,8 @@ class ReadingProcessViewModel : ViewModel() {
             }
         })
     }
-    fun testDelete(){
+
+    fun testDelete() {
         Log.d("Моя проверка", "VM / Запущен метод TestDelete")
         repository.deleteBook(object : CallBack<Any> {
             override fun onResult(result: Any) {
@@ -73,7 +76,8 @@ class ReadingProcessViewModel : ViewModel() {
             }
         })
     }
-    fun testPut(){
+
+    fun testPut() {
         Log.d("Моя проверка", "VM / Запущен метод TestPut")
         repository.putBook(object : CallBack<Any> {
             override fun onResult(result: Any) {
@@ -86,7 +90,8 @@ class ReadingProcessViewModel : ViewModel() {
             }
         })
     }
-    fun testHead(){
+
+    fun testHead() {
         Log.d("Моя проверка", "VM / Запущен метод TestHead")
         repository.headBook(object : CallBack<Any> {
             override fun onResult(result: Any) {
@@ -99,7 +104,8 @@ class ReadingProcessViewModel : ViewModel() {
             }
         })
     }
-    fun testOptions(){
+
+    fun testOptions() {
         Log.d("Моя проверка", "VM / Запущен метод TestOptions")
         repository.optionsBook(object : CallBack<Any> {
             override fun onResult(result: Any) {
@@ -112,7 +118,8 @@ class ReadingProcessViewModel : ViewModel() {
             }
         })
     }
-    fun testHttp(){
+
+    fun testHttp() {
         Log.d("Моя проверка", "VM / Запущен метод TestHttp")
         repository.httpBook(object : CallBack<Any> {
             override fun onResult(result: Any) {

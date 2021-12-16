@@ -17,6 +17,7 @@ class GlideImageLoader : IImageLoader<ImageView> {
             .centerCrop()
             .into(container)
     }
+
     fun loadInfo(url: String, container: ImageView) {
         Glide.with(container.context)
             .load(url)
@@ -38,7 +39,6 @@ class GlideImageLoader : IImageLoader<ImageView> {
             //.circleCrop()
             .into(container)
     }
-
 
 
 }
