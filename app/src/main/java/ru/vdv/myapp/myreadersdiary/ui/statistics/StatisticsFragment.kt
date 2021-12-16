@@ -31,9 +31,9 @@ class StatisticsFragment : Fragment() {
         val root: View = binding.root
 
         val textView: TextView = binding.textStatistics
-        statisticsViewModel.text.observe(viewLifecycleOwner, Observer {
+        statisticsViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
-        })
+        }
         return root
     }
 
