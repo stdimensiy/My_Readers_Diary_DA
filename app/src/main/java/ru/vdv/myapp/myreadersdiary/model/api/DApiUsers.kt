@@ -7,7 +7,7 @@ import ru.vdv.myapp.myreadersdiary.domain.User
 
 /**
 ## [Dad Approves API Docs / USERS](https://dadapproves.ru/docs/reference-users.php)
-### Интерфейс компоненты EVENTS (События)
+### Интерфейс компоненты USERS (Пользователи)
 Реализуемые методы:
 - **@GET**      [getUserInfo]
  - Будет намного больше, остальные в разработке

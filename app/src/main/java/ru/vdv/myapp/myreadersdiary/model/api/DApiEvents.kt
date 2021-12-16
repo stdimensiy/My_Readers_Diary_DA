@@ -2,9 +2,11 @@ package ru.vdv.myapp.myreadersdiary.model.api
 
 import retrofit2.Call
 import retrofit2.http.*
+import ru.vdv.myapp.myreadersdiary.domain.Book
 import ru.vdv.myapp.myreadersdiary.domain.Event
+
 /**
-## [Dad Approves API Docs / BOOKS](https://dadapproves.ru/docs/overview-resources-in-the-rest-api.php)
+## [Dad Approves API Docs / EVENTS](https://dadapproves.ru/docs/overview-resources-in-the-rest-api.php)
 ### Интерфейс компоненты EVENTS (События)
 Реализуемые методы:
 - **@GET**      [getListOfEvents]
@@ -12,6 +14,16 @@ import ru.vdv.myapp.myreadersdiary.domain.Event
 - **@PUT**      [putEvent]
  */
 interface DApiEvents {
+    /**
+    ## Компонент **EVENTS**   - (События)
+    ### "Получить список событий зафиксированных пользователем"
+     * **GET** .../events описание -  **[Dad Approves API Docs](https://dadapproves.ru/docs/reference-users.php#patch-user)**
+     * @param key Ключ пользователя API key (зарегистрированного приложения)
+     * @param user Идентификатор пользователя, список книг которого запрашивается
+     * @param since Крайний идентификатор события, (*выборка будет содержать элементы с большиминдексом*)
+     * @return возвращает список объектов *[Book]*
+     * @throws NullPointerException
+     **/
     @GET("events")
     fun getListOfEvents(
         @Header("apiKey") key: String,

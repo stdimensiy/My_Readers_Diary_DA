@@ -22,7 +22,7 @@ interface DApiBooks {
     ### "Получить список книг зарегистрированного пользователя"
      * **GET** .../books описание -  **[Dad Approves API Docs](https://dadapproves.ru/docs/reference-users.php#patch-user)**
      * @param user Идентификатор пользователя, список книг которого запрашивается
-     * @param key Ключ <code>пользователя API</code> key
+     * @param key Ключ пользователя API key (зарегистрированного приложения)
      * @param page номер запрашиваемой страницы ( >=1 )
      * @return возвращает список объектов *[Book]*
      * @throws NullPointerException
@@ -40,6 +40,7 @@ interface DApiBooks {
      * **@POST** .../books описание -  **[Dad Approves API Docs](https://dadapproves.ru/docs/reference-users.php#patch-user)**
      * @param user Идентификатор пользователя, список книг которого запрашивается
      * @param key Ключ <code>пользователя API</code> key
+     * @param book создаваемый объект (книга) записи
      * @return возвращает созданный объект *[Book]*
      * @throws NullPointerException
      **/
@@ -50,15 +51,42 @@ interface DApiBooks {
         @Body book: Book
     ): Call<Any>
 
+    /**
+    ## Компонент **BOOKS**   - (Книги / списки книг)
+    ### "Внести изменения в существующую запись информации о книге"
+     * **@PATCH** .../books описание -  **[Dad Approves API Docs](https://dadapproves.ru/docs/reference-users.php#patch-user)**
+     * @param key Ключ <code>пользователя API</code> key
+     * @param user Идентификатор пользователя, список книг которого запрашивается
+     * @param book создаваемый объект (книга) записи
+     * @return возвращает созданный объект *[Book]*
+     * @throws NullPointerException
+     **/
     @PATCH("books")
     fun patchBook(
-        @Header("dauser") user: String,
+        @Header("apiKey") key: String,
+        @Header("user") user: String,
         @Body book: Book
     ): Call<Any>
 
+    /**
+    ## Компонент **BOOKS**   - (Книги / списки книг)
+    ### "Удаление существующей запись информации о книге"
+     * **@DELETE** .../books описание -  **[Dad Approves API Docs](https://dadapproves.ru/docs/reference-users.php#patch-user)**
+     * @param key Ключ <code>пользователя API</code> key
+     * @param user Идентификатор пользователя, список книг которого запрашивается
+     * @param book создаваемый объект (книга) записи
+     * @return возвращает созданный объект *[Book]*
+     *  *на самом деле информация о книге (запись) не удаляется сразу а помечается "на удаление"
+     *  фактическое удаление записи с пометкой "на удаление" происходит автоматически
+     *  через определенный промежуток времени*
+     * @throws NullPointerException
+
+     **/
     @DELETE("books")
     fun deleteBook(
-        @Header("dauser") user: String,
+        @Header("apiKey") key: String,
+        @Header("user") user: String,
+        @Header("id") id: String,
     ): Call<Any>
 
     @PUT("books")
