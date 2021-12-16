@@ -28,4 +28,5 @@ class CreateNewBookFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(CreateNewBookViewModel::class.java)
         // TODO: Use the ViewModel
     }
+
 }

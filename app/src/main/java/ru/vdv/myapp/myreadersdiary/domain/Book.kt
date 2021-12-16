@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 /**
- * Класс Book (DA) - это модель данных, получаемых от **[Dad Approves API](https://dadapproves.ru/)**
+ * Класс DataModelFD - это модель данных, получаемых от **[Free Dictionary API](https://dictionaryapi.dev/)**
  *
  * **[id]**                 - уникальный идентификатор конкретной книги (как записи в базе данных)
  * **[title]**              - наименование книги

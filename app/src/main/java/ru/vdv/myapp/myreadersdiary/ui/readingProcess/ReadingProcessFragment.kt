@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -14,6 +15,15 @@ class ReadingProcessFragment : Fragment() {
 
     private lateinit var readingProcessViewModel: ReadingProcessViewModel
     private var _binding: FragmentReadingProcessBinding? = null
+//    private lateinit var btnGet: Button
+//    private lateinit var btnPost: Button
+//    private lateinit var btnPatch: Button
+//    private lateinit var btnDelete: Button
+//    private lateinit var btnPut: Button
+//    private lateinit var btnHead: Button
+//    private lateinit var btnOption: Button
+//    private lateinit var btnHttp: Button
+
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -31,9 +41,9 @@ class ReadingProcessFragment : Fragment() {
         val root: View = binding.root
 
         val textView: TextView = binding.textReadingProcess
-        readingProcessViewModel.text.observe(viewLifecycleOwner) {
+        readingProcessViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
-        }
+        })
         // инициализация
         binding.buttonGet.setOnClickListener { readingProcessViewModel.testGet() }
         binding.buttonPost.setOnClickListener { readingProcessViewModel.testPost() }
