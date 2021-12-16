@@ -1,4 +1,4 @@
-package ru.vdv.myapp.myreadersdiary.ui.main
+package ru.vdv.myapp.myreadersdiary.ui.events
 
 import android.os.Bundle
 import android.view.LayoutInflater

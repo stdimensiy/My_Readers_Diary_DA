@@ -169,6 +169,7 @@ class RepositoryImpl() : Repository {
 
     override fun patchBook(callBack: CallBack<Any>) {
         networkService.patchBook(
+            "123456",
             "test-user",
             Book(
                 "id123",
@@ -192,7 +193,9 @@ class RepositoryImpl() : Repository {
 
     override fun deleteBook(callBack: CallBack<Any>) {
         networkService.deleteBook(
-            "test-user"
+            "123456789wertrt",
+            "test-user",
+            "000000123",
         ).enqueue(object : Callback<Any> {
             override fun onResponse(call: Call<Any>, response: Response<Any>) {
                 response.body()?.let { callBack.onResult(true) }

@@ -1,4 +1,4 @@
-package ru.vdv.myapp.myreadersdiary.ui.main
+package ru.vdv.myapp.myreadersdiary.ui.events
 
 import android.view.View
 import android.widget.ImageView

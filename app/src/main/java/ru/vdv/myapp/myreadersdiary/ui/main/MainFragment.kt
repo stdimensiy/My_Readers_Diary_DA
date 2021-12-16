@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import app.futured.donut.DonutSection
 import ru.vdv.myapp.myreadersdiary.databinding.MainFragmentBinding
 import ru.vdv.myapp.myreadersdiary.glide.GlideImageLoader
-import ru.vdv.myapp.myreadersdiary.ui.home.HomeAdapter
+import ru.vdv.myapp.myreadersdiary.ui.events.MainEventsAdapter
 
 class MainFragment : Fragment() {
     private val imageLoader = GlideImageLoader()
