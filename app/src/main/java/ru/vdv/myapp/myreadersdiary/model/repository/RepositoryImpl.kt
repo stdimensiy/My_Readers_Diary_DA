@@ -145,6 +145,7 @@ class RepositoryImpl() : Repository {
 
     override fun postBook(callBack: CallBack<Any>) {
         networkService.postBook(
+            "123456789wertrt",
             "test-user",
             Book(
                 "id123",
