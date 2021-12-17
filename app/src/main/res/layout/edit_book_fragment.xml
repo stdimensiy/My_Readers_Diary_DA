@@ -3,11 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.book.EditBookFragment">
+    tools:context=".ui.books.editbook.EditBookFragment">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hello" />
+        android:text="Фрагмент формы редактирования записи о книге" />
 
 </FrameLayout>

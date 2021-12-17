@@ -1,4 +1,4 @@
-package ru.vdv.myapp.myreadersdiary.ui.events
+package ru.vdv.myapp.myreadersdiary.ui.statistics.events
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,16 +11,16 @@ import ru.vdv.myapp.myreadersdiary.domain.Event
 import ru.vdv.myapp.myreadersdiary.glide.GlideImageLoader
 import ru.vdv.myapp.myreadersdiary.glide.IImageLoader
 
-class EventsAdapter: RecyclerView.Adapter<EventViewHolder>() {
+class EventsListAdapter : RecyclerView.Adapter<EventsListViewHolder>() {
     var items: List<Event> = listOf()
     val imageLoader: IImageLoader<ImageView> = GlideImageLoader()
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventsListViewHolder {
         val root = LayoutInflater.from(parent.context)
             .inflate(R.layout.event_list_item, parent, false)
-        return EventViewHolder(root)
+        return EventsListViewHolder(root)
     }
 
-    override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: EventsListViewHolder, position: Int) {
         val item = items[position]
         holder.titleEvent.text = item.title
         holder.fixDataEvent.text = item.representedDateTime.toString()
@@ -35,17 +35,17 @@ class EventsAdapter: RecyclerView.Adapter<EventViewHolder>() {
         )
     }
 
-    override fun onViewAttachedToWindow(holder: EventViewHolder) {
+    override fun onViewAttachedToWindow(holder: EventsListViewHolder) {
         val item = items[holder.adapterPosition]
         holder.itemView.setOnClickListener {
             val bundle = Bundle()
             bundle.putParcelable("ARG_BOOK", item)
-            holder.itemView.findNavController().navigate(R.id.bookDetailsFragment, bundle)
+            holder.itemView.findNavController().navigate(R.id.nav_book_details_fragment, bundle)
         }
         super.onViewAttachedToWindow(holder)
     }
 
-    override fun onViewDetachedFromWindow(holder: EventViewHolder) {
+    override fun onViewDetachedFromWindow(holder: EventsListViewHolder) {
         holder.itemView.setOnClickListener(null)
         super.onViewDetachedFromWindow(holder)
     }

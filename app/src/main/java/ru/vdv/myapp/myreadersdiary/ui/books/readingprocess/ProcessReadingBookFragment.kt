@@ -1,4 +1,4 @@
-package ru.vdv.myapp.myreadersdiary.ui.book
+package ru.vdv.myapp.myreadersdiary.ui.books.readingprocess
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -9,10 +9,6 @@ import android.view.ViewGroup
 import ru.vdv.myapp.myreadersdiary.R
 
 class ProcessReadingBookFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = ProcessReadingBookFragment()
-    }
 
     private lateinit var viewModel: ProcessReadingBookViewModel
 

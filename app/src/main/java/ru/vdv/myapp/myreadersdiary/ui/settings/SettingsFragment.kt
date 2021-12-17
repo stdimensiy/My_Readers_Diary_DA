@@ -1,4 +1,4 @@
-package ru.vdv.myapp.myreadersdiary.ui.user
+package ru.vdv.myapp.myreadersdiary.ui.settings
 
 import android.os.Bundle
 import androidx.preference.PreferenceFragmentCompat

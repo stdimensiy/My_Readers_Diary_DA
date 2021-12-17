@@ -1,4 +1,4 @@
-package ru.vdv.myapp.myreadersdiary.ui.events
+package ru.vdv.myapp.myreadersdiary.ui.statistics.events
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,7 +7,7 @@ import ru.vdv.myapp.myreadersdiary.domain.CallBack
 import ru.vdv.myapp.myreadersdiary.domain.Event
 import ru.vdv.myapp.myreadersdiary.model.repository.RepositoryImpl
 
-class EventsViewModel : ViewModel() {
+class EventsListViewModel : ViewModel() {
     private val repository = RepositoryImpl()
     //events
 

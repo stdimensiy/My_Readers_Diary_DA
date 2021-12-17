@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="4dp"
-        tools:context=".ui.book.BookDetailsFragment">
+        tools:context=".ui.books.bookdetails.BookDetailsFragment">
 
         <TextView
             android:id="@+id/textView_book_details_title"

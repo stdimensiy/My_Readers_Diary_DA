@@ -1,4 +1,4 @@
-package ru.vdv.myapp.myreadersdiary.ui.book
+package ru.vdv.myapp.myreadersdiary.ui.books.bookdetails
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -18,10 +18,6 @@ class BookDetailsFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var book: Book
     private val imageLoader: IImageLoader<ImageView> = GlideImageLoader()
-
-    companion object {
-        fun newInstance() = BookDetailsFragment()
-    }
 
     private lateinit var viewModel: BookDetailsViewModel
 

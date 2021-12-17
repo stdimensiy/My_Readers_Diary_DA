@@ -1,4 +1,4 @@
-package ru.vdv.myapp.myreadersdiary.ui.readingProcess
+package ru.vdv.myapp.myreadersdiary.ui.temp
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -8,7 +8,7 @@ import ru.vdv.myapp.myreadersdiary.domain.Book
 import ru.vdv.myapp.myreadersdiary.domain.CallBack
 import ru.vdv.myapp.myreadersdiary.model.repository.RepositoryImpl
 
-class ReadingProcessViewModel : ViewModel() {
+class TempViewModel : ViewModel() {
     private val repository = RepositoryImpl()
 
     private val _text = MutableLiveData<String>().apply {

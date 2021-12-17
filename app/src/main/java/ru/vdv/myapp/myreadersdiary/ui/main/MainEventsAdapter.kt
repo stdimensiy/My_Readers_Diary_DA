@@ -40,7 +40,7 @@ class MainEventsAdapter : RecyclerView.Adapter<MainEventViewHolder>() {
         holder.itemView.setOnClickListener {
             val bundle = Bundle()
             bundle.putParcelable("ARG_BOOK", item)
-            holder.itemView.findNavController().navigate(R.id.bookDetailsFragment, bundle)
+            holder.itemView.findNavController().navigate(R.id.nav_book_details_fragment, bundle)
         }
         super.onViewAttachedToWindow(holder)
     }

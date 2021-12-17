@@ -1,23 +1,21 @@
-package ru.vdv.myapp.myreadersdiary.ui.home
+package ru.vdv.myapp.myreadersdiary.ui.books
 
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import ru.vdv.myapp.myreadersdiary.R
-import ru.vdv.myapp.myreadersdiary.databinding.FragmentHomeBinding
+import ru.vdv.myapp.myreadersdiary.databinding.FragmentListOfBooksBinding
 
-class HomeFragment : Fragment() {
+class ListOfBooksFragment : Fragment() {
 
-    private lateinit var adapter: HomeAdapter
-    private lateinit var homeViewModel: HomeViewModel
-    private var _binding: FragmentHomeBinding? = null
+    private lateinit var ofBooksAdapter: ListOfBooksAdapter
+    private lateinit var listOfBooksViewModel: ListOfBooksViewModel
+    private var _binding: FragmentListOfBooksBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -28,11 +26,11 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        adapter = HomeAdapter()
-        homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
+        ofBooksAdapter = ListOfBooksAdapter()
+        listOfBooksViewModel =
+            ViewModelProvider(this).get(ListOfBooksViewModel::class.java)
 
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        _binding = FragmentListOfBooksBinding.inflate(inflater, container, false)
         val root: View = binding.root
         return root
     }
@@ -40,15 +38,15 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val listOfBooks = binding.listOfBooks
-        listOfBooks.adapter = adapter
+        listOfBooks.adapter = ofBooksAdapter
         listOfBooks.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        homeViewModel.prepareItems.observe(viewLifecycleOwner, Observer {
-            adapter.items = it
-            adapter.notifyDataSetChanged()
+        listOfBooksViewModel.prepareItems.observe(viewLifecycleOwner, Observer {
+            ofBooksAdapter.items = it
+            ofBooksAdapter.notifyDataSetChanged()
         })
 
-        homeViewModel.postResult.observe(viewLifecycleOwner, Observer {
+        listOfBooksViewModel.postResult.observe(viewLifecycleOwner, Observer {
             Log.d("Моя проверка", "Фрагмент. Результат получен $it")
         })
 

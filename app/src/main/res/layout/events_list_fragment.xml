@@ -3,11 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.events.EventsFragment">
+    tools:context=".ui.statistics.events.EventsListFragment">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hello" />
+        android:text="Фрагмент отображения и работы с общим списком событий, сохраненным в рамках данного приложения и компонент" />
 
 </FrameLayout>
