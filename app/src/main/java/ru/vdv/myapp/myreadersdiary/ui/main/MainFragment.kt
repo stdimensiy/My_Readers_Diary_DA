@@ -81,13 +81,13 @@ class MainFragment : Fragment() {
 
     fun setImageAvatar(url: String): Unit =
         with(binding) {
-            imageLoader.loadInfo(url, ivUserAvatar)
+            imageLoader.loadUserAvatar(url, ivUserAvatar)
             Log.d("Моя проверка", "HomeViewHolder  / сработал setImageAvatar")
         }
 
     fun setCustomBackgroundImage(url: String): Unit =
         with(binding) {
-            imageLoader.loadBg(url, ivUserCustomBgImage)
+            imageLoader.loadUserBackground(url, ivUserCustomBgImage)
             Log.d("Моя проверка", "HomeViewHolder  / сработал setImageAvatar")
         }
 

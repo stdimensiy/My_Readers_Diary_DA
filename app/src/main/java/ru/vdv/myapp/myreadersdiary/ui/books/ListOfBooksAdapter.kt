@@ -9,11 +9,11 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.vdv.myapp.myreadersdiary.R
 import ru.vdv.myapp.myreadersdiary.domain.Book
 import ru.vdv.myapp.myreadersdiary.glide.GlideImageLoader
-import ru.vdv.myapp.myreadersdiary.glide.IImageLoader
+import ru.vdv.myapp.myreadersdiary.glide.ImageLoader
 
 class ListOfBooksAdapter : RecyclerView.Adapter<ListOfBooksViewHolder>() {
     var items: List<Book> = listOf()
-    private val imageLoader: IImageLoader<ImageView> = GlideImageLoader()
+    private val imageLoader: ImageLoader<ImageView> = GlideImageLoader()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListOfBooksViewHolder {
         val root = LayoutInflater.from(parent.context)
             .inflate(R.layout.book_list_item, parent, false)

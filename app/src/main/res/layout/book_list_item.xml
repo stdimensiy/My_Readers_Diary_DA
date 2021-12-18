@@ -17,13 +17,15 @@
 
         <ImageView
             android:id="@+id/imageView_book_cover"
-            android:layout_width="67dp"
+            android:layout_width="62dp"
             android:layout_height="100dp"
             android:contentDescription="@string/ImageView_contentDescription_book_cover"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/book_plug" />
+            tools:src="@drawable/book_plug"/>
+<!--            app:srcCompat="@drawable/book_plug"-->
+            />
 
         <TextView
             android:id="@+id/textView_book_title"

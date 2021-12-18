@@ -10,14 +10,14 @@ import android.widget.ImageView
 import ru.vdv.myapp.myreadersdiary.databinding.BookDetailsFragmentBinding
 import ru.vdv.myapp.myreadersdiary.domain.Book
 import ru.vdv.myapp.myreadersdiary.glide.GlideImageLoader
-import ru.vdv.myapp.myreadersdiary.glide.IImageLoader
+import ru.vdv.myapp.myreadersdiary.glide.ImageLoader
 
 class BookDetailsFragment : Fragment() {
 
     private var _binding: BookDetailsFragmentBinding? = null
     private val binding get() = _binding!!
     private lateinit var book: Book
-    private val imageLoader: IImageLoader<ImageView> = GlideImageLoader()
+    private val imageLoader: ImageLoader<ImageView> = GlideImageLoader()
 
     private lateinit var viewModel: BookDetailsViewModel
 
@@ -41,7 +41,7 @@ class BookDetailsFragment : Fragment() {
             binding.imageViewBookDetailsCover
         )
 
-        viewModel = ViewModelProvider(this).get(BookDetailsViewModel::class.java)
+        viewModel = ViewModelProvider(this)[BookDetailsViewModel::class.java]
         // TODO: Use the ViewModel
     }
 }

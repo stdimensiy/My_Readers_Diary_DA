@@ -9,11 +9,11 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.vdv.myapp.myreadersdiary.R
 import ru.vdv.myapp.myreadersdiary.domain.Event
 import ru.vdv.myapp.myreadersdiary.glide.GlideImageLoader
-import ru.vdv.myapp.myreadersdiary.glide.IImageLoader
+import ru.vdv.myapp.myreadersdiary.glide.ImageLoader
 
 class EventsListAdapter : RecyclerView.Adapter<EventsListViewHolder>() {
     var items: List<Event> = listOf()
-    val imageLoader: IImageLoader<ImageView> = GlideImageLoader()
+    val imageLoader: ImageLoader<ImageView> = GlideImageLoader()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventsListViewHolder {
         val root = LayoutInflater.from(parent.context)
             .inflate(R.layout.event_list_item, parent, false)
