@@ -300,7 +300,7 @@ class RepositoryImpl() : Repository {
         })
     }
 
-    override fun getEventsList(callBack: CallBack<List<Event>>) {
+    override fun getEventsList(num: Int, callBack: CallBack<List<Event>>) {
 // Запрос подготовлен ожидает готовности API
 
 //        networkService.getListOfEvents("123", "0.123", 1,1,10,"books")
@@ -316,6 +316,11 @@ class RepositoryImpl() : Repository {
 //                    //TODO("Not yet implemented")
 //                }
 //            })
+        callBack.onResult(eventPlug)
+    }
+
+    override fun getEventsListOfBook(num: Int, bookId: String, callBack: CallBack<List<Event>>) {
+        //временный ответ пока готовится API
         callBack.onResult(eventPlug)
     }
 

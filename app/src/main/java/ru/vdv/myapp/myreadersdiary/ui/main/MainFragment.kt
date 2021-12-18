@@ -18,14 +18,8 @@ import ru.vdv.myapp.myreadersdiary.glide.GlideImageLoader
 class MainFragment : Fragment() {
     private val imageLoader = GlideImageLoader()
     private var _binding: MainFragmentBinding? = null
-    private lateinit var adapter: MainEventsAdapter
-
-    companion object {
-        fun newInstance() = MainFragment()
-    }
-
     private val binding get() = _binding!!
-
+    private lateinit var adapter: MainEventsAdapter
     private lateinit var viewModel: MainViewModel
 
     override fun onCreateView(
@@ -39,8 +33,7 @@ class MainFragment : Fragment() {
         )
 
         _binding = MainFragmentBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-        return root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
