@@ -36,7 +36,6 @@ class EventsListFragment : Fragment() {
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         listViewModel = ViewModelProvider(this)[EventsListViewModel::class.java]
         listViewModel.prepareEventList.observe(viewLifecycleOwner, Observer {
-            Log.d("Моя проверка", "Результат получен")
             adapter.items = it
             adapter.notifyDataSetChanged()
         })

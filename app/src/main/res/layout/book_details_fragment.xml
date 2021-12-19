@@ -38,10 +38,10 @@
             android:id="@+id/imageView_book_details_cover"
             android:layout_width="150dp"
             android:layout_height="220dp"
+            android:contentDescription="@string/ImageView_contentDescription_book_cover"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView_book_details_authors_of_the_book"
-            app:srcCompat="@drawable/book_plug"
-            android:contentDescription="@string/ImageView_contentDescription_book_cover" />
+            app:srcCompat="@drawable/book_plug" />
 
         <TextView
             android:id="@+id/textView_book_details_genres"
@@ -135,6 +135,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView_book_details_cover" />
 
+        <TextView
+            android:id="@+id/textView_book_details_activity_graph_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/default_text_book_details_activity_graph_title"
+            android:textAlignment="viewStart"
+            android:textSize="18sp"
+            android:textStyle="bold|italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_book_details_description" />
+
         <ImageView
             android:id="@+id/imageView_book_reading_activity_graph"
             android:layout_width="match_parent"
@@ -145,8 +157,29 @@
             android:scaleType="fitXY"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView_book_details_description"
+            app:layout_constraintTop_toBottomOf="@+id/textView_book_details_activity_graph_title"
             app:srcCompat="@drawable/line_graph_sh" />
 
+        <TextView
+            android:id="@+id/textView_book_details_activity_log_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/default_text_book_details_activity_log_title"
+            android:textAlignment="viewStart"
+            android:textSize="18sp"
+            android:textStyle="bold|italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView_book_reading_activity_graph" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_events_list"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="#D7DDFB"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_book_details_activity_log_title" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
