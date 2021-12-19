@@ -24,15 +24,15 @@ class SummaryStatisticsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         summaryStatisticsViewModel =
-            ViewModelProvider(this).get(SummaryStatisticsViewModel::class.java)
+            ViewModelProvider(this)[SummaryStatisticsViewModel::class.java]
 
         _binding = FragmentSummaryStatisticsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textStatistics
-        summaryStatisticsViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+//        val textView: TextView = binding.textStatistics
+//        summaryStatisticsViewModel.text.observe(viewLifecycleOwner) {
+//            textView.text = it
+//        }
         return root
     }
 
