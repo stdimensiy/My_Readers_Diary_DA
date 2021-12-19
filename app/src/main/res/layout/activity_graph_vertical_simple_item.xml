@@ -2,21 +2,16 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_margin="4dp"
-    android:padding="4dp"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="2dp"
-    app:contentPadding="0dp">
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/iv_mon"
         android:layout_width="@dimen/elem_activity_graph_width"
         android:layout_height="@dimen/elem_activity_graph_height"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_baseline_check_circle_outline_24" />
+        app:srcCompat="@drawable/round_square_indigo_50_24dp" />
 
     <ImageView
         android:id="@+id/iv_tue"
@@ -26,7 +21,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/iv_mon"
-        app:srcCompat="@drawable/ic_baseline_check_circle_outline_24" />
+        app:srcCompat="@drawable/round_square_indigo_50_24dp" />
 
     <ImageView
         android:id="@+id/iv_wed"
@@ -36,7 +31,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/iv_tue"
-        app:srcCompat="@drawable/ic_baseline_check_circle_outline_24" />
+        app:srcCompat="@drawable/round_square_indigo_50_24dp" />
 
     <ImageView
         android:id="@+id/iv_thu"
@@ -46,7 +41,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/iv_wed"
-        app:srcCompat="@drawable/ic_baseline_check_circle_outline_24" />
+        app:srcCompat="@drawable/round_square_indigo_50_24dp" />
 
     <ImageView
         android:id="@+id/iv_fri"
@@ -56,7 +51,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/iv_thu"
-        app:srcCompat="@drawable/ic_baseline_check_circle_outline_24" />
+        app:srcCompat="@drawable/round_square_indigo_50_24dp" />
 
     <ImageView
         android:id="@+id/iv_sat"
@@ -66,7 +61,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/iv_fri"
-        app:srcCompat="@drawable/ic_baseline_check_circle_outline_24" />
+        app:srcCompat="@drawable/round_square_indigo_50_24dp" />
 
     <ImageView
         android:id="@+id/iv_sun"
@@ -76,7 +71,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/iv_sat"
-        app:srcCompat="@drawable/ic_baseline_check_circle_outline_24" />
+        app:srcCompat="@drawable/round_square_indigo_50_24dp" />
 
     <TextView
         android:id="@+id/tv_week_bottom_text"
@@ -88,25 +83,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/iv_sun" />
-
-<!--    <TextView-->
-<!--        android:id="@+id/textView_event_body"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginStart="4dp"-->
-<!--        android:text="@string/textView_event_body_plug"-->
-<!--        android:textStyle="italic"-->
-<!--        app:layout_constraintStart_toEndOf="@id/imageView_book_cover"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/textView_fix_data_event" />-->
-
-<!--    <ImageView-->
-<!--        android:id="@+id/imageView_event_add_book"-->
-<!--        android:layout_width="32dp"-->
-<!--        android:layout_height="32dp"-->
-<!--        android:layout_margin="16dp"-->
-<!--        android:contentDescription="@string/ImageView_contentDescription_sign_of_approval"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:srcCompat="@drawable/ic_baseline_library_add_24" />-->
 </androidx.constraintlayout.widget.ConstraintLayout>

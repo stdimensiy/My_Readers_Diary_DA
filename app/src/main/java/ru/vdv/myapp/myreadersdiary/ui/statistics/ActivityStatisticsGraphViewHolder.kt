@@ -2,6 +2,7 @@ package ru.vdv.myapp.myreadersdiary.ui.statistics
 
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ru.vdv.myapp.myreadersdiary.R
 
@@ -13,4 +14,5 @@ class ActivityStatisticsGraphViewHolder(itemView: View) : RecyclerView.ViewHolde
     var ivFriday: ImageView = itemView.findViewById(R.id.iv_fri)
     var ivSaturday: ImageView = itemView.findViewById(R.id.iv_sat)
     var ivSunday: ImageView = itemView.findViewById(R.id.iv_sun)
+    var tvBottomText: TextView= itemView.findViewById(R.id.tv_week_bottom_text)
 }

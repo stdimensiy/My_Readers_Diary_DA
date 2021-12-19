@@ -64,8 +64,9 @@
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/materialCardView_contributions_graph"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="160dp"
         android:layout_margin="8dp"
+        android:padding="4dp"
         android:checkable="false"
         android:clickable="false"
         android:focusable="true"
@@ -77,1180 +78,328 @@
         app:layout_constraintTop_toBottomOf="@id/materialCardView"
         app:rippleColor="#837A33F8">
 
-        <!-- Media -->
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
-        </LinearLayout>
-        <!-- Media -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <TableLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="18dp"
-                android:alpha="0.2">
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageView
-                        android:layout_width="@dimen/elem_activity_graph_width"
-                        android:layout_height="@dimen/elem_activity_graph_height"
-                        android:layout_margin="@dimen/elem_activity_graph_margin"
-                        android:alpha="0.3"
-                        android:background="@color/elem_activity_graph_background"
-                        android:backgroundTint="@color/elem_activity_graph_background_tint"
-                        android:scaleType="centerCrop"
-                        tools:ignore="MissingConstraints" />
-                </TableRow>
-            </TableLayout>
-        </LinearLayout>
-
+            android:layout_margin="4dp">
+
+            <TextView
+                android:id="@+id/tv_activity_graph_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ежедневная активность."
+                android:textSize="14sp"
+                android:textStyle="bold|italic"
+                app:layout_constraintStart_toStartOf="@+id/rv_events_graph"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/iv_da_coin_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:contentDescription="@string/ImageView_contentDescription_book_cover"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_activity_da_coin_count"
+                app:layout_constraintEnd_toStartOf="@id/tv_activity_da_coin_count"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_star_checkable_24" />
+
+            <TextView
+                android:id="@+id/tv_activity_da_coin_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="12 345 678"
+                android:textSize="14sp"
+                android:textStyle="bold|italic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_top_week_day_monday_title"
+                android:layout_width="18dp"
+                android:layout_height="wrap_content"
+                android:text="Пн"
+                android:textSize="9sp"
+                android:textStyle="italic"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_activity_graph_title"
+                app:layout_constraintBottom_toTopOf="@id/tv_top_week_day_tuesday_title"
+                />
+
+            <TextView
+                android:id="@+id/tv_top_week_day_tuesday_title"
+                android:layout_width="18dp"
+                android:layout_height="wrap_content"
+                android:text="Вт"
+                android:textSize="9sp"
+                android:textStyle="italic"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_top_week_day_monday_title"
+                app:layout_constraintBottom_toTopOf="@id/tv_top_week_day_wednesday_title"
+                />
+
+            <TextView
+                android:id="@+id/tv_top_week_day_wednesday_title"
+                android:layout_width="18dp"
+                android:layout_height="wrap_content"
+                android:text="Ср"
+                android:textSize="9sp"
+                android:textStyle="italic"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_top_week_day_tuesday_title"
+                app:layout_constraintBottom_toTopOf="@id/tv_top_week_day_thursday_title"
+                />
+
+            <TextView
+                android:id="@+id/tv_top_week_day_thursday_title"
+                android:layout_width="18dp"
+                android:layout_height="wrap_content"
+                android:text="Чт"
+                android:textSize="9sp"
+                android:textStyle="italic"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_top_week_day_wednesday_title"
+                app:layout_constraintBottom_toTopOf="@id/tv_top_week_day_friday_title"
+                />
+
+            <TextView
+                android:id="@+id/tv_top_week_day_friday_title"
+                android:layout_width="18dp"
+                android:layout_height="wrap_content"
+                android:text="Пт"
+                android:textSize="9sp"
+                android:textStyle="italic"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_top_week_day_thursday_title"
+                app:layout_constraintBottom_toTopOf="@id/tv_top_week_day_saturday_title"
+                />
+
+            <TextView
+                android:id="@+id/tv_top_week_day_saturday_title"
+                android:layout_width="18dp"
+                android:layout_height="wrap_content"
+                android:text="Сб"
+                android:textColor="#F10606"
+                android:textSize="9sp"
+                android:textStyle="bold|italic"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_top_week_day_friday_title"
+                app:layout_constraintBottom_toTopOf="@id/tv_top_week_day_sunday_title" />
+
+            <TextView
+                android:id="@+id/tv_top_week_day_sunday_title"
+                android:layout_width="18dp"
+                android:layout_height="wrap_content"
+                android:text="Вс"
+                android:textColor="#F10606"
+                android:textSize="9sp"
+                android:textStyle="bold|italic"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_top_week_day_saturday_title"
+                app:layout_constraintBottom_toTopOf="@id/tv_top_week_count_title"/>
+
+            <TextView
+                android:id="@+id/tv_top_week_count_title"
+                android:layout_width="18dp"
+                android:layout_height="wrap_content"
+                android:text="№"
+                android:textSize="9sp"
+                android:textStyle="bold|italic"
+                app:layout_constraintBottom_toBottomOf="@+id/rv_events_graph"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_top_week_day_sunday_title" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_events_graph"
+                android:layout_width="0dp"
+                android:layout_height="104dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@id/tv_top_week_day_monday_title"
+                app:layout_constraintTop_toBottomOf="@id/tv_activity_graph_title" />
+
+            <TextView
+                android:id="@+id/tv_bottom_comment_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Правила определения активности"
+                android:textSize="9sp"
+                android:textStyle="bold|italic"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rv_events_graph" />
+
+            <!--            ЛЕГЕНДА-->
+            <TextView
+                android:id="@+id/tv_bottom_legend_less_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Мало"
+                android:textSize="9sp"
+                android:textStyle="bold|italic"
+                app:layout_constraintTop_toBottomOf="@id/rv_events_graph"
+                app:layout_constraintEnd_toStartOf="@+id/iv_legend_level1_mark"/>
+            <ImageView
+                android:id="@+id/iv_legend_level1_mark"
+                android:layout_width="@dimen/elem_activity_graph_width"
+                android:layout_height="@dimen/elem_activity_graph_height"
+                android:contentDescription="@string/ImageView_contentDescription_book_cover"
+                app:layout_constraintEnd_toStartOf="@+id/iv_legend_level2_mark"
+                app:layout_constraintTop_toBottomOf="@+id/rv_events_graph"
+                app:srcCompat="@drawable/round_square_indigo_50_24dp" />
+            <ImageView
+                android:id="@+id/iv_legend_level2_mark"
+                android:layout_width="@dimen/elem_activity_graph_width"
+                android:layout_height="@dimen/elem_activity_graph_height"
+                android:contentDescription="@string/ImageView_contentDescription_book_cover"
+                app:layout_constraintEnd_toStartOf="@+id/iv_legend_level3_mark"
+                app:layout_constraintTop_toBottomOf="@+id/rv_events_graph"
+                app:srcCompat="@drawable/round_square_indigo_100_24dp" />
+            <ImageView
+                android:id="@+id/iv_legend_level3_mark"
+                android:layout_width="@dimen/elem_activity_graph_width"
+                android:layout_height="@dimen/elem_activity_graph_height"
+                android:contentDescription="@string/ImageView_contentDescription_book_cover"
+                app:layout_constraintEnd_toStartOf="@+id/iv_legend_level4_mark"
+                app:layout_constraintTop_toBottomOf="@+id/rv_events_graph"
+                app:srcCompat="@drawable/round_square_indigo_200_24dp" />
+            <ImageView
+                android:id="@+id/iv_legend_level4_mark"
+                android:layout_width="@dimen/elem_activity_graph_width"
+                android:layout_height="@dimen/elem_activity_graph_height"
+                android:contentDescription="@string/ImageView_contentDescription_book_cover"
+                app:layout_constraintEnd_toStartOf="@+id/iv_legend_level5_mark"
+                app:layout_constraintTop_toBottomOf="@+id/rv_events_graph"
+                app:srcCompat="@drawable/round_square_indigo_300_24dp" />
+            <ImageView
+                android:id="@+id/iv_legend_level5_mark"
+                android:layout_width="@dimen/elem_activity_graph_width"
+                android:layout_height="@dimen/elem_activity_graph_height"
+                android:contentDescription="@string/ImageView_contentDescription_book_cover"
+                app:layout_constraintEnd_toStartOf="@+id/iv_legend_leve6_mark"
+                app:layout_constraintTop_toBottomOf="@+id/rv_events_graph"
+                app:srcCompat="@drawable/round_square_indigo_400_24dp" />
+            <ImageView
+                android:id="@+id/iv_legend_leve6_mark"
+                android:layout_width="@dimen/elem_activity_graph_width"
+                android:layout_height="@dimen/elem_activity_graph_height"
+                android:contentDescription="@string/ImageView_contentDescription_book_cover"
+                app:layout_constraintEnd_toStartOf="@+id/iv_legend_level7_mark"
+                app:layout_constraintTop_toBottomOf="@+id/rv_events_graph"
+                app:srcCompat="@drawable/round_square_indigo_500_24dp" />
+            <ImageView
+                android:id="@+id/iv_legend_level7_mark"
+                android:layout_width="@dimen/elem_activity_graph_width"
+                android:layout_height="@dimen/elem_activity_graph_height"
+                android:contentDescription="@string/ImageView_contentDescription_book_cover"
+                app:layout_constraintEnd_toStartOf="@+id/iv_legend_level8_mark"
+                app:layout_constraintTop_toBottomOf="@+id/rv_events_graph"
+                app:srcCompat="@drawable/round_square_indigo_600_24dp" />
+            <ImageView
+                android:id="@+id/iv_legend_level8_mark"
+                android:layout_width="@dimen/elem_activity_graph_width"
+                android:layout_height="@dimen/elem_activity_graph_height"
+                android:contentDescription="@string/ImageView_contentDescription_book_cover"
+                app:layout_constraintEnd_toStartOf="@+id/iv_legend_level9_mark"
+                app:layout_constraintTop_toBottomOf="@+id/rv_events_graph"
+                app:srcCompat="@drawable/round_square_indigo_700_24dp" />
+            <ImageView
+                android:id="@+id/iv_legend_level9_mark"
+                android:layout_width="@dimen/elem_activity_graph_width"
+                android:layout_height="@dimen/elem_activity_graph_height"
+                android:contentDescription="@string/ImageView_contentDescription_book_cover"
+                app:layout_constraintEnd_toStartOf="@+id/iv_legend_level10_mark"
+                app:layout_constraintTop_toBottomOf="@+id/rv_events_graph"
+                app:srcCompat="@drawable/round_square_indigo_800_24dp" />
+
+            <ImageView
+                android:id="@+id/iv_legend_level10_mark"
+                android:layout_width="@dimen/elem_activity_graph_width"
+                android:layout_height="@dimen/elem_activity_graph_height"
+                android:contentDescription="@string/ImageView_contentDescription_book_cover"
+                app:layout_constraintEnd_toStartOf="@+id/tv_bottom_legend_more_title"
+                app:layout_constraintTop_toBottomOf="@+id/rv_events_graph"
+                app:srcCompat="@drawable/round_square_indigo_900_24dp" />
+            <TextView
+                android:id="@+id/tv_bottom_legend_more_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Много"
+                android:textSize="9sp"
+                android:textStyle="bold|italic"
+                app:layout_constraintEnd_toEndOf="@+id/rv_events_graph"
+                app:layout_constraintTop_toBottomOf="@+id/rv_events_graph" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
+
+<!--    //статистика мо месяцам, автоматически заменяется на детализацию по дням при выборе значения-->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView_contributions_month"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:layout_margin="8dp"
+        android:padding="4dp"
+        android:checkable="false"
+        android:clickable="false"
+        android:focusable="true"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="4dp"
+        app:contentPadding="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/materialCardView_contributions_graph"
+        app:rippleColor="#837A33F8">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="4dp">
+
+            <TextView
+                android:id="@+id/tv_activity_legend_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Активность и достижения"
+                android:textSize="14sp"
+                android:textStyle="bold|italic"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_activity_legend_month12_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Декабрь 2021"
+                android:textSize="12sp"
+                android:textStyle="bold|italic"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_activity_legend_title" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="#7b7b7b"
+                android:paddingStart="8dp"
+                android:paddingEnd="16dp"
+                android:layout_margin="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_activity_legend_month12_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tv_activity_legend_month12_title"
+                app:layout_constraintTop_toTopOf="@+id/tv_activity_legend_month12_title" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:layout_margin="8dp"
+                android:background="#7b7b7b"
+                app:layout_constraintStart_toStartOf="@+id/tv_activity_legend_month12_title"
+                app:layout_constraintTop_toBottomOf="@+id/tv_activity_legend_month12_title"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
