@@ -1,4 +1,4 @@
-package ru.vdv.myapp.myreadersdiary.ui.book
+package ru.vdv.myapp.myreadersdiary.ui.books.readingprocess
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -8,24 +8,21 @@ import android.view.View
 import android.view.ViewGroup
 import ru.vdv.myapp.myreadersdiary.R
 
-class CreateNewBookFragment : Fragment() {
+class ProcessReadingBookFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = CreateNewBookFragment()
-    }
-
-    private lateinit var viewModel: CreateNewBookViewModel
+    private lateinit var viewModel: ProcessReadingBookViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.create_new_book_fragment, container, false)
+        return inflater.inflate(R.layout.process_reading_book_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(CreateNewBookViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(ProcessReadingBookViewModel::class.java)
         // TODO: Use the ViewModel
     }
+
 }

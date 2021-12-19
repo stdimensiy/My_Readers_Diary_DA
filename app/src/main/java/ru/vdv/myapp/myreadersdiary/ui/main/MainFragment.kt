@@ -14,19 +14,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import app.futured.donut.DonutSection
 import ru.vdv.myapp.myreadersdiary.databinding.MainFragmentBinding
 import ru.vdv.myapp.myreadersdiary.glide.GlideImageLoader
-import ru.vdv.myapp.myreadersdiary.ui.home.HomeAdapter
 
 class MainFragment : Fragment() {
     private val imageLoader = GlideImageLoader()
     private var _binding: MainFragmentBinding? = null
-    private lateinit var adapter: MainEventsAdapter
-
-    companion object {
-        fun newInstance() = MainFragment()
-    }
-
     private val binding get() = _binding!!
-
+    private lateinit var adapter: MainEventsAdapter
     private lateinit var viewModel: MainViewModel
 
     override fun onCreateView(
@@ -40,8 +33,7 @@ class MainFragment : Fragment() {
         )
 
         _binding = MainFragmentBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-        return root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -82,13 +74,13 @@ class MainFragment : Fragment() {
 
     fun setImageAvatar(url: String): Unit =
         with(binding) {
-            imageLoader.loadInfo(url, ivUserAvatar)
+            imageLoader.loadUserAvatar(url, ivUserAvatar)
             Log.d("Моя проверка", "HomeViewHolder  / сработал setImageAvatar")
         }
 
     fun setCustomBackgroundImage(url: String): Unit =
         with(binding) {
-            imageLoader.loadBg(url, ivUserCustomBgImage)
+            imageLoader.loadUserBackground(url, ivUserCustomBgImage)
             Log.d("Моя проверка", "HomeViewHolder  / сработал setImageAvatar")
         }
 

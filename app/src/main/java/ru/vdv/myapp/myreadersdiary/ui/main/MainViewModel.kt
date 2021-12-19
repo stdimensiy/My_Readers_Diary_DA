@@ -3,7 +3,6 @@ package ru.vdv.myapp.myreadersdiary.ui.main
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import ru.vdv.myapp.myreadersdiary.domain.Book
 import ru.vdv.myapp.myreadersdiary.domain.CallBack
 import ru.vdv.myapp.myreadersdiary.domain.Event
 import ru.vdv.myapp.myreadersdiary.domain.User
@@ -36,7 +35,7 @@ class MainViewModel : ViewModel() {
     //events
 
     private val _prepareEventList = MutableLiveData<List<Event>>().apply {
-        repository.getEventsList(object : CallBack<List<Event>> {
+        repository.getEventsList(30, object : CallBack<List<Event>> {
             override fun onResult(result: List<Event>) {
                 value = result
             }

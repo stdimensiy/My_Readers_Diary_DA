@@ -6,14 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import ru.vdv.myapp.myreadersdiary.databinding.FragmentStatisticsBinding
+import ru.vdv.myapp.myreadersdiary.databinding.FragmentSummaryStatisticsBinding
 
-class StatisticsFragment : Fragment() {
+class SummaryStatisticsFragment : Fragment() {
 
-    private lateinit var statisticsViewModel: StatisticsViewModel
-    private var _binding: FragmentStatisticsBinding? = null
+    private lateinit var summaryStatisticsViewModel: SummaryStatisticsViewModel
+    private var _binding: FragmentSummaryStatisticsBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -24,14 +23,14 @@ class StatisticsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        statisticsViewModel =
-            ViewModelProvider(this).get(StatisticsViewModel::class.java)
+        summaryStatisticsViewModel =
+            ViewModelProvider(this).get(SummaryStatisticsViewModel::class.java)
 
-        _binding = FragmentStatisticsBinding.inflate(inflater, container, false)
+        _binding = FragmentSummaryStatisticsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val textView: TextView = binding.textStatistics
-        statisticsViewModel.text.observe(viewLifecycleOwner) {
+        summaryStatisticsViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
         return root

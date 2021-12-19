@@ -1,4 +1,4 @@
-package ru.vdv.myapp.myreadersdiary.ui.main
+package ru.vdv.myapp.myreadersdiary.ui.books.bookdetails
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,16 +11,16 @@ import ru.vdv.myapp.myreadersdiary.domain.Event
 import ru.vdv.myapp.myreadersdiary.glide.GlideImageLoader
 import ru.vdv.myapp.myreadersdiary.glide.ImageLoader
 
-class MainEventsAdapter : RecyclerView.Adapter<MainEventViewHolder>() {
+class BookEventListAdapter: RecyclerView.Adapter<BookEventListViewHolder>() {
     var items: List<Event> = listOf()
     val imageLoader: ImageLoader<ImageView> = GlideImageLoader()
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainEventViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookEventListViewHolder {
         val root = LayoutInflater.from(parent.context)
             .inflate(R.layout.event_list_item, parent, false)
-        return MainEventViewHolder(root)
+        return BookEventListViewHolder(root)
     }
 
-    override fun onBindViewHolder(holder: MainEventViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: BookEventListViewHolder, position: Int) {
         val item = items[position]
         holder.titleEvent.text = item.title
         holder.fixDataEvent.text = item.representedDateTime.toString()
@@ -35,7 +35,7 @@ class MainEventsAdapter : RecyclerView.Adapter<MainEventViewHolder>() {
         )
     }
 
-    override fun onViewAttachedToWindow(holder: MainEventViewHolder) {
+    override fun onViewAttachedToWindow(holder: BookEventListViewHolder) {
         val item = items[holder.adapterPosition]
         holder.itemView.setOnClickListener {
             val bundle = Bundle()
@@ -45,7 +45,7 @@ class MainEventsAdapter : RecyclerView.Adapter<MainEventViewHolder>() {
         super.onViewAttachedToWindow(holder)
     }
 
-    override fun onViewDetachedFromWindow(holder: MainEventViewHolder) {
+    override fun onViewDetachedFromWindow(holder: BookEventListViewHolder) {
         holder.itemView.setOnClickListener(null)
         super.onViewDetachedFromWindow(holder)
     }

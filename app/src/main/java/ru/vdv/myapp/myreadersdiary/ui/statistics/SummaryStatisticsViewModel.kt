@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class StatisticsViewModel : ViewModel() {
+class SummaryStatisticsViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "Это фрагмент отображения статистики чтения"

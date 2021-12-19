@@ -169,6 +169,7 @@ class RepositoryImpl() : Repository {
 
     override fun patchBook(callBack: CallBack<Any>) {
         networkService.patchBook(
+            "123456",
             "test-user",
             Book(
                 "id123",
@@ -192,7 +193,9 @@ class RepositoryImpl() : Repository {
 
     override fun deleteBook(callBack: CallBack<Any>) {
         networkService.deleteBook(
-            "test-user"
+            "123456789wertrt",
+            "test-user",
+            "000000123",
         ).enqueue(object : Callback<Any> {
             override fun onResponse(call: Call<Any>, response: Response<Any>) {
                 response.body()?.let { callBack.onResult(true) }
@@ -297,7 +300,7 @@ class RepositoryImpl() : Repository {
         })
     }
 
-    override fun getEventsList(callBack: CallBack<List<Event>>) {
+    override fun getEventsList(num: Int, callBack: CallBack<List<Event>>) {
 // Запрос подготовлен ожидает готовности API
 
 //        networkService.getListOfEvents("123", "0.123", 1,1,10,"books")
@@ -313,6 +316,11 @@ class RepositoryImpl() : Repository {
 //                    //TODO("Not yet implemented")
 //                }
 //            })
+        callBack.onResult(eventPlug)
+    }
+
+    override fun getEventsListOfBook(num: Int, bookId: String, callBack: CallBack<List<Event>>) {
+        //временный ответ пока готовится API
         callBack.onResult(eventPlug)
     }
 

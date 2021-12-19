@@ -1,4 +1,4 @@
-package ru.vdv.myapp.myreadersdiary.ui.home
+package ru.vdv.myapp.myreadersdiary.ui.books
 
 import android.view.View
 import android.widget.ImageView
@@ -6,7 +6,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ru.vdv.myapp.myreadersdiary.R
 
-class HomeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class ListOfBooksViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var titleBook: TextView = itemView.findViewById(R.id.textView_book_title)
     var authorBook: TextView = itemView.findViewById(R.id.textView_authors_of_the_book)
     var status: TextView = itemView.findViewById(R.id.textView_book_status)
