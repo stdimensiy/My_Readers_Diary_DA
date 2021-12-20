@@ -19,9 +19,8 @@ class CreateNewBookFragment : Fragment() {
         return inflater.inflate(R.layout.create_new_book_fragment, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(CreateNewBookViewModel::class.java)
-        // TODO: Use the ViewModel
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel = ViewModelProvider(this)[CreateNewBookViewModel::class.java]
     }
 }

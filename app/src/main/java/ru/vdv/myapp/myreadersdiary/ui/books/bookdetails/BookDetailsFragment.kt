@@ -46,7 +46,8 @@ class BookDetailsFragment : Fragment() {
         )
         val listOfEvent = binding.rvEventsList
         listOfEvent.adapter = adapter
-        listOfEvent.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        listOfEvent.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         viewModel = ViewModelProvider(this)[BookDetailsViewModel::class.java]
         viewModel.prepareEventList.observe(viewLifecycleOwner, Observer {
             adapter.items = it

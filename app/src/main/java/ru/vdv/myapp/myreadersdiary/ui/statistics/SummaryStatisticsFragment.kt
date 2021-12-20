@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.vdv.myapp.myreadersdiary.databinding.FragmentSummaryStatisticsBinding
@@ -42,7 +41,7 @@ class SummaryStatisticsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //запрос данных пользователя подписка на результат
-        summaryStatisticsViewModel.currentUser.observe(viewLifecycleOwner, Observer {
+        summaryStatisticsViewModel.currentUser.observe(viewLifecycleOwner, {
             setImageAvatar(it.avatarUrl)
             setCustomBackgroundImage(it.backgroundUrl)
         })
@@ -51,10 +50,10 @@ class SummaryStatisticsFragment : Fragment() {
         eventsGraph.adapter = adapter
         eventsGraph.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        summaryStatisticsViewModel.prepareEventList.observe(viewLifecycleOwner, Observer {
+        summaryStatisticsViewModel.prepareEventList.observe(viewLifecycleOwner, {
             adapter.items = it
-            Log.d("Моя проверка", "Обновление запущено $it")
             adapter.notifyDataSetChanged()
+            eventsGraph.scrollToPosition(adapter.itemCount - 1)
         })
     }
 
@@ -63,15 +62,13 @@ class SummaryStatisticsFragment : Fragment() {
         _binding = null
     }
 
-    fun setImageAvatar(url: String): Unit =
+    private fun setImageAvatar(url: String): Unit =
         with(binding) {
             imageLoader.loadUserAvatar(url, ivUserAvatar)
-            Log.d("Моя проверка", "HomeViewHolder  / сработал setImageAvatar")
         }
 
-    fun setCustomBackgroundImage(url: String): Unit =
+    private fun setCustomBackgroundImage(url: String): Unit =
         with(binding) {
             imageLoader.loadUserBackground(url, ivUserCustomBgImage)
-            Log.d("Моя проверка", "HomeViewHolder  / сработал setImageAvatar")
         }
 }

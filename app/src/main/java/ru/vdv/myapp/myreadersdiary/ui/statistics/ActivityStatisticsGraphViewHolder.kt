@@ -14,5 +14,5 @@ class ActivityStatisticsGraphViewHolder(itemView: View) : RecyclerView.ViewHolde
     var ivFriday: ImageView = itemView.findViewById(R.id.iv_fri)
     var ivSaturday: ImageView = itemView.findViewById(R.id.iv_sat)
     var ivSunday: ImageView = itemView.findViewById(R.id.iv_sun)
-    var tvBottomText: TextView= itemView.findViewById(R.id.tv_week_bottom_text)
+    var tvBottomText: TextView = itemView.findViewById(R.id.tv_week_bottom_text)
 }

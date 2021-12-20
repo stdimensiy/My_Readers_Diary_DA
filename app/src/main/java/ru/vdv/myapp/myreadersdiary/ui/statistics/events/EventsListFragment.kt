@@ -2,7 +2,6 @@ package ru.vdv.myapp.myreadersdiary.ui.statistics.events
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -40,5 +39,4 @@ class EventsListFragment : Fragment() {
             adapter.notifyDataSetChanged()
         })
     }
-
 }

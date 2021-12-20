@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import ru.vdv.myapp.myreadersdiary.R
+import ru.vdv.myapp.myreadersdiary.domain.Event
 import ru.vdv.myapp.myreadersdiary.domain.WeekEvent
 
 class ActivityStatisticsGraphAdapter : RecyclerView.Adapter<ActivityStatisticsGraphViewHolder>() {
@@ -27,12 +28,19 @@ class ActivityStatisticsGraphAdapter : RecyclerView.Adapter<ActivityStatisticsGr
         mark(item.weekFriday.numberOfContributions, holder.ivFriday)
         mark(item.weekSaturday.numberOfContributions, holder.ivSaturday)
         mark(item.weekSunday.numberOfContributions, holder.ivSunday)
+        holder.tvBottomText.text = position.toString()
     }
 
     override fun getItemCount(): Int {
         return items.size
     }
 
+    /**
+    ### "Установить соответствующий значению маркер"
+     * @param count знаячение, в соответствии с которым маркируется элемент (в данном случае
+     * количество баллов активности пользователя"
+     * @param view ссылка на [ImageView] в которой следует установить маркер"
+     **/
     private fun mark(count: Int, view: ImageView) {
         when (count) {
             0 -> view.setImageResource(R.drawable.round_square_indigo_50_24dp)
@@ -46,6 +54,5 @@ class ActivityStatisticsGraphAdapter : RecyclerView.Adapter<ActivityStatisticsGr
             in 15..16 -> view.setImageResource(R.drawable.round_square_indigo_800_24dp)
             in 17..10000 -> view.setImageResource(R.drawable.round_square_indigo_900_24dp)
         }
-
     }
 }

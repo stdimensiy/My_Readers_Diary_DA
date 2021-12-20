@@ -23,7 +23,7 @@ class MainViewModel : ViewModel() {
     }
 
     private val prepareUser = User(
-        "Неизвестный",
+        "DarthVerteliy",
         "https://dadapproves.ru/usercontent/avatars/da0000002.jpg",
         "https://dadapproves.ru/usercontent/bg/da_bg0000002.jpg"
     )

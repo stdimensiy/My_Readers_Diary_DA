@@ -11,6 +11,8 @@ import java.util.*
 
 class SummaryStatisticsViewModel : ViewModel() {
     private val repository = RepositoryImpl()
+
+    //заглушка пока не будет реализован нормально режим авторизации
     private val prepareUser = User(
         "DarthVerteliy",
         "https://dadapproves.ru/usercontent/avatars/da0000002.jpg",
@@ -22,7 +24,6 @@ class SummaryStatisticsViewModel : ViewModel() {
     val currentUser: LiveData<User> = _currentUser
 
     //events
-
     private val _prepareEventList = MutableLiveData<List<WeekEvent>>().apply {
         repository.getSummaryEventData(object : CallBack<List<WeekEvent>> {
             override fun onResult(result: List<WeekEvent>) {

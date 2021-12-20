@@ -1,7 +1,6 @@
 package ru.vdv.myapp.myreadersdiary.ui.books
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,8 +16,6 @@ class ListOfBooksFragment : Fragment() {
     private lateinit var listOfBooksViewModel: ListOfBooksViewModel
     private var _binding: FragmentListOfBooksBinding? = null
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -47,7 +44,6 @@ class ListOfBooksFragment : Fragment() {
         })
 
         listOfBooksViewModel.postResult.observe(viewLifecycleOwner, Observer {
-            Log.d("Моя проверка", "Фрагмент. Результат получен $it")
         })
 
     }
