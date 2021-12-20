@@ -23,4 +23,5 @@ class CreateNewBookFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this)[CreateNewBookViewModel::class.java]
     }
+
 }
