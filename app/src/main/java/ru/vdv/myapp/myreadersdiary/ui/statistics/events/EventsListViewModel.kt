@@ -9,8 +9,8 @@ import ru.vdv.myapp.myreadersdiary.model.repository.RepositoryImpl
 
 class EventsListViewModel : ViewModel() {
     private val repository = RepositoryImpl()
-    //events
 
+    //events
     private val _prepareEventList = MutableLiveData<List<Event>>().apply {
         repository.getEventsListOfBook(30, "0000011", object : CallBack<List<Event>> {
             override fun onResult(result: List<Event>) {

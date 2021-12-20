@@ -3,7 +3,6 @@ package ru.vdv.myapp.myreadersdiary.ui.main
 import android.graphics.Color
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -67,30 +66,25 @@ class MainFragment : Fragment() {
         setDonatChartData(section1, section2)
     }
 
-    fun setName(name: String): Unit = with(binding) {
+    private fun setName(name: String): Unit = with(binding) {
         tvName.text = name
-        Log.d("Моя проверка", "HomeViewHolder  / сработал setName")
     }
 
-    fun setImageAvatar(url: String): Unit =
+    private fun setImageAvatar(url: String): Unit =
         with(binding) {
             imageLoader.loadUserAvatar(url, ivUserAvatar)
-            Log.d("Моя проверка", "HomeViewHolder  / сработал setImageAvatar")
         }
 
-    fun setCustomBackgroundImage(url: String): Unit =
+    private fun setCustomBackgroundImage(url: String): Unit =
         with(binding) {
             imageLoader.loadUserBackground(url, ivUserCustomBgImage)
-            Log.d("Моя проверка", "HomeViewHolder  / сработал setImageAvatar")
         }
 
-    fun setDonatChartData(section1: DonutSection, section2: DonutSection): Unit =
+    private fun setDonatChartData(section1: DonutSection, section2: DonutSection): Unit =
         with(binding) {
             donutView.cap = 5f
             donutView.gapAngleDegrees = -45f
             donutView.gapWidthDegrees = 60f
             donutView.submitData(listOf(section1, section2))
         }
-
-
 }

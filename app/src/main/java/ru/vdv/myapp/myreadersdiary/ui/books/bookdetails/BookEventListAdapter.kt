@@ -11,7 +11,7 @@ import ru.vdv.myapp.myreadersdiary.domain.Event
 import ru.vdv.myapp.myreadersdiary.glide.GlideImageLoader
 import ru.vdv.myapp.myreadersdiary.glide.ImageLoader
 
-class BookEventListAdapter: RecyclerView.Adapter<BookEventListViewHolder>() {
+class BookEventListAdapter : RecyclerView.Adapter<BookEventListViewHolder>() {
     var items: List<Event> = listOf()
     val imageLoader: ImageLoader<ImageView> = GlideImageLoader()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookEventListViewHolder {

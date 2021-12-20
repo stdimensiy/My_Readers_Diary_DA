@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/iv_mon"
+        android:layout_width="@dimen/elem_activity_graph_width"
+        android:layout_height="@dimen/elem_activity_graph_height"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/round_square_indigo_50_24dp" />
+
+    <ImageView
+        android:id="@+id/iv_tue"
+        android:layout_width="@dimen/elem_activity_graph_width"
+        android:layout_height="@dimen/elem_activity_graph_height"
+        android:contentDescription="@string/ImageView_contentDescription_book_cover"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_mon"
+        app:srcCompat="@drawable/round_square_indigo_50_24dp" />
+
+    <ImageView
+        android:id="@+id/iv_wed"
+        android:layout_width="@dimen/elem_activity_graph_width"
+        android:layout_height="@dimen/elem_activity_graph_height"
+        android:contentDescription="@string/ImageView_contentDescription_book_cover"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_tue"
+        app:srcCompat="@drawable/round_square_indigo_50_24dp" />
+
+    <ImageView
+        android:id="@+id/iv_thu"
+        android:layout_width="@dimen/elem_activity_graph_width"
+        android:layout_height="@dimen/elem_activity_graph_height"
+        android:contentDescription="@string/ImageView_contentDescription_book_cover"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_wed"
+        app:srcCompat="@drawable/round_square_indigo_50_24dp" />
+
+    <ImageView
+        android:id="@+id/iv_fri"
+        android:layout_width="@dimen/elem_activity_graph_width"
+        android:layout_height="@dimen/elem_activity_graph_height"
+        android:contentDescription="@string/ImageView_contentDescription_book_cover"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_thu"
+        app:srcCompat="@drawable/round_square_indigo_50_24dp" />
+
+    <ImageView
+        android:id="@+id/iv_sat"
+        android:layout_width="@dimen/elem_activity_graph_width"
+        android:layout_height="@dimen/elem_activity_graph_height"
+        android:contentDescription="@string/ImageView_contentDescription_book_cover"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_fri"
+        app:srcCompat="@drawable/round_square_indigo_50_24dp" />
+
+    <ImageView
+        android:id="@+id/iv_sun"
+        android:layout_width="@dimen/elem_activity_graph_width"
+        android:layout_height="@dimen/elem_activity_graph_height"
+        android:contentDescription="@string/ImageView_contentDescription_book_cover"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_sat"
+        app:srcCompat="@drawable/round_square_indigo_50_24dp" />
+
+    <TextView
+        android:id="@+id/tv_week_bottom_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="СЕН"
+        android:textSize="8sp"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_sun" />
+</androidx.constraintlayout.widget.ConstraintLayout>

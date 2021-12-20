@@ -1,9 +1,6 @@
 package ru.vdv.myapp.myreadersdiary.model.repository
 
-import ru.vdv.myapp.myreadersdiary.domain.Book
-import ru.vdv.myapp.myreadersdiary.domain.CallBack
-import ru.vdv.myapp.myreadersdiary.domain.Event
-import ru.vdv.myapp.myreadersdiary.domain.User
+import ru.vdv.myapp.myreadersdiary.domain.*
 
 interface Repository {
     fun getListOfBooks(callBack: CallBack<List<Book>>)
@@ -37,6 +34,13 @@ interface Repository {
      * @throws NullPointerException
      **/
     fun getEventsListOfBook(num: Int, bookId: String, callBack: CallBack<List<Event>>)
+
+    /**
+    ### "Получить список совокупных значений недельных активностей пользователя"
+     * @return возвращает список объектов *[WeekEvent]* совокупных даннных недельных активностей.
+     * @throws NullPointerException
+     **/
+    fun getSummaryEventData(callBack: CallBack<List<WeekEvent>>)
 
     fun setEvent(callBack: CallBack<Event>)
     fun putEventOfStartApp(callBack: CallBack<Event>)
