@@ -7,4 +7,6 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="elem_activity_graph_background">#9C0F0F</color>
+    <color name="elem_activity_graph_background_tint">#EC5252</color>
 </resources>

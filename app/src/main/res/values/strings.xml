@@ -2,16 +2,16 @@
     <string name="app_name">My Reader\'s Diary</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Имф Фамилия</string>
+    <string name="nav_header_title">Имя Фамилия</string>
     <string name="nav_header_subtitle">читатель / ученик 3а 9 лет</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Настройки</string>
 
-    <string name="menu_home">Список книг</string>
-    <string name="menu_reading_process">Чтение(процесс)</string>
-    <string name="menu_statistics">Статистика</string>
+    <string name="menu_list_of_books">Список книг</string>
+    <string name="menu_temporary_fragment">Чтение(процесс)</string>
+    <string name="menu_summary_statistics">Статистика</string>
     <string name="ImageView_contentDescription_book_cover">Изображение обложки книги</string>
-    <string name="textView_book_title_plug">Наименование книги...</string>
+    <string name="textView_book_title_plug">Наименование книги…</string>
     <string name="textView_authors_of_the_book_plug">Автор или авторы книги</string>
     <string name="textView_book_status_plug">Статус прочтения книги</string>
     <string name="ImageView_contentDescription_sign_of_approval">Иконкф-Флаг признак одобрения</string>
@@ -43,7 +43,20 @@
     <string name="name_title">Имя пользователя</string>
     <string name="surname_title">Фамилия</string>
     <string name="main_curator_title">Основной куратор</string>
-    <string name="main_fragment_title">Мой прогресс</string>
+    <string name="main_fragment_title">Мой дневник</string>
     <string name="menu_main">Главная</string>
     <string name="iv_userListItem_contentDescription">Рамочка вокруг аваатара</string>
+    <string name="textView_event_title_plug">Выполнено такое-то действие</string>
+    <string name="textView_fix_data_event_plug">" день нед. / 15.12.2021 (18:20)"</string>
+    <string name="textView_event_body_plug">Описание события (коротко)</string>
+    <string name="events_list_label">Список событий</string>
+    <string name="create_new_book_label">Новая книга</string>
+    <string name="edit_book_label">Редактирование информации</string>
+    <string name="process_reading_book_label">Чтение книги…</string>
+    <string name="menu_create_book_fragment">Создать новую запись (книги)</string>
+    <string name="menu_edit_book_fragment">Редактировать запись (о книге)</string>
+    <string name="menu_book_details_fragment">Подробная информация о книге</string>
+    <string name="menu_events_list_fragment">Общий список событий</string>
+    <string name="default_text_book_details_activity_graph_title">Активность чтения книги</string>
+    <string name="default_text_book_details_activity_log_title">История чтения книги</string>
 </resources>

@@ -7,7 +7,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import ru.vdv.myapp.myreadersdiary.R
 
-class GlideImageLoader : IImageLoader<ImageView> {
+class GlideImageLoader : ImageLoader<ImageView> {
     override fun loadBookCover(url: String, container: ImageView) {
         Glide.with(container.context)
             .load(url)
@@ -17,7 +17,8 @@ class GlideImageLoader : IImageLoader<ImageView> {
             .centerCrop()
             .into(container)
     }
-    fun loadInfo(url: String, container: ImageView) {
+
+    override fun loadUserAvatar(url: String, container: ImageView) {
         Glide.with(container.context)
             .load(url)
             .placeholder(R.drawable.ic_baseline_account_circle_24)
@@ -27,7 +28,7 @@ class GlideImageLoader : IImageLoader<ImageView> {
             .into(container)
     }
 
-    fun loadBg(url: String, container: ImageView) {
+    override fun loadUserBackground(url: String, container: ImageView) {
         val options = RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE)
         Glide.with(container.context)
             .load(url)
@@ -38,7 +39,4 @@ class GlideImageLoader : IImageLoader<ImageView> {
             //.circleCrop()
             .into(container)
     }
-
-
-
 }

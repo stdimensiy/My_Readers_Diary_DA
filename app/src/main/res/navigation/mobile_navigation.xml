@@ -6,51 +6,104 @@
     app:startDestination="@id/nav_main">
 
     <fragment
-        android:id="@+id/nav_home"
-        android:name="ru.vdv.myapp.myreadersdiary.ui.home.HomeFragment"
-        android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" >
+        android:id="@+id/nav_list_of_books"
+        android:name="ru.vdv.myapp.myreadersdiary.ui.books.ListOfBooksFragment"
+        android:label="@string/menu_list_of_books"
+        tools:layout="@layout/fragment_list_of_books">
         <action
             android:id="@+id/action_nav_home_to_bookDetailsFragment"
-            app:destination="@id/bookDetailsFragment" />
+            app:destination="@id/nav_book_details_fragment" />
+        <action
+            android:id="@+id/action_nav_home_to_createNewBookFragment"
+            app:destination="@id/nav_create_new_book_Fragment" />
+        <action
+            android:id="@+id/action_nav_home_to_editBookFragment"
+            app:destination="@id/nav_edit_book_fragment" />
+        <action
+            android:id="@+id/action_nav_home_to_processReadingBookFragment"
+            app:destination="@id/nav_process_reading_book_fragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/nav_reading_process"
-        android:name="ru.vdv.myapp.myreadersdiary.ui.readingProcess.ReadingProcessFragment"
-        android:label="@string/menu_reading_process"
-        tools:layout="@layout/fragment_reading_process" />
+        android:id="@+id/nav_temporary_fragment"
+        android:name="ru.vdv.myapp.myreadersdiary.ui.temp.TempFragment"
+        android:label="@string/menu_temporary_fragment"
+        tools:layout="@layout/fragment_temporary_fragment" />
 
     <fragment
-        android:id="@+id/nav_statistics"
-        android:name="ru.vdv.myapp.myreadersdiary.ui.statistics.StatisticsFragment"
-        android:label="@string/menu_statistics"
-        tools:layout="@layout/fragment_statistics" />
+        android:id="@+id/nav_summary_statistics"
+        android:name="ru.vdv.myapp.myreadersdiary.ui.statistics.SummaryStatisticsFragment"
+        android:label="@string/menu_summary_statistics"
+        tools:layout="@layout/fragment_summary_statistics">
+        <action
+            android:id="@+id/action_nav_statistics_to_eventsFragment"
+            app:destination="@id/nav_events_list_fragment" />
+    </fragment>
     <fragment
-        android:id="@+id/bookDetailsFragment"
-        android:name="ru.vdv.myapp.myreadersdiary.ui.book.BookDetailsFragment"
+        android:id="@+id/nav_book_details_fragment"
+        android:name="ru.vdv.myapp.myreadersdiary.ui.books.bookdetails.BookDetailsFragment"
         android:label="@string/menu_bookDetailsFragment"
-        tools:layout="@layout/book_details_fragment" />
+        tools:layout="@layout/book_details_fragment">
+        <action
+            android:id="@+id/action_bookDetailsFragment_to_editBookFragment"
+            app:destination="@id/nav_edit_book_fragment" />
+        <action
+            android:id="@+id/action_bookDetailsFragment_to_processReadingBookFragment"
+            app:destination="@id/nav_process_reading_book_fragment" />
+    </fragment>
     <fragment
-        android:id="@+id/settingsFragment"
-        android:name="ru.vdv.myapp.myreadersdiary.ui.user.SettingsFragment"
+        android:id="@+id/nav_settings_fragment"
+        android:name="ru.vdv.myapp.myreadersdiary.ui.settings.SettingsFragment"
         android:label="@string/settings_title" />
     <fragment
         android:id="@+id/nav_main"
         android:name="ru.vdv.myapp.myreadersdiary.ui.main.MainFragment"
         android:label="@string/main_fragment_title"
-        tools:layout="@layout/main_fragment" >
+        tools:layout="@layout/main_fragment">
         <action
             android:id="@+id/action_nav_main_to_nav_home"
-            app:destination="@id/nav_home" />
+            app:destination="@id/nav_list_of_books" />
         <action
             android:id="@+id/action_nav_main_to_nav_reading_process"
-            app:destination="@id/nav_reading_process" />
+            app:destination="@id/nav_temporary_fragment" />
         <action
             android:id="@+id/action_nav_main_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
+            app:destination="@id/nav_settings_fragment" />
         <action
             android:id="@+id/action_nav_main_to_nav_statistics"
-            app:destination="@id/nav_statistics" />
+            app:destination="@id/nav_summary_statistics" />
+        <action
+            android:id="@+id/action_nav_main_to_eventsFragment"
+            app:destination="@id/nav_events_list_fragment" />
+        <action
+            android:id="@+id/action_nav_main_to_createNewBookFragment"
+            app:destination="@id/nav_create_new_book_Fragment" />
+        <action
+            android:id="@+id/action_nav_main_to_processReadingBookFragment"
+            app:destination="@id/nav_process_reading_book_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_events_list_fragment"
+        android:name="ru.vdv.myapp.myreadersdiary.ui.statistics.events.EventsListFragment"
+        android:label="@string/events_list_label"
+        tools:layout="@layout/events_list_fragment" />
+    <fragment
+        android:id="@+id/nav_create_new_book_Fragment"
+        android:name="ru.vdv.myapp.myreadersdiary.ui.books.createbook.CreateNewBookFragment"
+        android:label="@string/create_new_book_label"
+        tools:layout="@layout/create_new_book_fragment" />
+    <fragment
+        android:id="@+id/nav_edit_book_fragment"
+        android:name="ru.vdv.myapp.myreadersdiary.ui.books.editbook.EditBookFragment"
+        android:label="@string/edit_book_label"
+        tools:layout="@layout/edit_book_fragment" />
+    <fragment
+        android:id="@+id/nav_process_reading_book_fragment"
+        android:name="ru.vdv.myapp.myreadersdiary.ui.books.readingprocess.ProcessReadingBookFragment"
+        android:label="@string/process_reading_book_label"
+        tools:layout="@layout/process_reading_book_fragment">
+        <action
+            android:id="@+id/action_processReadingBookFragment_to_eventsFragment"
+            app:destination="@id/nav_events_list_fragment" />
     </fragment>
 </navigation>

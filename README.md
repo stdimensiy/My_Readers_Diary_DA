@@ -14,10 +14,12 @@
 так и для родителя. Ряд отчетов для всех видов пользователей одинаковый, часть функций имеет
 существенные отличия.
 ## Мои проекты
-| <video src="https://user-images.githubusercontent.com/73497940/145891700-49e7ac00-5174-4433-8af8-216719b7ea7b.mp4"></video> |  | <img src="https://raw.githubusercontent.com/stdimensiy/My_Readers_Diary_DA/develop/snapshots/my_readers_diary_menu.jpg" width="300" title="Домашний фрагмент"> |
+<video src="https://user-images.githubusercontent.com/73497940/146787247-cbb39fba-982e-40c9-8ae7-72f45c84d084.mp4" ></video>
+| <img src="https://user-images.githubusercontent.com/73497940/146788192-262a0b7a-1751-4993-bde9-2916e13da4cb.jpg" width="300" title="Список книг"> | <img src="https://user-images.githubusercontent.com/73497940/146788157-13b34560-f354-420d-bd12-b40c2e8c64e7.jpg" width="300" title="Меню"> | <img src="https://user-images.githubusercontent.com/73497940/146787841-81e1180e-b7e0-4bac-9824-fc56dce47b91.jpg" width="300" title="Статистика">
 |:--------------------------------:|:--------------------------------:|:--------------------------------:|
-| Запуск и настройки | Меню| Список книг |
+| Список книг | Меню| Статистика |
 | `в разработке` | `в разработке` | `в разработке` |
+
 Также в рамках проекта "Папа одобряет" приложение содержит:
 - компоненты взаимодействия с удаленной базой данных
 - синхронизации данных;
