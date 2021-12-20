@@ -37,7 +37,9 @@ class BookDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         book = arguments?.getParcelable("ARG_BOOK")!!
         binding.textViewBookDetailsTitle.text = book.title
-        "${book.producerName} ${book.producerPatronymic} ${book.producerSurname}".also { binding.textViewBookDetailsAuthorsOfTheBook.text = it }
+        "${book.producerName} ${book.producerPatronymic} ${book.producerSurname}".also {
+            binding.textViewBookDetailsAuthorsOfTheBook.text = it
+        }
         imageLoader.loadBookCover(
             "https://dadapproves.ru/usercontent/book/covers/${book.bookCover}",
             binding.imageViewBookDetailsCover
@@ -52,5 +54,4 @@ class BookDetailsFragment : Fragment() {
             adapter.notifyDataSetChanged()
         })
     }
-
 }
