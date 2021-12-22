@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import ru.vdv.myapp.myreadersdiary.R
-import ru.vdv.myapp.myreadersdiary.domain.Event
 import ru.vdv.myapp.myreadersdiary.domain.WeekEvent
 
 class ActivityStatisticsGraphAdapter : RecyclerView.Adapter<ActivityStatisticsGraphViewHolder>() {
@@ -37,7 +36,7 @@ class ActivityStatisticsGraphAdapter : RecyclerView.Adapter<ActivityStatisticsGr
 
     /**
     ### "Установить соответствующий значению маркер"
-     * @param count знаячение, в соответствии с которым маркируется элемент (в данном случае
+     * @param count значение, в соответствии с которым маркируется элемент (в данном случае
      * количество баллов активности пользователя"
      * @param view ссылка на [ImageView] в которой следует установить маркер"
      **/
