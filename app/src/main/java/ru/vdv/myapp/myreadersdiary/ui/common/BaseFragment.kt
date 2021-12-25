@@ -1,7 +1,6 @@
 package ru.vdv.myapp.myreadersdiary.ui.common
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,10 +21,7 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val type = javaClass.genericSuperclass
-        Log.d("Моя проверка", "Получен тип: $type")
         val clazz = (type as ParameterizedType).actualTypeArguments[0] as Class<VB>
-        Log.d("Моя проверка", "Получен аргумент: ${(type).actualTypeArguments[0]}")
-        Log.d("Моя проверка", "Получен приведенный результат: $clazz")
         val method = clazz.getMethod(
             "inflate",
             LayoutInflater::class.java,

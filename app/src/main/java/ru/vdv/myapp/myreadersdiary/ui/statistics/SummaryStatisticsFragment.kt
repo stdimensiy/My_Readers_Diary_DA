@@ -4,33 +4,25 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.vdv.myapp.myreadersdiary.databinding.FragmentSummaryStatisticsBinding
-import ru.vdv.myapp.myreadersdiary.glide.GlideImageLoader
+import ru.vdv.myapp.myreadersdiary.ui.common.BaseFragment
 
-class SummaryStatisticsFragment : Fragment() {
-
-    private val imageLoader = GlideImageLoader()
-    private var _binding: FragmentSummaryStatisticsBinding? = null
-    private val binding get() = _binding!!
+class SummaryStatisticsFragment : BaseFragment<FragmentSummaryStatisticsBinding>() {
     private lateinit var adapter: ActivityStatisticsGraphAdapter
     private lateinit var summaryStatisticsViewModel: SummaryStatisticsViewModel
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         adapter = ActivityStatisticsGraphAdapter()
         summaryStatisticsViewModel =
             ViewModelProvider(this)[SummaryStatisticsViewModel::class.java]
 
-        _binding = FragmentSummaryStatisticsBinding.inflate(inflater, container, false)
-
-        return binding.root
+        return super.onCreateView(inflater, container, savedInstanceState)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,11 +42,6 @@ class SummaryStatisticsFragment : Fragment() {
             adapter.notifyDataSetChanged()
             eventsGraph.scrollToPosition(adapter.itemCount - 1)
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     private fun setImageAvatar(url: String): Unit =
