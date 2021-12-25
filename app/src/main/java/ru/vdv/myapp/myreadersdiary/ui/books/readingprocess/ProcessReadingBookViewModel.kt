@@ -1,7 +1,7 @@
 package ru.vdv.myapp.myreadersdiary.ui.books.readingprocess
 
-import androidx.lifecycle.ViewModel
+import ru.vdv.myapp.myreadersdiary.ui.common.BaseViewModel
 
-class ProcessReadingBookViewModel : ViewModel() {
+class ProcessReadingBookViewModel : BaseViewModel() {
     // TODO: Implement the ViewModel
 }

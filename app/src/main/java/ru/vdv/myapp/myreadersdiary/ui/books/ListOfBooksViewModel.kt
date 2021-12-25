@@ -2,14 +2,11 @@ package ru.vdv.myapp.myreadersdiary.ui.books
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import ru.vdv.myapp.myreadersdiary.domain.Book
 import ru.vdv.myapp.myreadersdiary.domain.CallBack
-import ru.vdv.myapp.myreadersdiary.model.repository.RepositoryImpl
+import ru.vdv.myapp.myreadersdiary.ui.common.BaseViewModel
 
-class ListOfBooksViewModel : ViewModel() {
-    private val repository = RepositoryImpl()
-
+class ListOfBooksViewModel : BaseViewModel() {
     private val _prepareItems = MutableLiveData<List<Book>>().apply {
         repository.getListOfBooks(object : CallBack<List<Book>> {
             override fun onResult(result: List<Book>) {

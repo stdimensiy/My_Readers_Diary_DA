@@ -2,15 +2,10 @@ package ru.vdv.myapp.myreadersdiary.ui.statistics
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import ru.vdv.myapp.myreadersdiary.domain.*
-import ru.vdv.myapp.myreadersdiary.model.repository.RepositoryImpl
-import java.text.DateFormat
-import java.time.LocalDate
-import java.util.*
+import ru.vdv.myapp.myreadersdiary.ui.common.BaseViewModel
 
-class SummaryStatisticsViewModel : ViewModel() {
-    private val repository = RepositoryImpl()
+class SummaryStatisticsViewModel : BaseViewModel() {
 
     //заглушка пока не будет реализован нормально режим авторизации
     private val prepareUser = User(

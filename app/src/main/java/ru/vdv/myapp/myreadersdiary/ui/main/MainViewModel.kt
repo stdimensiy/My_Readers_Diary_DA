@@ -2,14 +2,12 @@ package ru.vdv.myapp.myreadersdiary.ui.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import ru.vdv.myapp.myreadersdiary.domain.CallBack
 import ru.vdv.myapp.myreadersdiary.domain.Event
 import ru.vdv.myapp.myreadersdiary.domain.User
-import ru.vdv.myapp.myreadersdiary.model.repository.RepositoryImpl
+import ru.vdv.myapp.myreadersdiary.ui.common.BaseViewModel
 
-class MainViewModel : ViewModel() {
-    private val repository = RepositoryImpl()
+class MainViewModel : BaseViewModel() {
     fun fetchCurrentUser(login: String?) {
         // в дальнейшем необходимо использовать тольео хешированный идентификатор
         // нно для начала лупим только по логину
