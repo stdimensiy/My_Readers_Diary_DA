@@ -1,6 +1,5 @@
 package ru.vdv.myapp.myreadersdiary.model.repository
 
-import android.text.format.DateUtils
 import android.util.Log
 import retrofit2.Call
 import retrofit2.Callback
@@ -9,9 +8,79 @@ import ru.vdv.myapp.myreadersdiary.domain.*
 import ru.vdv.myapp.myreadersdiary.model.api.ApiService
 import ru.vdv.myapp.myreadersdiary.model.retrofit.Common
 import java.util.*
+import kotlin.random.Random.Default.nextInt
 
 class RepositoryImpl() : Repository {
+
+    /**
+     * Формирует список заполненных объектов WeekEvent с понедельника, предшествующего [startData] по текущую дату
+     * numberOfContributions в SummaryDayEvents заполняется значением = 0
+     * @param startData - начальная дата, начиная с которой формировать список
+     */
+    override fun getClearSummaryEventData(startData: Date, callBack: CallBack<List<WeekEvent>>) {
+        val endDate = Date()
+        val currentCalendarDate = getBeginCalendar(startData)
+
+        val weekEvent: MutableList<WeekEvent> = mutableListOf()
+        while (currentCalendarDate.time.before(endDate)) {
+            weekEvent.add(
+                WeekEvent(
+                    weekMonday = SummaryDayEvents(date = currentCalendarDate.apply { add(Calendar.DATE, 1) }.time, 0),
+                    weekTuesday = SummaryDayEvents(date = currentCalendarDate.apply { add(Calendar.DATE, 1) }.time, 0),
+                    weekWednesday = SummaryDayEvents(date = currentCalendarDate.apply { add(Calendar.DATE, 1) }.time, 0),
+                    weekThursday = SummaryDayEvents(date = currentCalendarDate.apply { add(Calendar.DATE, 1) }.time, 0),
+                    weekFriday = SummaryDayEvents(date = currentCalendarDate.apply { add(Calendar.DATE, 1) }.time, 0),
+                    weekSaturday = SummaryDayEvents(date = currentCalendarDate.apply { add(Calendar.DATE, 1) }.time, 0),
+                    weekSunday = SummaryDayEvents(date = currentCalendarDate.apply { add(Calendar.DATE, 1) }.time, 0)
+
+                )
+            )
+        }
+        callBack.onResult(weekEvent)
+    }
+
+    /**
+     * Формирует список заполненных объектов WeekEvent с понедельника, предшествующего [startData] по текущую дату
+     * В отличие от [getClearSummaryEventData] заполняет numberOfContributions случайным значением от 0 до 20 (включительно)
+     * @param startData - начальная дата, начиная с которой формировать список
+     */
+    override fun getRandomSummaryEventData(startData: Date, callBack: CallBack<List<WeekEvent>>) {
+        val endDate = Date()
+        val currentCalendarDate = getBeginCalendar(startData)
+
+        val weekEvent: MutableList<WeekEvent> = mutableListOf()
+        while (currentCalendarDate.time.before(endDate)) {
+            weekEvent.add(
+                WeekEvent(
+                    weekMonday = SummaryDayEvents(date = currentCalendarDate.apply { add(Calendar.DATE, 1) }.time, nextInt(0, 21)),
+                    weekTuesday = SummaryDayEvents(date = currentCalendarDate.apply { add(Calendar.DATE, 1) }.time, nextInt(0, 21)),
+                    weekWednesday = SummaryDayEvents(date = currentCalendarDate.apply { add(Calendar.DATE, 1) }.time, nextInt(0, 21)),
+                    weekThursday = SummaryDayEvents(date = currentCalendarDate.apply { add(Calendar.DATE, 1) }.time, nextInt(0, 21)),
+                    weekFriday = SummaryDayEvents(date = currentCalendarDate.apply { add(Calendar.DATE, 1) }.time, nextInt(0, 21)),
+                    weekSaturday = SummaryDayEvents(date = currentCalendarDate.apply { add(Calendar.DATE, 1) }.time, nextInt(0, 21)),
+                    weekSunday = SummaryDayEvents(date = currentCalendarDate.apply { add(Calendar.DATE, 1) }.time, nextInt(0, 21))
+
+                )
+            )
+        }
+        callBack.onResult(weekEvent)
+    }
+
+    /**
+     * Возвращает Calendar с датой, установленной на воскресенье недели, предшествующей указанной в [startData]
+     */
+    private fun getBeginCalendar(startData: Date): Calendar =
+        Calendar.getInstance().apply {
+            time = startData
+            get(Calendar.DAY_OF_WEEK).also { dayOfWeak ->
+                val dayOfWeakNormalized = (7 + dayOfWeak - 2) % 7 //Изначально get возвращает как 1 - воскресенье, 7 - суббота. Приводим к виду 0 - понедельник, 6 - воскресенье
+                roll(Calendar.DATE, -dayOfWeakNormalized - 1)
+            }
+        }
+
+
     //Заглушка  недельных суммарных активностей, пока API готовится.
+    @Deprecated("Using getClearSummaryEventData")
     private val weekEventPlug: List<WeekEvent> = listOf(
         WeekEvent(
             SummaryDayEvents(Date(2020, 11, 10), 0),
