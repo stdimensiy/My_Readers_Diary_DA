@@ -16,9 +16,8 @@ class MainEventsAdapter : RecyclerView.Adapter<MainEventViewHolder>() {
     var items: List<Event> = listOf()
     val imageLoader: ImageLoader<ImageView> = GlideImageLoader()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainEventViewHolder {
-        val binding = EventListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-//        val root = LayoutInflater.from(parent.context)
-//            .inflate(R.layout.event_list_item, parent, false)
+        val binding =
+            EventListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MainEventViewHolder(binding)
     }
 
@@ -41,7 +40,7 @@ class MainEventsAdapter : RecyclerView.Adapter<MainEventViewHolder>() {
         val item = items[holder.adapterPosition]
         holder.itemView.setOnClickListener {
             val bundle = Bundle()
-            bundle.putParcelable("ARG_BOOK", item)
+            bundle.putParcelable("ARG_BOOK", item.baseObject)
             holder.itemView.findNavController().navigate(R.id.nav_book_details_fragment, bundle)
         }
         super.onViewAttachedToWindow(holder)
