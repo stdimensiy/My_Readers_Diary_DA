@@ -39,7 +39,7 @@ class EventsListAdapter : RecyclerView.Adapter<EventsListViewHolder>() {
         val item = items[holder.adapterPosition]
         holder.itemView.setOnClickListener {
             val bundle = Bundle()
-            bundle.putParcelable("ARG_BOOK", item)
+            bundle.putParcelable("ARG_BOOK", item.baseObject)
             holder.itemView.findNavController().navigate(R.id.nav_book_details_fragment, bundle)
         }
         super.onViewAttachedToWindow(holder)
