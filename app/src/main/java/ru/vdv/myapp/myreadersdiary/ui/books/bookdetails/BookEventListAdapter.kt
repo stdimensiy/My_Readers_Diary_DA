@@ -37,11 +37,11 @@ class BookEventListAdapter : RecyclerView.Adapter<BookEventListViewHolder>() {
 
     override fun onViewAttachedToWindow(holder: BookEventListViewHolder) {
         val item = items[holder.adapterPosition]
-        holder.itemView.setOnClickListener {
-            val bundle = Bundle()
-            bundle.putParcelable("ARG_BOOK", item)
-            holder.itemView.findNavController().navigate(R.id.nav_book_details_fragment, bundle)
-        }
+//        holder.itemView.setOnClickListener {
+//            val bundle = Bundle()
+//            bundle.putParcelable("ARG_BOOK", item)
+//            holder.itemView.findNavController().navigate(R.id.nav_book_details_fragment, bundle)
+//        }
         super.onViewAttachedToWindow(holder)
     }
 
