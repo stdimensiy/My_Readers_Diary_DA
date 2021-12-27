@@ -34,5 +34,6 @@ class SummaryStatisticsViewModel : BaseViewModel() {
         val df = SimpleDateFormat("yyyy.MM.dd HH:mm")
         return df.parse(date).time
     }
+
     val prepareEventList: LiveData<List<WeekEvent>> = _prepareEventList
 }
