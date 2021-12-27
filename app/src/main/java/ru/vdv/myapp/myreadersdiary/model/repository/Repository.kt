@@ -1,8 +1,11 @@
 package ru.vdv.myapp.myreadersdiary.model.repository
 
 import ru.vdv.myapp.myreadersdiary.domain.*
+import java.util.*
 
 interface Repository {
+    fun getClearSummaryEventData(startData: Date, callBack: CallBack<List<WeekEvent>>)
+    fun getRandomSummaryEventData(startData: Date, callBack: CallBack<List<WeekEvent>>)
     fun getListOfBooks(callBack: CallBack<List<Book>>)
     fun getUserInfo(userLogin: String, callBack: CallBack<User>)
     fun postBook(callBack: CallBack<Any>)
@@ -33,7 +36,7 @@ interface Repository {
      * @return возвращает список объектов *[Event]*
      * @throws NullPointerException
      **/
-    fun getEventsListOfBook(num: Int, bookId: String, callBack: CallBack<List<Event>>)
+    fun getEventsListOfBook(num: Int, bookId: String, callBack: CallBack<List<ShortEventForBook>>)
 
     /**
     ### "Получить список совокупных значений недельных активностей пользователя"

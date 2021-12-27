@@ -3,23 +3,16 @@ package ru.vdv.myapp.myreadersdiary.ui.temp
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import ru.vdv.myapp.myreadersdiary.domain.Book
 import ru.vdv.myapp.myreadersdiary.domain.CallBack
-import ru.vdv.myapp.myreadersdiary.model.repository.RepositoryImpl
+import ru.vdv.myapp.myreadersdiary.ui.common.BaseViewModel
 
-class TempViewModel : ViewModel() {
-    private val repository = RepositoryImpl()
+class TempViewModel : BaseViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         repository.postBook(object : CallBack<Any> {
             override fun onResult(result: Any) {
                 Log.d("Моя проверка", "VM результат: $result")
-//                value = if (result) {
-//                    "Объект отправлен"
-//                } else {
-//                    "Объект НЕ отправлен"
-//                }
             }
         })
     }
@@ -40,11 +33,6 @@ class TempViewModel : ViewModel() {
         repository.postBook(object : CallBack<Any> {
             override fun onResult(result: Any) {
                 Log.d("Моя проверка", "VM результат: $result")
-//                value = if (result) {
-//                    "Объект отправлен"
-//                } else {
-//                    "Объект НЕ отправлен"
-//                }
             }
         })
     }
@@ -54,11 +42,6 @@ class TempViewModel : ViewModel() {
         repository.patchBook(object : CallBack<Any> {
             override fun onResult(result: Any) {
                 Log.d("Моя проверка", "VM результат: $result")
-//                value = if (result) {
-//                    "Объект отправлен"
-//                } else {
-//                    "Объект НЕ отправлен"
-//                }
             }
         })
     }
@@ -68,11 +51,6 @@ class TempViewModel : ViewModel() {
         repository.deleteBook(object : CallBack<Any> {
             override fun onResult(result: Any) {
                 Log.d("Моя проверка", "VM результат: $result")
-//                value = if (result) {
-//                    "Объект отправлен"
-//                } else {
-//                    "Объект НЕ отправлен"
-//                }
             }
         })
     }
@@ -82,11 +60,6 @@ class TempViewModel : ViewModel() {
         repository.putBook(object : CallBack<Any> {
             override fun onResult(result: Any) {
                 Log.d("Моя проверка", "VM результат: $result")
-//                value = if (result) {
-//                    "Объект отправлен"
-//                } else {
-//                    "Объект НЕ отправлен"
-//                }
             }
         })
     }
@@ -96,11 +69,6 @@ class TempViewModel : ViewModel() {
         repository.headBook(object : CallBack<Any> {
             override fun onResult(result: Any) {
                 Log.d("Моя проверка", "VM результат: $result")
-//                value = if (result) {
-//                    "Объект отправлен"
-//                } else {
-//                    "Объект НЕ отправлен"
-//                }
             }
         })
     }
@@ -110,11 +78,6 @@ class TempViewModel : ViewModel() {
         repository.optionsBook(object : CallBack<Any> {
             override fun onResult(result: Any) {
                 Log.d("Моя проверка", "VM результат: $result")
-//                value = if (result) {
-//                    "Объект отправлен"
-//                } else {
-//                    "Объект НЕ отправлен"
-//                }
             }
         })
     }
@@ -124,11 +87,6 @@ class TempViewModel : ViewModel() {
         repository.httpBook(object : CallBack<Any> {
             override fun onResult(result: Any) {
                 Log.d("Моя проверка", "VM результат: $result")
-//                value = if (result) {
-//                    "Объект отправлен"
-//                } else {
-//                    "Объект НЕ отправлен"
-//                }
             }
         })
     }

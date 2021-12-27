@@ -4,32 +4,25 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.vdv.myapp.myreadersdiary.databinding.FragmentListOfBooksBinding
+import ru.vdv.myapp.myreadersdiary.ui.common.BaseFragment
 
-class ListOfBooksFragment : Fragment() {
-
+class ListOfBooksFragment : BaseFragment<FragmentListOfBooksBinding>() {
     private lateinit var ofBooksAdapter: ListOfBooksAdapter
     private lateinit var listOfBooksViewModel: ListOfBooksViewModel
-    private var _binding: FragmentListOfBooksBinding? = null
-
-    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         ofBooksAdapter = ListOfBooksAdapter()
         listOfBooksViewModel =
             ViewModelProvider(this).get(ListOfBooksViewModel::class.java)
-
-        _binding = FragmentListOfBooksBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-        return root
+        return super.onCreateView(inflater, container, savedInstanceState)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -45,11 +38,5 @@ class ListOfBooksFragment : Fragment() {
 
         listOfBooksViewModel.postResult.observe(viewLifecycleOwner, Observer {
         })
-
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

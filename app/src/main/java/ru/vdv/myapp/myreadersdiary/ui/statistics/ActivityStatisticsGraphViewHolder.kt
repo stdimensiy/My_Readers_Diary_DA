@@ -1,18 +1,18 @@
 package ru.vdv.myapp.myreadersdiary.ui.statistics
 
-import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import ru.vdv.myapp.myreadersdiary.R
+import ru.vdv.myapp.myreadersdiary.databinding.ActivityGraphVerticalSimpleItemBinding
 
-class ActivityStatisticsGraphViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    var ivMonday: ImageView = itemView.findViewById(R.id.iv_mon)
-    var ivTuesday: ImageView = itemView.findViewById(R.id.iv_tue)
-    var ivWednesday: ImageView = itemView.findViewById(R.id.iv_wed)
-    var ivThursday: ImageView = itemView.findViewById(R.id.iv_thu)
-    var ivFriday: ImageView = itemView.findViewById(R.id.iv_fri)
-    var ivSaturday: ImageView = itemView.findViewById(R.id.iv_sat)
-    var ivSunday: ImageView = itemView.findViewById(R.id.iv_sun)
-    var tvBottomText: TextView = itemView.findViewById(R.id.tv_week_bottom_text)
+class ActivityStatisticsGraphViewHolder(val binding: ActivityGraphVerticalSimpleItemBinding) :
+    RecyclerView.ViewHolder(binding.root) {
+    var ivMonday: ImageView = binding.ivMon
+    var ivTuesday: ImageView = binding.ivTue
+    var ivWednesday: ImageView = binding.ivWed
+    var ivThursday: ImageView = binding.ivThu
+    var ivFriday: ImageView = binding.ivFri
+    var ivSaturday: ImageView = binding.ivSat
+    var ivSunday: ImageView = binding.ivSun
+    var tvBottomText: TextView = binding.tvWeekBottomText
 }
