@@ -7,6 +7,7 @@ import android.widget.ImageView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import ru.vdv.myapp.myreadersdiary.R
+import ru.vdv.myapp.myreadersdiary.databinding.EventListItemBinding
 import ru.vdv.myapp.myreadersdiary.domain.Event
 import ru.vdv.myapp.myreadersdiary.glide.GlideImageLoader
 import ru.vdv.myapp.myreadersdiary.glide.ImageLoader
@@ -15,9 +16,9 @@ class MainEventsAdapter : RecyclerView.Adapter<MainEventViewHolder>() {
     var items: List<Event> = listOf()
     val imageLoader: ImageLoader<ImageView> = GlideImageLoader()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainEventViewHolder {
-        val root = LayoutInflater.from(parent.context)
-            .inflate(R.layout.event_list_item, parent, false)
-        return MainEventViewHolder(root)
+        val binding =
+            EventListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return MainEventViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: MainEventViewHolder, position: Int) {
@@ -39,7 +40,7 @@ class MainEventsAdapter : RecyclerView.Adapter<MainEventViewHolder>() {
         val item = items[holder.adapterPosition]
         holder.itemView.setOnClickListener {
             val bundle = Bundle()
-            bundle.putParcelable("ARG_BOOK", item)
+            bundle.putParcelable("ARG_BOOK", item.baseObject)
             holder.itemView.findNavController().navigate(R.id.nav_book_details_fragment, bundle)
         }
         super.onViewAttachedToWindow(holder)

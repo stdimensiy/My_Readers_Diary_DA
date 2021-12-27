@@ -1,7 +1,7 @@
 package ru.vdv.myapp.myreadersdiary.ui.books.createbook
 
-import androidx.lifecycle.ViewModel
+import ru.vdv.myapp.myreadersdiary.ui.common.BaseViewModel
 
-class CreateNewBookViewModel : ViewModel() {
+class CreateNewBookViewModel : BaseViewModel() {
     // TODO: Implement the ViewModel
 }

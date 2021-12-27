@@ -2,13 +2,13 @@ package ru.vdv.myapp.myreadersdiary.ui.books.createbook
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import ru.vdv.myapp.myreadersdiary.R
+import ru.vdv.myapp.myreadersdiary.databinding.CreateNewBookFragmentBinding
+import ru.vdv.myapp.myreadersdiary.ui.common.BaseFragment
 
-class CreateNewBookFragment : Fragment() {
+class CreateNewBookFragment : BaseFragment<CreateNewBookFragmentBinding>() {
 
     private lateinit var viewModel: CreateNewBookViewModel
 
@@ -16,7 +16,8 @@ class CreateNewBookFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.create_new_book_fragment, container, false)
+        //Тут будет размещена инициализация переменных фрагмента
+        return super.onCreateView(inflater, container, savedInstanceState)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -2,29 +2,24 @@ package ru.vdv.myapp.myreadersdiary.ui.statistics.events
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.vdv.myapp.myreadersdiary.databinding.EventsListFragmentBinding
-import ru.vdv.myapp.myreadersdiary.glide.GlideImageLoader
+import ru.vdv.myapp.myreadersdiary.ui.common.BaseFragment
 
-class EventsListFragment : Fragment() {
-    private val imageLoader = GlideImageLoader()
-    private var _binding: EventsListFragmentBinding? = null
-    private val binding get() = _binding!!
+class EventsListFragment : BaseFragment<EventsListFragmentBinding>() {
     private lateinit var adapter: EventsListAdapter
     private lateinit var listViewModel: EventsListViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         adapter = EventsListAdapter()
-        _binding = EventsListFragmentBinding.inflate(inflater, container, false)
-        return binding.root
+        return super.onCreateView(inflater, container, savedInstanceState)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -3,7 +3,6 @@ package ru.vdv.myapp.myreadersdiary.ui.main
 import android.graphics.Color
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,27 +11,23 @@ import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import app.futured.donut.DonutSection
 import ru.vdv.myapp.myreadersdiary.databinding.MainFragmentBinding
-import ru.vdv.myapp.myreadersdiary.glide.GlideImageLoader
+import ru.vdv.myapp.myreadersdiary.ui.common.BaseFragment
 
-class MainFragment : Fragment() {
-    private val imageLoader = GlideImageLoader()
-    private var _binding: MainFragmentBinding? = null
-    private val binding get() = _binding!!
+class MainFragment : BaseFragment<MainFragmentBinding>() {
     private lateinit var adapter: MainEventsAdapter
     private lateinit var viewModel: MainViewModel
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         adapter = MainEventsAdapter()
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         viewModel.fetchCurrentUser(
             PreferenceManager.getDefaultSharedPreferences(context).getString("login", "132")
         )
-
-        _binding = MainFragmentBinding.inflate(inflater, container, false)
-        return binding.root
+        return super.onCreateView(inflater, container, savedInstanceState)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

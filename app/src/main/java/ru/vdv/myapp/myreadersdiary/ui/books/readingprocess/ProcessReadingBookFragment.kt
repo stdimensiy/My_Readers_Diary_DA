@@ -2,13 +2,13 @@ package ru.vdv.myapp.myreadersdiary.ui.books.readingprocess
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import ru.vdv.myapp.myreadersdiary.R
+import ru.vdv.myapp.myreadersdiary.databinding.ProcessReadingBookFragmentBinding
+import ru.vdv.myapp.myreadersdiary.ui.common.BaseFragment
 
-class ProcessReadingBookFragment : Fragment() {
+class ProcessReadingBookFragment : BaseFragment<ProcessReadingBookFragmentBinding>() {
 
     private lateinit var viewModel: ProcessReadingBookViewModel
 
@@ -16,13 +16,12 @@ class ProcessReadingBookFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.process_reading_book_fragment, container, false)
+        return super.onCreateView(inflater, container, savedInstanceState)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(ProcessReadingBookViewModel::class.java)
-        // TODO: Use the ViewModel
     }
 
 }
