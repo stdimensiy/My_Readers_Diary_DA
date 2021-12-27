@@ -22,4 +22,4 @@ data class User(
     val avatarUrl: String,
     @SerializedName("backgroundUrl")
     val backgroundUrl: String
-): Parcelable
+) : Parcelable

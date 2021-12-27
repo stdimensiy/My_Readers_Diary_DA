@@ -36,7 +36,7 @@ interface Repository {
      * @return возвращает список объектов *[Event]*
      * @throws NullPointerException
      **/
-    fun getEventsListOfBook(num: Int, bookId: String, callBack: CallBack<List<Event>>)
+    fun getEventsListOfBook(num: Int, bookId: String, callBack: CallBack<List<ShortEventForBook>>)
 
     /**
     ### "Получить список совокупных значений недельных активностей пользователя"
