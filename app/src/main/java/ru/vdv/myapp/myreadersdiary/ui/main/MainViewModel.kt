@@ -96,60 +96,60 @@ class MainViewModel : BaseViewModel() {
             )
         ),
         Event(
-            "0000000037", "Чтение книги",
+            "0000000045", "Чтение/прогрес +12 (170 из 1170)",
             Date(convertDateToLong("2021.12.22 17:25")),
             Date(convertDateToLong("2021.12.22 17:25")),
             "readBook",
             Book(
-                "0000000037",
-                "Погружение в паттерны проектирования",
-                "Швец",
-                "Александр",
+                "0000000042",
+                "Философия java",
+                "Эккель",
+                "Брюс",
                 "",
-                "pp123457.jpg"
+                "000000043.jpg"
             )
         ),
         Event(
-            "0000000037", "Чтение книги",
+            "0000000049", "Чтение/прогрес +21 (260 из 304)",
             Date(convertDateToLong("2021.12.22 17:25")),
             Date(convertDateToLong("2021.12.22 17:25")),
             "readBook",
             Book(
-                "0000000037",
-                "Погружение в паттерны проектирования",
-                "Швец",
-                "Александр",
+                "0000000043",
+                "Как устроен JavaScript",
+                "Кроксфорд",
+                "Дуглас",
                 "",
-                "pp123457.jpg"
+                "000000044.jpg"
             )
         ),
         Event(
-            "0000000037", "Чтение книги",
+            "0000000037", "Чтение/прогрес +14 (102 из 368)",
             Date(convertDateToLong("2021.12.22 17:25")),
             Date(convertDateToLong("2021.12.22 17:25")),
             "readBook",
             Book(
-                "0000000037",
-                "Погружение в паттерны проектирования",
-                "Швец",
-                "Александр",
+                "0000000044",
+                "Приемы объектно-ориентированного программирования",
+                "Гамма, Хелм, Джонсон, Влиссидес",
+                "...",
                 "",
-                "pp123457.jpg"
+                "000000045.jpg"
             )
         ),
     )
 
-    fun convertLongToTime(time: Long): String {
+    private fun convertLongToTime(time: Long): String {
         val date = Date(time)
         val format = SimpleDateFormat("yyyy.MM.dd HH:mm")
         return format.format(date)
     }
 
-    fun currentTimeToLong(): Long {
+    private fun currentTimeToLong(): Long {
         return System.currentTimeMillis()
     }
 
-    fun convertDateToLong(date: String): Long {
+    private fun convertDateToLong(date: String): Long {
         val df = SimpleDateFormat("yyyy.MM.dd HH:mm")
         return df.parse(date).time
     }
