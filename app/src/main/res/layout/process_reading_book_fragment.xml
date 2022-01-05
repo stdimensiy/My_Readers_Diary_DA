@@ -1,15 +1,255 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.books.readingprocess.ProcessReadingBookFragment">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Фрагмент фиксирования времени чтения книги (для непосрественной фиксации
-        процесса, с часами-секундомером, напоминалками о необходимости отвлечься и продолжить
-         чтение" />
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/buttons_container"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-</FrameLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="4dp">
+
+            <TextView
+                android:id="@+id/text_view_process_reading_book_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textAlignment="textStart"
+                android:textSize="20sp"
+                android:textStyle="bold|italic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/text_view_process_reading_book_title" />
+
+            <TextView
+                android:id="@+id/text_view_process_reading_book_authors"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textAlignment="textStart"
+                android:textColor="@color/cod_gray_66"
+                android:textSize="18sp"
+                android:textStyle="bold|italic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_view_process_reading_book_title"
+                tools:text="@string/text_view_process_reading_book_authors" />
+
+            <ImageView
+                android:id="@+id/image_view_process_reading_book_cover"
+                android:layout_width="124dp"
+                android:layout_height="175dp"
+                android:contentDescription="@string/ImageView_contentDescription_book_cover"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_process_reading_book_authors"
+                tools:srcCompat="@drawable/book_plug" />
+
+            <TextView
+                android:id="@+id/text_view_process_reading_book_pages_count"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textAlignment="textStart"
+                android:textSize="16sp"
+                android:textStyle="italic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/image_view_process_reading_book_cover"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_process_reading_book_authors"
+                tools:text="@string/text_view_process_reading_pages_count" />
+
+            <TextView
+                android:id="@+id/text_view_process_reading_book_words_count"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textAlignment="textStart"
+                android:textSize="16sp"
+                android:textStyle="italic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/image_view_process_reading_book_cover"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_process_reading_book_pages_count"
+                tools:text="@string/text_view_process_reading_book_words_count" />
+
+            <TextView
+                android:id="@+id/text_view_process_reading_book_density_words"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textAlignment="textStart"
+                android:textSize="16sp"
+                android:textStyle="italic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/image_view_process_reading_book_cover"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_process_reading_book_words_count"
+                tools:text="@string/text_view_process_reading_book_density_words" />
+
+            <TextView
+                android:id="@+id/text_view_process_reading_book_current_page"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textAlignment="textStart"
+                android:textSize="16sp"
+                android:textStyle="italic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/image_view_process_reading_book_cover"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_process_reading_book_density_words"
+                tools:text="@string/text_view_process_reading_book_current_page" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier_process_reading_book"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="text_view_process_reading_book_current_page, image_view_process_reading_book_cover" />
+
+            <TextView
+                android:id="@+id/text_view_reading_control_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingVertical="16dp"
+                android:text="@string/text_view_reading_control_title"
+                android:textSize="20sp"
+                android:textStyle="bold|italic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/barrier_process_reading_book" />
+
+            <TextView
+                android:id="@+id/text_view_process_reading_active_time_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_view_process_reading_active_time_title"
+                android:textAlignment="textStart"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="italic"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_reading_control_title" />
+
+            <TextView
+                android:id="@+id/text_view_process_reading_relax_time_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingVertical="16dp"
+                android:text="@string/text_view_process_reading_relax_time_title"
+                android:textAlignment="textStart"
+                android:textColor="@color/purple_700"
+                android:textSize="20sp"
+                android:textStyle="italic"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_process_reading_active_time_title" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier_process_reading_stopwatch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="end"
+                app:constraint_referenced_ids="text_view_process_reading_active_time_title,text_view_process_reading_relax_time_title" />
+
+            <TextView
+                android:id="@+id/text_view_process_reading_active_stopwatch"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:text="@string/text_view_process_reading_active_stopwatch_initial_value"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="25sp"
+                app:layout_constraintBottom_toBottomOf="@+id/text_view_process_reading_active_time_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/barrier_process_reading_stopwatch"
+                app:layout_constraintTop_toTopOf="@+id/text_view_process_reading_active_time_title" />
+
+            <TextView
+                android:id="@+id/text_view_process_reading_relax_stopwatch"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:text="@string/text_view_process_reading_relax_stopwatch_initial_value"
+                android:textAlignment="center"
+                android:textColor="@color/purple_700"
+                android:textSize="25sp"
+                app:layout_constraintBottom_toBottomOf="@+id/text_view_process_reading_relax_time_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/barrier_process_reading_stopwatch"
+                app:layout_constraintTop_toTopOf="@+id/text_view_process_reading_relax_time_title" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/group_process_reading_relax"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                app:constraint_referenced_ids="text_view_process_reading_relax_stopwatch, text_view_process_reading_relax_time_title"
+                tools:visibility="visible" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/buttons_container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_process_reading_start_or_pause"
+            style="@style/Widget.MaterialComponents.Button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="4dp"
+            android:layout_marginVertical="4dp"
+            android:minHeight="60dp"
+            android:text="@string/button_process_reading_start_text"
+            android:textAllCaps="false"
+            app:icon="@drawable/ic_start_reading"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/button_process_reading_stop"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_process_reading_stop"
+            style="@style/Widget.MaterialComponents.Button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="4dp"
+            android:minHeight="60dp"
+            android:text="@string/button_process_reading_stop_text"
+            android:textAllCaps="false"
+            app:icon="@drawable/ic_stop_reading"
+            app:layout_constraintBottom_toBottomOf="@+id/button_process_reading_start_or_pause"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/button_process_reading_start_or_pause" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <include
+        android:id="@+id/loader_process_reading"
+        layout="@layout/loading_sheet"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <include
+        android:id="@+id/error_process_reading"
+        layout="@layout/error_sheet"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
