@@ -20,7 +20,7 @@
     <string name="textView_book_details_duration">1000 страниц</string>
     <string name="textView_book_details_rating">Одобрена папой</string>
     <string name="default_text_book_details_budget">Ориентировочное коичество 100000 слов</string>
-    <string name="default_text_book_details_revenue">Средняя плотнотсь слов на страницу 200</string>
+    <string name="default_text_book_details_revenue">Средняя плотнотсь слов на страницу 250</string>
     <string name="default_text_book_details">Книга запланирована к прочтению в ближайшее время</string>
     <!-- Preference Titles -->
     <string name="main_settings_header">Основные настройки пользователя</string>
@@ -87,5 +87,6 @@
     <string name="text_view_reading_results_speed">Средняя скорость чтения: %s слов в минуту, %s страниц в минуту</string>
     <string name="button_reading_results_close">Закрыть</string>
     <string name="error_process_reading">Произошла ошибка\n%s</string>
+    <string name="start_read_book_label">Приступить к чтению</string>
     <!-- end process reading fragment area-->
 </resources>

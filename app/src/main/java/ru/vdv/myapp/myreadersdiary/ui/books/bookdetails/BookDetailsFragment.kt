@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import ru.vdv.myapp.myreadersdiary.R
 import ru.vdv.myapp.myreadersdiary.databinding.BookDetailsFragmentBinding
 import ru.vdv.myapp.myreadersdiary.domain.Book
 import ru.vdv.myapp.myreadersdiary.ui.common.BaseFragment
@@ -36,6 +38,12 @@ class BookDetailsFragment : BaseFragment<BookDetailsFragmentBinding>() {
             "https://dadapproves.ru/usercontent/book/covers/${book.bookCover}",
             binding.imageViewBookDetailsCover
         )
+
+        binding.startReadBook.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putParcelable("ARG_BOOK", book)
+            view.findNavController().navigate(R.id.nav_process_reading_book_fragment, bundle)
+        }
         val listOfEvent = binding.rvEventsList
         listOfEvent.adapter = adapter
         listOfEvent.layoutManager =
