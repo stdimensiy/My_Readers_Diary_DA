@@ -27,7 +27,10 @@ class EnterCurrentPageDialog : BaseDialogFragment<DialogEnterBookmarkBinding>() 
 
     override fun onResume() {
         super.onResume()
-        dialog?.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        dialog?.window?.setLayout(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
         isCancelable = false
         binding.editTextInputLayoutEnterBookmark.requestFocus()
     }
@@ -44,11 +47,14 @@ class EnterCurrentPageDialog : BaseDialogFragment<DialogEnterBookmarkBinding>() 
 
         when {
             newCurrentPage == null ->
-                inputLayoutEnterBookmark.error = resources.getString(R.string.dialog_process_reading_error_is_empty)
+                inputLayoutEnterBookmark.error =
+                    resources.getString(R.string.dialog_process_reading_error_is_empty)
             newCurrentPage < currentPage ->
-                inputLayoutEnterBookmark.error = resources.getString(R.string.dialog_process_reading_error_less_than_last)
+                inputLayoutEnterBookmark.error =
+                    resources.getString(R.string.dialog_process_reading_error_less_than_last)
             newCurrentPage > pagesCount ->
-                inputLayoutEnterBookmark.error = resources.getString(R.string.dialog_process_reading_error_more_than_pages_count)
+                inputLayoutEnterBookmark.error =
+                    resources.getString(R.string.dialog_process_reading_error_more_than_pages_count)
             else -> {
                 inputLayoutEnterBookmark.error = null
                 onCurrentPageEntered?.invoke(newCurrentPage)

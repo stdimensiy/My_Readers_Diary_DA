@@ -3,6 +3,8 @@ package ru.vdv.myapp.myreadersdiary.ui.books.readingprocess
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
+import ru.vdv.myapp.myreadersdiary.ui.common.Dialog
+import ru.vdv.myapp.myreadersdiary.ui.common.StartOrPauseButtonMode
 
 /**
  * UI-модель фрагмента ProcessReadingBookFragment
@@ -39,17 +41,4 @@ data class ProcessReadingBookUiModel(
     val relaxStopwatchValue: String,
     val isGroupProcessReadingRelaxVisible: Boolean,
     val dialog: Dialog
-) : Parcelable {
-
-    enum class StartOrPauseButtonMode {
-        START,
-        PAUSE,
-        RESUME
-    }
-
-    enum class Dialog {
-        NONE,
-        ENTER_CURRENT_PAGE,
-        READING_RESULTS
-    }
-}
+) : Parcelable

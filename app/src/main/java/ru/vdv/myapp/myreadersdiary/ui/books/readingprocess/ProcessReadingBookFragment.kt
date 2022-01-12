@@ -18,6 +18,7 @@ import ru.vdv.myapp.myreadersdiary.databinding.ProcessReadingBookFragmentBinding
 import ru.vdv.myapp.myreadersdiary.ui.books.readingprocess.dialogs.EnterCurrentPageDialog
 import ru.vdv.myapp.myreadersdiary.ui.books.readingprocess.dialogs.ReadingResultsDialog
 import ru.vdv.myapp.myreadersdiary.ui.common.BaseFragment
+import ru.vdv.myapp.myreadersdiary.ui.common.Dialog
 import ru.vdv.myapp.myreadersdiary.ui.common.ScreenUiState
 
 /**
@@ -96,9 +97,9 @@ class ProcessReadingBookFragment : BaseFragment<ProcessReadingBookFragmentBindin
 
     private fun renderDialog(data: ProcessReadingBookUiModel) {
         when (data.dialog) {
-            ProcessReadingBookUiModel.Dialog.NONE -> {}
-            ProcessReadingBookUiModel.Dialog.ENTER_CURRENT_PAGE -> openEnterCurrentPageDialog(data)
-            ProcessReadingBookUiModel.Dialog.READING_RESULTS -> openReadingResultsDialog(data)
+            Dialog.NONE -> {}
+            Dialog.ENTER_CURRENT_PAGE -> openEnterCurrentPageDialog(data)
+            Dialog.READING_RESULTS -> openReadingResultsDialog(data)
         }
     }
 
@@ -111,7 +112,10 @@ class ProcessReadingBookFragment : BaseFragment<ProcessReadingBookFragmentBindin
                         currentPage = data.currentPage
                     )
         enterCurrentPageDialog.setOnCurrentPageEnteredListener(viewModel::onCurrentPageEntered)
-        if (enterCurrentPageDialog.dialog == null) enterCurrentPageDialog.show(childFragmentManager, CURRENT_PAGE_DIALOG_TAG)
+        if (enterCurrentPageDialog.dialog == null) enterCurrentPageDialog.show(
+            childFragmentManager,
+            CURRENT_PAGE_DIALOG_TAG
+        )
     }
 
     private fun openReadingResultsDialog(data: ProcessReadingBookUiModel) {
@@ -120,7 +124,10 @@ class ProcessReadingBookFragment : BaseFragment<ProcessReadingBookFragmentBindin
                 ?: ReadingResultsDialog.newInstance(processReadingBookUiModel = data)
 
         readingResultsDialog.setOnCloseButtonPressedListener { findNavController().popBackStack() }
-        if (readingResultsDialog.dialog == null) readingResultsDialog.show(childFragmentManager, READING_RESULTS_DIALOG_TAG)
+        if (readingResultsDialog.dialog == null) readingResultsDialog.show(
+            childFragmentManager,
+            READING_RESULTS_DIALOG_TAG
+        )
     }
 
     private fun renderUiData(data: ProcessReadingBookUiModel) {
@@ -144,7 +151,12 @@ class ProcessReadingBookFragment : BaseFragment<ProcessReadingBookFragmentBindin
                 data.currentPage
             )
             imageViewProcessReadingBookCover.loadImageIfEmpty(data.coverUrl)
-            data.startOrPauseButtonTextAndIcon.let { buttonProcessReadingStartOrPause.setTextAndIconIfChanged(it.first, it.second) }
+            data.startOrPauseButtonTextAndIcon.let {
+                buttonProcessReadingStartOrPause.setTextAndIconIfChanged(
+                    it.first,
+                    it.second
+                )
+            }
             textViewProcessReadingActiveStopwatch.setIfChanged(data.activeStopwatchValue)
             textViewProcessReadingRelaxStopwatch.setIfChanged(data.relaxStopwatchValue)
             groupProcessReadingRelax.setVisibilityAnimated(data.isGroupProcessReadingRelaxVisible)
@@ -169,7 +181,10 @@ class ProcessReadingBookFragment : BaseFragment<ProcessReadingBookFragmentBindin
         }
     }
 
-    private fun MaterialButton.setTextAndIconIfChanged(@DrawableRes iconRes: Int, @StringRes textRes: Int) {
+    private fun MaterialButton.setTextAndIconIfChanged(
+        @DrawableRes iconRes: Int,
+        @StringRes textRes: Int
+    ) {
         val newButtonText = resources.getString(textRes)
         if (text.equals(newButtonText).not()) {
             icon = ContextCompat.getDrawable(requireContext(), iconRes)
@@ -198,7 +213,8 @@ class ProcessReadingBookFragment : BaseFragment<ProcessReadingBookFragmentBindin
     // ### end extensions utils area ###
 
     companion object {
-        private const val BOOK_ARG_KEY = "ARG_BOOK" //такой ключ встречается много где. Следует сделать общую публичную константу
+        private const val BOOK_ARG_KEY =
+            "ARG_BOOK" //такой ключ встречается много где. Следует сделать общую публичную константу
         private const val ANIMATION_FADE_DURATION = 1000L
         private const val ANIMATION_APPEAR_DURATION = 100L
         private const val CURRENT_PAGE_DIALOG_TAG = "CurrentPageDialog"

@@ -8,7 +8,9 @@ import ru.vdv.myapp.myreadersdiary.domain.Book
 import ru.vdv.myapp.myreadersdiary.model.stopwatch.Stopwatch
 import ru.vdv.myapp.myreadersdiary.model.stopwatch.StopwatchFactory
 import ru.vdv.myapp.myreadersdiary.ui.common.BaseViewModel
+import ru.vdv.myapp.myreadersdiary.ui.common.Dialog
 import ru.vdv.myapp.myreadersdiary.ui.common.ScreenUiState
+import ru.vdv.myapp.myreadersdiary.ui.common.StartOrPauseButtonMode
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -46,9 +48,9 @@ class ProcessReadingBookViewModel(
     fun onButtonProcessReadingStartOrPauseClicked() {
         uiModel?.let { uiModelNotNull ->
             when (uiModelNotNull.startOrPauseButtonMode) {
-                ProcessReadingBookUiModel.StartOrPauseButtonMode.START -> performStart(uiModelNotNull)
-                ProcessReadingBookUiModel.StartOrPauseButtonMode.PAUSE -> performPause(uiModelNotNull)
-                ProcessReadingBookUiModel.StartOrPauseButtonMode.RESUME -> performResume(uiModelNotNull)
+                StartOrPauseButtonMode.START -> performStart(uiModelNotNull)
+                StartOrPauseButtonMode.PAUSE -> performPause(uiModelNotNull)
+                StartOrPauseButtonMode.RESUME -> performResume(uiModelNotNull)
             }
         }
     }
@@ -59,7 +61,7 @@ class ProcessReadingBookViewModel(
         relaxStopwatch.pause()
         uiModel?.let { uiModelNotNull ->
             uiModelNotNull.copy(
-                dialog = ProcessReadingBookUiModel.Dialog.ENTER_CURRENT_PAGE
+                dialog = Dialog.ENTER_CURRENT_PAGE
             ).let { processReadingBookUiModel ->
                 postNewSuccessState(processReadingBookUiModel)
             }
@@ -70,7 +72,7 @@ class ProcessReadingBookViewModel(
     fun onCurrentPageEntered(currentPage: Int) {
         uiModel?.let { uiModelNotNull ->
             uiModelNotNull.copy(
-                dialog = ProcessReadingBookUiModel.Dialog.NONE,
+                dialog = Dialog.NONE,
                 newCurrentPage = currentPage.toLong()
             ).let { processReadingBookUiModel ->
                 postNewSuccessState(processReadingBookUiModel)
@@ -95,13 +97,16 @@ class ProcessReadingBookViewModel(
                             densityWordsPerPage = densityWordsPerPage,
                             currentPage = currentPage,
                             newCurrentPage = currentPage,
-                            startOrPauseButtonMode = ProcessReadingBookUiModel.StartOrPauseButtonMode.START,
-                            startOrPauseButtonTextAndIcon = Pair(R.drawable.ic_start_reading, R.string.button_process_reading_start_text),
+                            startOrPauseButtonMode = StartOrPauseButtonMode.START,
+                            startOrPauseButtonTextAndIcon = Pair(
+                                R.drawable.ic_start_reading,
+                                R.string.button_process_reading_start_text
+                            ),
                             activeStopwatchValue = STOPWATCH_INITIAL_VALUE,
                             activeStopwatchElapsingTime = STOPWATCH_INITIAL_VALUE_MS,
                             relaxStopwatchValue = STOPWATCH_INITIAL_VALUE,
                             isGroupProcessReadingRelaxVisible = false,
-                            dialog = ProcessReadingBookUiModel.Dialog.NONE
+                            dialog = Dialog.NONE
                         )).let { processReadingBookUiModel ->
                         uiModel = processReadingBookUiModel
                         ScreenUiState.Success(processReadingBookUiModel)
@@ -145,8 +150,11 @@ class ProcessReadingBookViewModel(
     private fun performStart(uiModelNotNull: ProcessReadingBookUiModel) {
         activeStopwatch.start()
         uiModelNotNull.copy(
-            startOrPauseButtonMode = ProcessReadingBookUiModel.StartOrPauseButtonMode.PAUSE,
-            startOrPauseButtonTextAndIcon = Pair(R.drawable.ic_pause_reading, R.string.button_process_reading_pause_text),
+            startOrPauseButtonMode = StartOrPauseButtonMode.PAUSE,
+            startOrPauseButtonTextAndIcon = Pair(
+                R.drawable.ic_pause_reading,
+                R.string.button_process_reading_pause_text
+            ),
             isGroupProcessReadingRelaxVisible = false
         ).let { processReadingBookUiModel ->
             postNewSuccessState(processReadingBookUiModel)
@@ -159,8 +167,11 @@ class ProcessReadingBookViewModel(
         relaxStopwatch.stop()
         relaxStopwatch.start()
         uiModelNotNull.copy(
-            startOrPauseButtonMode = ProcessReadingBookUiModel.StartOrPauseButtonMode.RESUME,
-            startOrPauseButtonTextAndIcon = Pair(R.drawable.ic_start_reading, R.string.button_process_reading_resume_text),
+            startOrPauseButtonMode = StartOrPauseButtonMode.RESUME,
+            startOrPauseButtonTextAndIcon = Pair(
+                R.drawable.ic_start_reading,
+                R.string.button_process_reading_resume_text
+            ),
             isGroupProcessReadingRelaxVisible = true
         ).let { processReadingBookUiModel ->
             postNewSuccessState(processReadingBookUiModel)
@@ -172,8 +183,11 @@ class ProcessReadingBookViewModel(
         relaxStopwatch.pause()
         activeStopwatch.start()
         uiModelNotNull.copy(
-            startOrPauseButtonMode = ProcessReadingBookUiModel.StartOrPauseButtonMode.PAUSE,
-            startOrPauseButtonTextAndIcon = Pair(R.drawable.ic_pause_reading, R.string.button_process_reading_pause_text),
+            startOrPauseButtonMode = StartOrPauseButtonMode.PAUSE,
+            startOrPauseButtonTextAndIcon = Pair(
+                R.drawable.ic_pause_reading,
+                R.string.button_process_reading_pause_text
+            ),
             isGroupProcessReadingRelaxVisible = false
         ).let { processReadingBookUiModel ->
             postNewSuccessState(processReadingBookUiModel)
@@ -184,7 +198,7 @@ class ProcessReadingBookViewModel(
     private fun readingResultsAnalysis() {
         postScreenState(ScreenUiState.Loading())
         val newUiModel = uiModel?.copy(
-            dialog = ProcessReadingBookUiModel.Dialog.READING_RESULTS
+            dialog = Dialog.READING_RESULTS
         )
         //todo тут будет вызов метода репозитория для отправки данных на сервер. Но пока еще не ясно, какой именнно метод и будет ли он возвращать какие-либо результаты.
         // но пока заглушка с таймаутом для проверки корректности работы лоадера:
@@ -199,9 +213,11 @@ class ProcessReadingBookViewModel(
     companion object {
         private const val UI_MODEL_KEY = "uiModel"
         private const val NO_DATA_ERROR = "Ошибка. Нет данных для отображения!"
-        private const val BASE_URL = "https://dadapproves.ru/usercontent/book/covers/" //todo следует вынести в ресурсы Gradle
+        private const val BASE_URL =
+            "https://dadapproves.ru/usercontent/book/covers/" //todo следует вынести в ресурсы Gradle
         private const val STOPWATCH_INITIAL_VALUE = "00:00:000"
         private const val STOPWATCH_INITIAL_VALUE_MS = 0L
-        private const val READING_RESULTS_ANALYSIS_DELAY = 2000L  //временная задержка, пока не появится метод на бэкенде
+        private const val READING_RESULTS_ANALYSIS_DELAY =
+            2000L  //временная задержка, пока не появится метод на бэкенде
     }
 }
