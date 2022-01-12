@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import app.futured.donut.DonutSection
+import ru.vdv.myapp.myreadersdiary.R
 import ru.vdv.myapp.myreadersdiary.databinding.MainFragmentBinding
 import ru.vdv.myapp.myreadersdiary.ui.common.BaseFragment
 
@@ -25,7 +26,10 @@ class MainFragment : BaseFragment<MainFragmentBinding>() {
         adapter = MainEventsAdapter()
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         viewModel.fetchCurrentUser(
-            PreferenceManager.getDefaultSharedPreferences(context).getString("login", "132")
+            PreferenceManager.getDefaultSharedPreferences(context).getString(
+                getString(R.string.spref_key_login),
+                getString(R.string.spref_key_login_default)
+            )
         )
         return super.onCreateView(inflater, container, savedInstanceState)
     }
@@ -42,9 +46,11 @@ class MainFragment : BaseFragment<MainFragmentBinding>() {
         }
         //запрос данных пользователя подписка на результат
         viewModel.currentUser.observe(viewLifecycleOwner, Observer {
-            setName(it.name)
-            setImageAvatar(it.avatarUrl)
-            setCustomBackgroundImage(it.backgroundUrl)
+            it?.let {
+                setName(it.name)
+                setImageAvatar(it.avatarUrl)
+                setCustomBackgroundImage(it.backgroundUrl)
+            }
         })
 
         val section1 = DonutSection(

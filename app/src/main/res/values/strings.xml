@@ -88,5 +88,7 @@
     <string name="button_reading_results_close">Закрыть</string>
     <string name="error_process_reading">Произошла ошибка\n%s</string>
     <string name="start_read_book_label">Приступить к чтению</string>
+    <string name="spref_key_login">login</string>
+    <string name="spref_key_login_default">\"\"</string>
     <!-- end process reading fragment area-->
 </resources>

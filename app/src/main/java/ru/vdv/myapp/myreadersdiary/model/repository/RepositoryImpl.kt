@@ -508,7 +508,7 @@ class RepositoryImpl() : Repository {
             .enqueue(object : Callback<User> {
                 override fun onResponse(call: Call<User>, response: Response<User>) {
                     response.body()?.let {
-                        //callBack.onResult(it)
+                        callBack.onResult(it)
                         Log.d("Моя проверка", "Результат вернулься: $it")
                     }
                 }
