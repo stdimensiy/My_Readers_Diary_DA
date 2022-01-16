@@ -24,6 +24,7 @@ import com.google.android.material.button.MaterialButton
 import ru.vdv.myapp.myreadersdiary.R
 import ru.vdv.myapp.myreadersdiary.databinding.ProcessReadingBookFragmentBinding
 import ru.vdv.myapp.myreadersdiary.services.stopwatch.StopwatchService
+import ru.vdv.myapp.myreadersdiary.ui.CustomBackButtonListener
 import ru.vdv.myapp.myreadersdiary.ui.books.readingprocess.dialogs.EnterCurrentPageDialog
 import ru.vdv.myapp.myreadersdiary.ui.books.readingprocess.dialogs.ReadingResultsDialog
 import ru.vdv.myapp.myreadersdiary.ui.common.BaseFragment
@@ -33,7 +34,7 @@ import ru.vdv.myapp.myreadersdiary.ui.common.ScreenUiState
 /**
  * Фрагмент "Контроль чтения"
  */
-class ProcessReadingBookFragment : BaseFragment<ProcessReadingBookFragmentBinding>() {
+class ProcessReadingBookFragment : BaseFragment<ProcessReadingBookFragmentBinding>(), CustomBackButtonListener {
     private val viewModel: ProcessReadingBookViewModel by viewModels {
         ProcessReadingBookViewModelFactory(
             book = arguments?.getParcelable(BOOK_ARG_KEY),
@@ -87,17 +88,20 @@ class ProcessReadingBookFragment : BaseFragment<ProcessReadingBookFragmentBindin
         super.onDestroy()
     }
 
+    override fun backPressed(): Boolean {
+        viewModel.onButtonProcessReadingStopClicked()
+        return true
+    }
+
     //Если все ViewModels будут с поддержкой SavedStateHandle, то тоже можно будет вынести в BaseFragment
     override fun onSaveInstanceState(outState: Bundle) {
         viewModel.saveCurrentState()
         super.onSaveInstanceState(outState)
     }
 
-    private fun initViews() {
-        with(binding) {
-            buttonProcessReadingStartOrPause.setOnClickListener { viewModel.onButtonProcessReadingStartOrPauseClicked() }
-            buttonProcessReadingStop.setOnClickListener { viewModel.onButtonProcessReadingStopClicked() }
-        }
+    private fun initViews() = with(binding) {
+        buttonProcessReadingStartOrPause.setOnClickListener { viewModel.onButtonProcessReadingStartOrPauseClicked() }
+        buttonProcessReadingStop.setOnClickListener { viewModel.onButtonProcessReadingStopClicked() }
     }
 
     private fun observeToLiveData() {
@@ -170,7 +174,7 @@ class ProcessReadingBookFragment : BaseFragment<ProcessReadingBookFragmentBindin
             childFragmentManager.findFragmentByTag(READING_RESULTS_DIALOG_TAG) as? ReadingResultsDialog
                 ?: ReadingResultsDialog.newInstance(processReadingBookUiModel = data)
 
-        readingResultsDialog.setOnCloseButtonPressedListener { findNavController().popBackStack() }
+        readingResultsDialog.setOnCloseButtonPressedListener { findNavController().navigateUp() }
         if (readingResultsDialog.dialog == null) readingResultsDialog.show(
             childFragmentManager,
             READING_RESULTS_DIALOG_TAG
@@ -225,7 +229,6 @@ class ProcessReadingBookFragment : BaseFragment<ProcessReadingBookFragmentBindin
                 NOTIFICATION_ALARM_CHANNEL_NAME,
                 NotificationManager.IMPORTANCE_HIGH
             ).let { channel -> notificationManager.createNotificationChannel(channel) }
-            //NOTIFICATION_ALARM_CHANNEL_ID
         }
     }
 
