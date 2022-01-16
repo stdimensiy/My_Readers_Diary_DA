@@ -1,6 +1,14 @@
 package ru.vdv.myapp.myreadersdiary.ui.books.readingprocess
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.ComponentName
+import android.content.Context
+import android.content.Intent
+import android.content.ServiceConnection
+import android.os.Build
 import android.os.Bundle
+import android.os.IBinder
 import android.transition.Fade
 import android.transition.TransitionManager
 import android.view.View
@@ -15,6 +23,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.button.MaterialButton
 import ru.vdv.myapp.myreadersdiary.R
 import ru.vdv.myapp.myreadersdiary.databinding.ProcessReadingBookFragmentBinding
+import ru.vdv.myapp.myreadersdiary.services.stopwatch.StopwatchService
 import ru.vdv.myapp.myreadersdiary.ui.books.readingprocess.dialogs.EnterCurrentPageDialog
 import ru.vdv.myapp.myreadersdiary.ui.books.readingprocess.dialogs.ReadingResultsDialog
 import ru.vdv.myapp.myreadersdiary.ui.common.BaseFragment
@@ -31,6 +40,29 @@ class ProcessReadingBookFragment : BaseFragment<ProcessReadingBookFragmentBindin
             owner = this
         )
     }
+    private var stopwatchServiceBinder: StopwatchService.StopwatchServiceBinder? = null
+    private var isStopwatchServiceBound: Boolean = false
+    private val stopwatchServiceIntent by lazy { Intent(requireActivity(), StopwatchService::class.java) }
+
+    private val boundServiceConnection = object : ServiceConnection {
+        override fun onServiceConnected(componentName: ComponentName, binder: IBinder) {
+            (binder as? StopwatchService.StopwatchServiceBinder)?.apply {
+                viewModel.setActiveStopwatch(getActiveStopwatch())
+                viewModel.setRelaxStopwatch(getRelaxStopwatch())
+            }
+            isStopwatchServiceBound = true
+        }
+
+        override fun onServiceDisconnected(componentName: ComponentName) {
+            isStopwatchServiceBound = false
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        createNotificationChannels()
+        requireActivity().startService(stopwatchServiceIntent)
+    }
 
     //Если фрагменты будут типовыми, то onViewCreated можно вынести в BaseFragment.
     // И в BaseFragment определить абстракнтые методы observeToLiveData() и initViews()
@@ -38,6 +70,21 @@ class ProcessReadingBookFragment : BaseFragment<ProcessReadingBookFragmentBindin
         super.onViewCreated(view, savedInstanceState)
         initViews()
         observeToLiveData()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        bindService()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        unbindService()
+    }
+
+    override fun onDestroy() {
+        requireActivity().stopService(stopwatchServiceIntent)
+        super.onDestroy()
     }
 
     //Если все ViewModels будут с поддержкой SavedStateHandle, то тоже можно будет вынести в BaseFragment
@@ -164,6 +211,38 @@ class ProcessReadingBookFragment : BaseFragment<ProcessReadingBookFragmentBindin
     }
     // ### end rendering data area ###
 
+    // ### service area ###
+    private fun createNotificationChannels() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val notificationManager: NotificationManager = requireActivity().getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            NotificationChannel(
+                NOTIFICATION_FOREGROUND_CHANNEL_ID,
+                NOTIFICATION_FOREGROUND_CHANNEL_NAME,
+                NotificationManager.IMPORTANCE_LOW
+            ).let { channel -> notificationManager.createNotificationChannel(channel) }
+            NotificationChannel(
+                NOTIFICATION_ALARM_CHANNEL_ID,
+                NOTIFICATION_ALARM_CHANNEL_NAME,
+                NotificationManager.IMPORTANCE_HIGH
+            ).let { channel -> notificationManager.createNotificationChannel(channel) }
+            //NOTIFICATION_ALARM_CHANNEL_ID
+        }
+    }
+
+    private fun bindService() {
+        val intent = Intent(requireActivity(), StopwatchService::class.java)
+        requireActivity().bindService(intent, boundServiceConnection, Context.BIND_AUTO_CREATE)
+    }
+
+    private fun unbindService() {
+        if (isStopwatchServiceBound) {
+            requireActivity().unbindService(boundServiceConnection)
+            stopwatchServiceBinder = null
+        }
+    }
+    // ### end service area ###
+
+
     // ### extensions utils area ###
     //Выполняем диффинг перед обновлением данных
     private fun TextView.setIfChanged(data: String) {
@@ -213,6 +292,10 @@ class ProcessReadingBookFragment : BaseFragment<ProcessReadingBookFragmentBindin
     // ### end extensions utils area ###
 
     companion object {
+        const val NOTIFICATION_FOREGROUND_CHANNEL_ID = "StopwatchServiceForegroundChannelId"
+        const val NOTIFICATION_ALARM_CHANNEL_ID = "StopwatchServiceAlarmChannelId"
+        private const val NOTIFICATION_FOREGROUND_CHANNEL_NAME = "Контроль чтения - таймер"
+        private const val NOTIFICATION_ALARM_CHANNEL_NAME = "Контроль чтения - уведомления"
         private const val BOOK_ARG_KEY =
             "ARG_BOOK" //такой ключ встречается много где. Следует сделать общую публичную константу
         private const val ANIMATION_FADE_DURATION = 1000L
