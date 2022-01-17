@@ -10,6 +10,7 @@ import ru.vdv.myapp.myreadersdiary.R
 import ru.vdv.myapp.myreadersdiary.domain.Book
 import ru.vdv.myapp.myreadersdiary.glide.GlideImageLoader
 import ru.vdv.myapp.myreadersdiary.glide.ImageLoader
+import ru.vdv.myapp.myreadersdiary.ui.common.BaseConstants
 
 class ListOfBooksAdapter : RecyclerView.Adapter<ListOfBooksViewHolder>() {
     var items: List<Book> = listOf()
@@ -26,17 +27,14 @@ class ListOfBooksAdapter : RecyclerView.Adapter<ListOfBooksViewHolder>() {
         ("${item.producerName} ${item.producerPatronymic} ${item.producerSurname}").also {
             holderOfBooks.authorBook.text = it
         }
-        imageLoader.loadBookCover(
-            "https://dadapproves.ru/usercontent/book/covers/${item.bookCover}",
-            holderOfBooks.coverBook
-        )
+        imageLoader.loadBookCover(item.bookCover, holderOfBooks.coverBook)
     }
 
     override fun onViewAttachedToWindow(holderOfBooks: ListOfBooksViewHolder) {
         val item = items[holderOfBooks.adapterPosition]
         holderOfBooks.itemView.setOnClickListener {
             val bundle = Bundle()
-            bundle.putParcelable("ARG_BOOK", item)
+            bundle.putParcelable(BaseConstants.MY_BOOK_BUNDLE_KEY, item)
             holderOfBooks.itemView.findNavController()
                 .navigate(R.id.nav_book_details_fragment, bundle)
         }

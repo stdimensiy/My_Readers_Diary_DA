@@ -37,8 +37,4 @@ class MainViewModel : BaseViewModel() {
         })
     }
     val prepareEventList: LiveData<List<Event>> = _prepareEventList
-
-    companion object {
-        private const val TAG = "Моя проверка / MainViewModel" // для логирования во время отладки
-    }
 }

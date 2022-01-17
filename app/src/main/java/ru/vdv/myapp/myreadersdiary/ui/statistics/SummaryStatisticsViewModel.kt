@@ -39,9 +39,4 @@ class SummaryStatisticsViewModel : BaseViewModel() {
     }
 
     val prepareEventList: LiveData<List<WeekEvent>> = _prepareEventList
-
-    companion object {
-        // для логирования во время отладки
-        private const val TAG = "Моя проверка / SummaryStatisticsViewModel"
-    }
 }
