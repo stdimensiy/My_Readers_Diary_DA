@@ -1,6 +1,5 @@
 package ru.vdv.myapp.myreadersdiary.model.repository
 
-import android.util.Log
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -11,7 +10,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.random.Random.Default.nextInt
 
-class RepositoryImpl() : Repository {
+class RepositoryImpl : Repository {
 
     //Заглушка недельных суммарных активностей (с пустыми значениями активности), пока API готовится.
     /**
@@ -27,49 +26,27 @@ class RepositoryImpl() : Repository {
         while (currentCalendarDate.time.before(endDate)) {
             weekEvent.add(
                 WeekEvent(
-                    weekMonday = SummaryDayEvents(date = currentCalendarDate.apply {
-                        add(
-                            Calendar.DATE,
-                            1
-                        )
-                    }.time, 0),
-                    weekTuesday = SummaryDayEvents(date = currentCalendarDate.apply {
-                        add(
-                            Calendar.DATE,
-                            1
-                        )
-                    }.time, 0),
-                    weekWednesday = SummaryDayEvents(date = currentCalendarDate.apply {
-                        add(
-                            Calendar.DATE,
-                            1
-                        )
-                    }.time, 0),
-                    weekThursday = SummaryDayEvents(date = currentCalendarDate.apply {
-                        add(
-                            Calendar.DATE,
-                            1
-                        )
-                    }.time, 0),
-                    weekFriday = SummaryDayEvents(date = currentCalendarDate.apply {
-                        add(
-                            Calendar.DATE,
-                            1
-                        )
-                    }.time, 0),
-                    weekSaturday = SummaryDayEvents(date = currentCalendarDate.apply {
-                        add(
-                            Calendar.DATE,
-                            1
-                        )
-                    }.time, 0),
-                    weekSunday = SummaryDayEvents(date = currentCalendarDate.apply {
-                        add(
-                            Calendar.DATE,
-                            1
-                        )
-                    }.time, 0)
-
+                    weekMonday = SummaryDayEvents(
+                        date = currentCalendarDate.apply { add(Calendar.DATE, 1) }.time, 0
+                    ),
+                    weekTuesday = SummaryDayEvents(
+                        date = currentCalendarDate.apply { add(Calendar.DATE, 1) }.time, 0
+                    ),
+                    weekWednesday = SummaryDayEvents(
+                        date = currentCalendarDate.apply { add(Calendar.DATE, 1) }.time, 0
+                    ),
+                    weekThursday = SummaryDayEvents(
+                        date = currentCalendarDate.apply { add(Calendar.DATE, 1) }.time, 0
+                    ),
+                    weekFriday = SummaryDayEvents(
+                        date = currentCalendarDate.apply { add(Calendar.DATE, 1) }.time, 0
+                    ),
+                    weekSaturday = SummaryDayEvents(
+                        date = currentCalendarDate.apply { add(Calendar.DATE, 1) }.time, 0
+                    ),
+                    weekSunday = SummaryDayEvents(
+                        date = currentCalendarDate.apply { add(Calendar.DATE, 1) }.time, 0
+                    )
                 )
             )
         }
@@ -90,49 +67,34 @@ class RepositoryImpl() : Repository {
         while (currentCalendarDate.time.before(endDate)) {
             weekEvent.add(
                 WeekEvent(
-                    weekMonday = SummaryDayEvents(date = currentCalendarDate.apply {
-                        add(
-                            Calendar.DATE,
-                            1
-                        )
-                    }.time, nextInt(0, 21)),
-                    weekTuesday = SummaryDayEvents(date = currentCalendarDate.apply {
-                        add(
-                            Calendar.DATE,
-                            1
-                        )
-                    }.time, nextInt(0, 21)),
-                    weekWednesday = SummaryDayEvents(date = currentCalendarDate.apply {
-                        add(
-                            Calendar.DATE,
-                            1
-                        )
-                    }.time, nextInt(0, 21)),
-                    weekThursday = SummaryDayEvents(date = currentCalendarDate.apply {
-                        add(
-                            Calendar.DATE,
-                            1
-                        )
-                    }.time, nextInt(0, 21)),
-                    weekFriday = SummaryDayEvents(date = currentCalendarDate.apply {
-                        add(
-                            Calendar.DATE,
-                            1
-                        )
-                    }.time, nextInt(0, 21)),
-                    weekSaturday = SummaryDayEvents(date = currentCalendarDate.apply {
-                        add(
-                            Calendar.DATE,
-                            1
-                        )
-                    }.time, nextInt(0, 21)),
-                    weekSunday = SummaryDayEvents(date = currentCalendarDate.apply {
-                        add(
-                            Calendar.DATE,
-                            1
-                        )
-                    }.time, nextInt(0, 21))
-
+                    weekMonday = SummaryDayEvents(
+                        date = currentCalendarDate.apply { add(Calendar.DATE, 1) }.time,
+                        nextInt(0, 21)
+                    ),
+                    weekTuesday = SummaryDayEvents(
+                        date = currentCalendarDate.apply { add(Calendar.DATE, 1) }.time,
+                        nextInt(0, 21)
+                    ),
+                    weekWednesday = SummaryDayEvents(
+                        date = currentCalendarDate.apply { add(Calendar.DATE, 1) }.time,
+                        nextInt(0, 21)
+                    ),
+                    weekThursday = SummaryDayEvents(
+                        date = currentCalendarDate.apply { add(Calendar.DATE, 1) }.time,
+                        nextInt(0, 21)
+                    ),
+                    weekFriday = SummaryDayEvents(
+                        date = currentCalendarDate.apply { add(Calendar.DATE, 1) }.time,
+                        nextInt(0, 21)
+                    ),
+                    weekSaturday = SummaryDayEvents(
+                        date = currentCalendarDate.apply { add(Calendar.DATE, 1) }.time,
+                        nextInt(0, 21)
+                    ),
+                    weekSunday = SummaryDayEvents(
+                        date = currentCalendarDate.apply { add(Calendar.DATE, 1) }.time,
+                        nextInt(0, 21)
+                    )
                 )
             )
         }
@@ -153,7 +115,7 @@ class RepositoryImpl() : Repository {
         }
 
     //Заглушка на период подготовки BackEnd
-    private val eventPlug: List<Event> = listOf<Event>(
+    private val eventPlug: List<Event> = listOf(
         Event(
             "00000001",
             "Чтение/прогрес +10 (31 из 406)",
@@ -166,7 +128,7 @@ class RepositoryImpl() : Repository {
                 "Швец",
                 "Александр",
                 "",
-                "pp123457.jpg"
+                "https://dadapproves.ru/usercontent/book/covers/pp123457.jpg"
             )
         ),
         Event(
@@ -181,7 +143,7 @@ class RepositoryImpl() : Repository {
                 "Мартин",
                 "Роберт",
                 "С",
-                "00000038.jpg"
+                "https://dadapproves.ru/usercontent/book/covers/00000038.jpg"
             )
         ),
         Event(
@@ -196,7 +158,7 @@ class RepositoryImpl() : Repository {
                 "Зандстра",
                 "Мэтт",
                 "",
-                "00000039.jpg"
+                "https://dadapproves.ru/usercontent/book/covers/00000039.jpg"
             )
         ),
         Event(
@@ -211,7 +173,7 @@ class RepositoryImpl() : Repository {
                 "Марсикано, Гарднер, Филлипс, Стюарт",
                 "...",
                 "",
-                "00000040.jpg"
+                "https://dadapproves.ru/usercontent/book/covers/00000040.jpg"
             )
         ),
         Event(
@@ -225,7 +187,7 @@ class RepositoryImpl() : Repository {
                 "Аделакан",
                 "Ияну",
                 "",
-                "00000041.jpg"
+                "https://dadapproves.ru/usercontent/book/covers/00000041.jpg"
             )
         ),
         Event(
@@ -239,7 +201,7 @@ class RepositoryImpl() : Repository {
                 "Эккель",
                 "Брюс",
                 "",
-                "000000043.jpg"
+                "https://dadapproves.ru/usercontent/book/covers/000000043.jpg"
             )
         ),
         Event(
@@ -253,7 +215,7 @@ class RepositoryImpl() : Repository {
                 "Кроксфорд",
                 "Дуглас",
                 "",
-                "000000044.jpg"
+                "https://dadapproves.ru/usercontent/book/covers/000000044.jpg"
             )
         ),
         Event(
@@ -267,13 +229,13 @@ class RepositoryImpl() : Repository {
                 "Гамма, Хелм, Джонсон, Влиссидес",
                 "...",
                 "",
-                "000000045.jpg"
+                "https://dadapproves.ru/usercontent/book/covers/000000045.jpg"
             )
         ),
     )
 
     // Заглушка данных активности по конкретной книге на период рефакторинга репозитория
-    private val shortEventForBookPlug: List<ShortEventForBook> = listOf<ShortEventForBook>(
+    private val shortEventForBookPlug: List<ShortEventForBook> = listOf(
         ShortEventForBook(
             "00000001",
             "Чтение/прогрес +7 (240 из 406)",
@@ -503,13 +465,11 @@ class RepositoryImpl() : Repository {
     }
 
     override fun getUserInfo(userLogin: String, callBack: CallBack<User>) {
-        Log.d("Моя проверка", "Передан параметр: $userLogin")
         networkService.getUserInfo("123-321321321", userLogin)
             .enqueue(object : Callback<User> {
                 override fun onResponse(call: Call<User>, response: Response<User>) {
                     response.body()?.let {
-                        //callBack.onResult(it)
-                        Log.d("Моя проверка", "Результат вернулься: $it")
+                        callBack.onResult(it)
                     }
                 }
 
@@ -539,7 +499,6 @@ class RepositoryImpl() : Repository {
 
             override fun onFailure(call: Call<Any>, t: Throwable) {
                 //TODO("Not yet implemented")
-                Log.d("Моя проверка", "Чтото пошло не так $t")
             }
         })
     }
@@ -563,7 +522,6 @@ class RepositoryImpl() : Repository {
 
             override fun onFailure(call: Call<Any>, t: Throwable) {
                 //TODO("Not yet implemented")
-                Log.d("Моя проверка", "Чтото пошло не так $t")
             }
         })
     }
@@ -580,7 +538,6 @@ class RepositoryImpl() : Repository {
 
             override fun onFailure(call: Call<Any>, t: Throwable) {
                 //TODO("Not yet implemented")
-                Log.d("Моя проверка", "Чтото пошло не так $t")
             }
         })
     }
@@ -603,7 +560,6 @@ class RepositoryImpl() : Repository {
 
             override fun onFailure(call: Call<Any>, t: Throwable) {
                 //TODO("Not yet implemented")
-                Log.d("Моя проверка", "Чтото пошло не так $t")
             }
         })
     }
@@ -626,7 +582,6 @@ class RepositoryImpl() : Repository {
 
             override fun onFailure(call: Call<Any>, t: Throwable) {
                 //TODO("Not yet implemented")
-                Log.d("Моя проверка", "Чтото пошло не так $t")
             }
         })
     }
@@ -649,7 +604,6 @@ class RepositoryImpl() : Repository {
 
             override fun onFailure(call: Call<Any>, t: Throwable) {
                 //TODO("Not yet implemented")
-                Log.d("Моя проверка", "Чтото пошло не так $t")
             }
         })
     }
@@ -719,16 +673,6 @@ class RepositoryImpl() : Repository {
 
     override fun deleteEvent(callBack: CallBack<Event>) {
         TODO("Not yet implemented")
-    }
-
-    private fun convertLongToTime(time: Long): String {
-        val date = Date(time)
-        val format = SimpleDateFormat("yyyy.MM.dd HH:mm")
-        return format.format(date)
-    }
-
-    private fun currentTimeToLong(): Long {
-        return System.currentTimeMillis()
     }
 
     private fun convertDateToLong(date: String): Long {

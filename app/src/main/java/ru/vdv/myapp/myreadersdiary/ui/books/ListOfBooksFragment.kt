@@ -31,10 +31,10 @@ class ListOfBooksFragment : BaseFragment<FragmentListOfBooksBinding>() {
         listOfBooks.adapter = ofBooksAdapter
         listOfBooks.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        listOfBooksViewModel.prepareItems.observe(viewLifecycleOwner, Observer {
+        listOfBooksViewModel.prepareItems.observe(viewLifecycleOwner) {
             ofBooksAdapter.items = it
             ofBooksAdapter.notifyDataSetChanged()
-        })
+        }
 
         listOfBooksViewModel.postResult.observe(viewLifecycleOwner, Observer {
         })

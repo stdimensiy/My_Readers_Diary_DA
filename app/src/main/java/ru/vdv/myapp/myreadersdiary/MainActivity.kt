@@ -3,15 +3,16 @@ package ru.vdv.myapp.myreadersdiary
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import com.google.android.material.navigation.NavigationView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.drawerlayout.widget.DrawerLayout
-import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.navigation.NavigationView
 import ru.vdv.myapp.myreadersdiary.databinding.ActivityMainBinding
+import ru.vdv.myapp.myreadersdiary.ui.CustomBackButtonListener
 
 class MainActivity : AppCompatActivity() {
 
@@ -58,8 +59,16 @@ class MainActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
+    override fun onBackPressed() {
+        val fragmentBackButton =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_main)?.childFragmentManager?.fragments?.first() as? CustomBackButtonListener
+        fragmentBackButton?.backPressed() ?: super.onBackPressed()
+    }
+
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
-        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+        val fragmentBackButton =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_main)?.childFragmentManager?.fragments?.first() as? CustomBackButtonListener
+        return fragmentBackButton?.backPressed() ?: false || navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 }

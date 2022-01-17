@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="elem_activity_graph_background">#9C0F0F</color>
     <color name="elem_activity_graph_background_tint">#EC5252</color>
+    <color name="cod_gray_66">#66090909</color>
+    <color name="black_40">#66000000</color>
 </resources>

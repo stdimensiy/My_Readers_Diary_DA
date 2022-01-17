@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import ru.vdv.myapp.myreadersdiary.R
 import ru.vdv.myapp.myreadersdiary.databinding.FragmentSummaryStatisticsBinding
 import ru.vdv.myapp.myreadersdiary.ui.common.BaseFragment
 
@@ -21,16 +23,23 @@ class SummaryStatisticsFragment : BaseFragment<FragmentSummaryStatisticsBinding>
         adapter = ActivityStatisticsGraphAdapter()
         summaryStatisticsViewModel =
             ViewModelProvider(this)[SummaryStatisticsViewModel::class.java]
-
+        summaryStatisticsViewModel.fetchCurrentUser(
+            PreferenceManager.getDefaultSharedPreferences(context).getString(
+                getString(R.string.spref_key_login),
+                getString(R.string.spref_key_login_default)
+            )
+        )
         return super.onCreateView(inflater, container, savedInstanceState)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //запрос данных пользователя подписка на результат
+
         summaryStatisticsViewModel.currentUser.observe(viewLifecycleOwner) {
-            setImageAvatar(it.avatarUrl)
-            setCustomBackgroundImage(it.backgroundUrl)
+            it?.let {
+                setImageAvatar(it.avatarUrl)
+                setCustomBackgroundImage(it.backgroundUrl)
+            }
         }
 
         val eventsGraph = binding.rvEventsGraph

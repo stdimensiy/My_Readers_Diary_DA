@@ -18,8 +18,8 @@ import kotlinx.parcelize.Parcelize
 data class User(
     @SerializedName("name")
     val name: String,
-    @SerializedName("avatarUrl:")
+    @SerializedName("avatar_url")
     val avatarUrl: String,
-    @SerializedName("backgroundUrl")
+    @SerializedName("wallpaper_url")
     val backgroundUrl: String
 ) : Parcelable

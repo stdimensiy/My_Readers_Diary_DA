@@ -10,9 +10,14 @@ import ru.vdv.myapp.myreadersdiary.domain.User
 import ru.vdv.myapp.myreadersdiary.ui.common.BaseViewModel
 
 class MainViewModel : BaseViewModel() {
+
+    //user
+    private val _currentUser = MutableLiveData<User>().apply {
+        value = null
+    }
+    val currentUser: LiveData<User> = _currentUser
+
     fun fetchCurrentUser(login: String?) {
-        // в дальнейшем необходимо использовать тольео хешированный идентификатор
-        // нно для начала лупим только по логину
         login?.let {
             repository.getUserInfo(it, object : CallBack<User> {
                 override fun onResult(value: User) {
@@ -21,16 +26,6 @@ class MainViewModel : BaseViewModel() {
             })
         }
     }
-
-    private val prepareUser = User(
-        "DarthVerteliy",
-        "https://dadapproves.ru/usercontent/avatars/da0000002.jpg",
-        "https://dadapproves.ru/usercontent/bg/da_bg0000002.jpg"
-    )
-    private val _currentUser = MutableLiveData<User>().apply {
-        value = prepareUser
-    }
-    val currentUser: LiveData<User> = _currentUser
 
     //events
     private val _prepareEventList = MutableLiveData<List<Event>>().apply {
