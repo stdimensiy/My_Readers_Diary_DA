@@ -9,16 +9,19 @@ import java.util.*
 
 class SummaryStatisticsViewModel : BaseViewModel() {
 
-    //заглушка пока не будет реализован нормально режим авторизации
-    private val prepareUser = User(
-        "DarthVerteliy",
-        "https://dadapproves.ru/usercontent/avatars/da0000002.jpg",
-        "https://dadapproves.ru/usercontent/bg/da_bg0000002.jpg"
-    )
-    private val _currentUser = MutableLiveData<User>().apply {
-        value = prepareUser
-    }
+    //user
+    private val _currentUser = MutableLiveData<User>().apply { value = null }
     val currentUser: LiveData<User> = _currentUser
+
+    fun fetchCurrentUser(login: String?) {
+        login?.let {
+            repository.getUserInfo(it, object : CallBack<User> {
+                override fun onResult(value: User) {
+                    _currentUser.value = value
+                }
+            })
+        }
+    }
 
     //events
     private val _prepareEventList = MutableLiveData<List<WeekEvent>>().apply {
@@ -36,4 +39,9 @@ class SummaryStatisticsViewModel : BaseViewModel() {
     }
 
     val prepareEventList: LiveData<List<WeekEvent>> = _prepareEventList
+
+    companion object {
+        // для логирования во время отладки
+        private const val TAG = "Моя проверка / SummaryStatisticsViewModel"
+    }
 }
