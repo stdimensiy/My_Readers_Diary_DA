@@ -90,5 +90,15 @@
     <string name="start_read_book_label">Приступить к чтению</string>
     <string name="spref_key_login">login</string>
     <string name="spref_key_login_default">\"\"</string>
+    <string name="iv_new_book_cover_contentDescription_text">Ихображение обложки книги</string>
+    <string name="btn_start_camera_text">Фотографировать обложку</string>
+    <string name="btn_start_media_text">Выбрать из галереи</string>
+    <string name="btn_crop_image_text">Подрезать</string>
+    <string name="til_new_book_title_hint">Наименование книги</string>
+    <string name="til_new_book_author_hint">Автор(ы) (Фамилия Имя Отчество)</string>
+    <string name="til_new_book_number_of_pages_hint">Страниц</string>
+    <string name="til_new_book_number_of_words_per_page_hint">Слов на странице</string>
+    <string name="til_new_book_total_words_hint">Всего слов</string>
+    <string name="btn_save_new_book_text">Сохранить основные данные</string>
     <!-- end process reading fragment area-->
 </resources>
