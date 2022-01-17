@@ -93,7 +93,7 @@ class ProcessReadingBookViewModel(
                         ?: ProcessReadingBookUiModel(
                             title = title,
                             authors = "$producerName $producerSurname $producerPatronymic",
-                            coverUrl = "$BASE_URL$bookCover",
+                            coverUrl = bookCover,
                             pagesCount = pageCount,
                             wordsCount = wordsCount,
                             densityWordsPerPage = densityWordsPerPage,
@@ -215,8 +215,6 @@ class ProcessReadingBookViewModel(
     companion object {
         private const val UI_MODEL_KEY = "uiModel"
         private const val NO_DATA_ERROR = "Ошибка. Нет данных для отображения!"
-        private const val BASE_URL =
-            "https://dadapproves.ru/usercontent/book/covers/" //todo следует вынести в ресурсы Gradle
         private const val STOPWATCH_INITIAL_VALUE = "00:00:000"
         private const val STOPWATCH_INITIAL_VALUE_MS = 0L
         private const val READING_RESULTS_ANALYSIS_DELAY =

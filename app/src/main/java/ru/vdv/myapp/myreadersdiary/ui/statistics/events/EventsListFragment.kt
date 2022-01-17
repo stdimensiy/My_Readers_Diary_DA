@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.vdv.myapp.myreadersdiary.databinding.EventsListFragmentBinding
 import ru.vdv.myapp.myreadersdiary.ui.common.BaseFragment
@@ -29,9 +28,9 @@ class EventsListFragment : BaseFragment<EventsListFragmentBinding>() {
         listOfEvent.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         listViewModel = ViewModelProvider(this)[EventsListViewModel::class.java]
-        listViewModel.prepareEventList.observe(viewLifecycleOwner, Observer {
+        listViewModel.prepareEventList.observe(viewLifecycleOwner) {
             adapter.items = it
             adapter.notifyDataSetChanged()
-        })
+        }
     }
 }

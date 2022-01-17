@@ -10,6 +10,7 @@ import ru.vdv.myapp.myreadersdiary.R
 import ru.vdv.myapp.myreadersdiary.domain.Event
 import ru.vdv.myapp.myreadersdiary.glide.GlideImageLoader
 import ru.vdv.myapp.myreadersdiary.glide.ImageLoader
+import ru.vdv.myapp.myreadersdiary.ui.common.BaseConstants
 
 class EventsListAdapter : RecyclerView.Adapter<EventsListViewHolder>() {
     var items: List<Event> = listOf()
@@ -29,17 +30,14 @@ class EventsListAdapter : RecyclerView.Adapter<EventsListViewHolder>() {
                 + " / " + " ${item.baseObject.title}").also {
             holder.eventBody.text = it
         }
-        imageLoader.loadBookCover(
-            "https://dadapproves.ru/usercontent/book/covers/${item.baseObject.bookCover}",
-            holder.coverBook
-        )
+        imageLoader.loadBookCover(item.baseObject.bookCover, holder.coverBook)
     }
 
     override fun onViewAttachedToWindow(holder: EventsListViewHolder) {
         val item = items[holder.adapterPosition]
         holder.itemView.setOnClickListener {
             val bundle = Bundle()
-            bundle.putParcelable("ARG_BOOK", item.baseObject)
+            bundle.putParcelable(BaseConstants.MY_BOOK_BUNDLE_KEY, item.baseObject)
             holder.itemView.findNavController().navigate(R.id.nav_book_details_fragment, bundle)
         }
         super.onViewAttachedToWindow(holder)

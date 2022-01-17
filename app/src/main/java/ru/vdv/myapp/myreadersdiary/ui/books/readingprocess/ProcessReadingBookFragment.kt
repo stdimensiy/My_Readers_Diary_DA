@@ -27,6 +27,7 @@ import ru.vdv.myapp.myreadersdiary.services.stopwatch.StopwatchService
 import ru.vdv.myapp.myreadersdiary.ui.CustomBackButtonListener
 import ru.vdv.myapp.myreadersdiary.ui.books.readingprocess.dialogs.EnterCurrentPageDialog
 import ru.vdv.myapp.myreadersdiary.ui.books.readingprocess.dialogs.ReadingResultsDialog
+import ru.vdv.myapp.myreadersdiary.ui.common.BaseConstants
 import ru.vdv.myapp.myreadersdiary.ui.common.BaseFragment
 import ru.vdv.myapp.myreadersdiary.ui.common.Dialog
 import ru.vdv.myapp.myreadersdiary.ui.common.ScreenUiState
@@ -34,16 +35,22 @@ import ru.vdv.myapp.myreadersdiary.ui.common.ScreenUiState
 /**
  * Фрагмент "Контроль чтения"
  */
-class ProcessReadingBookFragment : BaseFragment<ProcessReadingBookFragmentBinding>(), CustomBackButtonListener {
+class ProcessReadingBookFragment : BaseFragment<ProcessReadingBookFragmentBinding>(),
+    CustomBackButtonListener {
     private val viewModel: ProcessReadingBookViewModel by viewModels {
         ProcessReadingBookViewModelFactory(
-            book = arguments?.getParcelable(BOOK_ARG_KEY),
+            book = arguments?.getParcelable(BaseConstants.MY_BOOK_BUNDLE_KEY),
             owner = this
         )
     }
     private var stopwatchServiceBinder: StopwatchService.StopwatchServiceBinder? = null
     private var isStopwatchServiceBound: Boolean = false
-    private val stopwatchServiceIntent by lazy { Intent(requireActivity(), StopwatchService::class.java) }
+    private val stopwatchServiceIntent by lazy {
+        Intent(
+            requireActivity(),
+            StopwatchService::class.java
+        )
+    }
 
     private val boundServiceConnection = object : ServiceConnection {
         override fun onServiceConnected(componentName: ComponentName, binder: IBinder) {
@@ -218,7 +225,8 @@ class ProcessReadingBookFragment : BaseFragment<ProcessReadingBookFragmentBindin
     // ### service area ###
     private fun createNotificationChannels() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val notificationManager: NotificationManager = requireActivity().getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            val notificationManager: NotificationManager =
+                requireActivity().getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             NotificationChannel(
                 NOTIFICATION_FOREGROUND_CHANNEL_ID,
                 NOTIFICATION_FOREGROUND_CHANNEL_NAME,
@@ -299,8 +307,6 @@ class ProcessReadingBookFragment : BaseFragment<ProcessReadingBookFragmentBindin
         const val NOTIFICATION_ALARM_CHANNEL_ID = "StopwatchServiceAlarmChannelId"
         private const val NOTIFICATION_FOREGROUND_CHANNEL_NAME = "Контроль чтения - таймер"
         private const val NOTIFICATION_ALARM_CHANNEL_NAME = "Контроль чтения - уведомления"
-        private const val BOOK_ARG_KEY =
-            "ARG_BOOK" //такой ключ встречается много где. Следует сделать общую публичную константу
         private const val ANIMATION_FADE_DURATION = 1000L
         private const val ANIMATION_APPEAR_DURATION = 100L
         private const val CURRENT_PAGE_DIALOG_TAG = "CurrentPageDialog"
