@@ -21,6 +21,9 @@ class StopwatchImpl(private val stopwatchStateHolder: StopwatchStateHolder) : St
     override fun getElapsedTime(): Long =
         stopwatchStateHolder.getElapsedTime()
 
+    override fun getFormattedElapsedTime(): String {
+        return stopwatchStateHolder.getStringTimeRepresentation()
+    }
 
     override fun start() {
         executor ?: startJob()

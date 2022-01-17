@@ -6,7 +6,6 @@ import androidx.lifecycle.SavedStateHandle
 import ru.vdv.myapp.myreadersdiary.R
 import ru.vdv.myapp.myreadersdiary.domain.Book
 import ru.vdv.myapp.myreadersdiary.model.stopwatch.Stopwatch
-import ru.vdv.myapp.myreadersdiary.model.stopwatch.StopwatchFactory
 import ru.vdv.myapp.myreadersdiary.ui.common.BaseViewModel
 import ru.vdv.myapp.myreadersdiary.ui.common.Dialog
 import ru.vdv.myapp.myreadersdiary.ui.common.ScreenUiState
@@ -18,10 +17,21 @@ import java.util.concurrent.Executors
 class ProcessReadingBookViewModel(
     private val book: Book?,
     private val _liveData: MutableLiveData<ScreenUiState<ProcessReadingBookUiModel>> = MutableLiveData(),
-    private val activeStopwatch: Stopwatch = StopwatchFactory.createStopwatch(),
-    private val relaxStopwatch: Stopwatch = StopwatchFactory.createStopwatch(),
     private val state: SavedStateHandle
 ) : BaseViewModel() {
+
+    private var activeStopwatch: Stopwatch? = null
+    private var relaxStopwatch: Stopwatch? = null
+
+    fun setActiveStopwatch(activeStopwatch: Stopwatch) {
+        this.activeStopwatch = activeStopwatch
+        this.activeStopwatch?.observe { timer -> postActiveStopwatchData(timer) }
+    }
+
+    fun setRelaxStopwatch(relaxStopwatch: Stopwatch) {
+        this.relaxStopwatch = relaxStopwatch
+        this.relaxStopwatch?.observe { timer -> postRelaxStopwatchData(timer) }
+    }
 
     val liveData: LiveData<ScreenUiState<ProcessReadingBookUiModel>>
         get() = _liveData
@@ -30,14 +40,6 @@ class ProcessReadingBookViewModel(
 
     init {
         initScreenState()
-        activeStopwatch.observe { timer -> postActiveStopwatchData(timer) }
-        relaxStopwatch.observe { timer -> postRelaxStopwatchData(timer) }
-    }
-
-    override fun onCleared() {
-        activeStopwatch.stop()
-        relaxStopwatch.stop()
-        super.onCleared()
     }
 
     fun saveCurrentState() {
@@ -57,8 +59,8 @@ class ProcessReadingBookViewModel(
 
     /** ОБработка нажатия на кнопку "Стоп" */
     fun onButtonProcessReadingStopClicked() {
-        activeStopwatch.pause()
-        relaxStopwatch.pause()
+        activeStopwatch?.pause()
+        relaxStopwatch?.pause()
         uiModel?.let { uiModelNotNull ->
             uiModelNotNull.copy(
                 dialog = Dialog.ENTER_CURRENT_PAGE
@@ -131,7 +133,7 @@ class ProcessReadingBookViewModel(
     private fun postActiveStopwatchData(timer: String) {
         uiModel?.copy(
             activeStopwatchValue = timer,
-            activeStopwatchElapsingTime = activeStopwatch.getElapsedTime()
+            activeStopwatchElapsingTime = activeStopwatch?.getElapsedTime() ?: ZERO_TIME
         )?.let { processReadingBookUiModel ->
             postNewSuccessState(processReadingBookUiModel)
         }
@@ -148,7 +150,7 @@ class ProcessReadingBookViewModel(
 
     /** Нажатие на кнопку "Начать чтение" */
     private fun performStart(uiModelNotNull: ProcessReadingBookUiModel) {
-        activeStopwatch.start()
+        activeStopwatch?.start()
         uiModelNotNull.copy(
             startOrPauseButtonMode = StartOrPauseButtonMode.PAUSE,
             startOrPauseButtonTextAndIcon = Pair(
@@ -163,9 +165,9 @@ class ProcessReadingBookViewModel(
 
     /** Нажатие на кнопку "Сделать паузу" */
     private fun performPause(uiModelNotNull: ProcessReadingBookUiModel) {
-        activeStopwatch.pause()
-        relaxStopwatch.stop()
-        relaxStopwatch.start()
+        activeStopwatch?.pause()
+        relaxStopwatch?.stop()
+        relaxStopwatch?.start()
         uiModelNotNull.copy(
             startOrPauseButtonMode = StartOrPauseButtonMode.RESUME,
             startOrPauseButtonTextAndIcon = Pair(
@@ -180,8 +182,8 @@ class ProcessReadingBookViewModel(
 
     /** Нажатие на кнопку "Возобновить чтение" */
     private fun performResume(uiModelNotNull: ProcessReadingBookUiModel) {
-        relaxStopwatch.pause()
-        activeStopwatch.start()
+        relaxStopwatch?.pause()
+        activeStopwatch?.start()
         uiModelNotNull.copy(
             startOrPauseButtonMode = StartOrPauseButtonMode.PAUSE,
             startOrPauseButtonTextAndIcon = Pair(
@@ -219,5 +221,6 @@ class ProcessReadingBookViewModel(
         private const val STOPWATCH_INITIAL_VALUE_MS = 0L
         private const val READING_RESULTS_ANALYSIS_DELAY =
             2000L  //временная задержка, пока не появится метод на бэкенде
+        private const val ZERO_TIME = 0L
     }
 }
