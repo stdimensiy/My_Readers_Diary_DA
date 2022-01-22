@@ -2,6 +2,7 @@ package ru.vdv.myapp.myreadersdiary.services.stopwatch
 
 import android.app.Notification
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.app.Service
 import android.content.Context
 import android.content.Intent
@@ -9,11 +10,17 @@ import android.os.Binder
 import android.os.Build
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
+import androidx.core.os.bundleOf
+import androidx.navigation.NavDeepLinkBuilder
+import ru.vdv.myapp.myreadersdiary.MainActivity
 import ru.vdv.myapp.myreadersdiary.R
+import ru.vdv.myapp.myreadersdiary.domain.Book
 import ru.vdv.myapp.myreadersdiary.model.stopwatch.Stopwatch
 import ru.vdv.myapp.myreadersdiary.model.stopwatch.StopwatchFactory
 import ru.vdv.myapp.myreadersdiary.ui.books.readingprocess.ProcessReadingBookFragment.Companion.NOTIFICATION_ALARM_CHANNEL_ID
 import ru.vdv.myapp.myreadersdiary.ui.books.readingprocess.ProcessReadingBookFragment.Companion.NOTIFICATION_FOREGROUND_CHANNEL_ID
+import ru.vdv.myapp.myreadersdiary.ui.books.readingprocess.ProcessReadingBookUiModel
+import ru.vdv.myapp.myreadersdiary.ui.common.BaseConstants
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -23,7 +30,13 @@ class StopwatchService(
 ) : Service() {
 
     private val stopwatchServiceBinder: IBinder by lazy { StopwatchServiceBinder() }
-    private var isAlarmShowed: Boolean = false
+    private var isAlarmRelaxShowed: Boolean = false
+    private var isAlarmActiveShowed: Boolean = false
+    private var uiModel: ProcessReadingBookUiModel? = null
+    private var book: Book? = null
+    private var executor: ExecutorService? = null
+    private val notificationManager: NotificationManager by lazy { getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager }
+    private var openProcessReadingBookFragmentIntent: PendingIntent? = null
 
     @Suppress("deprecation")
     private val notificationForegroundBuilder: NotificationCompat.Builder by lazy {
@@ -41,12 +54,7 @@ class StopwatchService(
             .setContentTitle(NOTIFICATION_TITLE)
     }
 
-    private var executor: ExecutorService? = null
-
-    private val notificationManager: NotificationManager by lazy { getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager }
-
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        isAlarmShowed = false
         startForeground(FOREGROUND_MESSAGE_ID, makeForegroundNotification(NOTIFICATION_TITLE))
         showTimersPush()
         return START_NOT_STICKY
@@ -57,41 +65,53 @@ class StopwatchService(
     }
 
     override fun onDestroy() {
-        isAlarmShowed = false
-        activeStopwatch.stop()
-        relaxStopwatch.stop()
-        executor?.shutdown()
-        executor = null
+        stopwatchShutdown()
         super.onDestroy()
     }
 
     private fun showTimersPush() {
-        executor = Executors.newSingleThreadExecutor()
-        executor?.let { executor ->
-            executor.execute {
-                try {
-                    while (!executor.isShutdown) {
-                        showForegroundNotification(
-                            "$ACTIVE_STOPWATCH_MESSAGE ${activeStopwatch.getFormattedElapsedTime()}\n" +
-                                    "$RELAX_STOPWATCH_MESSAGE ${relaxStopwatch.getFormattedElapsedTime()}"
-                        )
-                        checkRelaxTime()
-                        Thread.sleep(SHOW_TIMERS_PUSH_DELAY_MS)
+        if (executor == null) {
+            executor = Executors.newSingleThreadExecutor().also { executor ->
+                executor.execute {
+                    try {
+                        while (!executor.isShutdown) {
+                            showForegroundNotification(
+                                "$ACTIVE_STOPWATCH_MESSAGE ${activeStopwatch.getFormattedElapsedTime()}\n" +
+                                        "$RELAX_STOPWATCH_MESSAGE ${relaxStopwatch.getFormattedElapsedTime()}"
+                            )
+                            checkAlarms()
+                            Thread.sleep(SHOW_TIMERS_PUSH_DELAY_MS)
+                        }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
                     }
-                } catch (e: Exception) {
-                    e.printStackTrace()
                 }
             }
         }
     }
 
+    private fun checkAlarms() {
+        checkActiveTime()
+        checkRelaxTime()
+    }
+
+    private fun checkActiveTime() {
+        when {
+            !isAlarmActiveShowed && activeStopwatch.checkAlarm() -> {
+                showAlarmNotification(ALARM_ACTIVE_MESSAGE)
+                isAlarmActiveShowed = true
+            }
+            isAlarmActiveShowed && activeStopwatch.checkAlarm().not() -> isAlarmActiveShowed = false
+        }
+    }
+
     private fun checkRelaxTime() {
         when {
-            !isAlarmShowed && relaxStopwatch.getElapsedTime() > MAX_RELAX_TIME_MS -> {
-                showAlarmNotification()
-                isAlarmShowed = true
+            !isAlarmRelaxShowed && relaxStopwatch.checkAlarm() -> {
+                showAlarmNotification(ALARM_RELAX_MESSAGE)
+                isAlarmRelaxShowed = true
             }
-            isAlarmShowed && relaxStopwatch.getElapsedTime() < MAX_RELAX_TIME_MS -> isAlarmShowed = false
+            isAlarmRelaxShowed && relaxStopwatch.checkAlarm().not() -> isAlarmRelaxShowed = false
         }
     }
 
@@ -99,6 +119,7 @@ class StopwatchService(
         return notificationForegroundBuilder
             .setStyle(NotificationCompat.BigTextStyle().bigText(message))
             .setAutoCancel(true)
+            .setContentIntent(openProcessReadingBookFragmentIntent)
             .build()
     }
 
@@ -106,14 +127,49 @@ class StopwatchService(
         notificationManager.notify(FOREGROUND_MESSAGE_ID, makeForegroundNotification(message))
     }
 
-    private fun showAlarmNotification() {
+    private fun showAlarmNotification(alarmMessage: String) {
         notificationAlarmBuilder
-            .setContentText(ALARM_MESSAGE)
+            .setContentText(alarmMessage)
+            .setContentIntent(openProcessReadingBookFragmentIntent)
+            .setAutoCancel(true)
             .build()
             .let { notification -> notificationManager.notify(ALARM_MESSAGE_ID, notification) }
     }
 
+    private fun checkBoundStateAndStopSelf() {
+        Executors.newSingleThreadExecutor().let { executorService ->
+            executorService.execute {
+                Thread.sleep(SHOWDOWN_ON_NO_CLIENTS_SERVICE_DELAY_MS)
+                if (activeClients <= ZERO_ACTIVE_CLIENTS) {
+                    stopwatchShutdown()
+                    stopForeground(true)
+                    stopSelf()
+                    executorService.shutdown()
+                }
+            }
+        }
+    }
+
+    private fun stopwatchShutdown() {
+        isAlarmRelaxShowed = false
+        isAlarmActiveShowed = false
+        activeStopwatch.stop()
+        relaxStopwatch.stop()
+        executor?.shutdown()
+        executor = null
+    }
+
     inner class StopwatchServiceBinder : Binder() {
+        /**
+         * [uiModelServiceHolder] Служит для сохранения UI-стейта в сервисе. Для получения текущего стейта выполнить вызов с параметром null
+         */
+        val uiModelServiceHolder: UiModelServiceHolder = { uiModel ->
+            uiModel?.let {
+                this@StopwatchService.uiModel = uiModel
+            }
+            this@StopwatchService.uiModel
+        }
+
         fun getActiveStopwatch(): Stopwatch {
             return activeStopwatch
         }
@@ -121,16 +177,36 @@ class StopwatchService(
         fun getRelaxStopwatch(): Stopwatch {
             return relaxStopwatch
         }
+
+        fun setCurrentBook(book: Book?) {
+            this@StopwatchService.book = book
+            this@StopwatchService.openProcessReadingBookFragmentIntent = NavDeepLinkBuilder(baseContext)
+                .setComponentName(MainActivity::class.java)
+                .setGraph(R.navigation.mobile_navigation)
+                .setArguments(bundleOf(BaseConstants.MY_BOOK_BUNDLE_KEY to book))
+                .setDestination(R.id.nav_book_details_fragment)
+                .setDestination(R.id.nav_process_reading_book_fragment)
+                .createPendingIntent()
+        }
+
+        fun setBoundState(stopwatchServiceBound: Boolean) {
+            if (stopwatchServiceBound) activeClients++
+            else activeClients--
+            if (activeClients <= ZERO_ACTIVE_CLIENTS) checkBoundStateAndStopSelf()
+        }
     }
 
     companion object {
-        private const val SHOW_TIMERS_PUSH_DELAY_MS = 300L
+        private var activeClients: Int = 0
+        private const val ZERO_ACTIVE_CLIENTS = 0
+        private const val SHOWDOWN_ON_NO_CLIENTS_SERVICE_DELAY_MS = 1000L //если нет активных подключений к сервису в течении 1 сек, то сервис останавливается
+        private const val SHOW_TIMERS_PUSH_DELAY_MS = 500L
         private const val NOTIFICATION_TITLE = "Контроль чтения"
         private const val ACTIVE_STOPWATCH_MESSAGE = "Время чтения: "
         private const val RELAX_STOPWATCH_MESSAGE = "Время отдыха: "
-        private const val ALARM_MESSAGE = "Пора приступить к чтению!"
+        private const val ALARM_RELAX_MESSAGE = "Пора приступить к чтению!"
+        private const val ALARM_ACTIVE_MESSAGE = "Пора сделать перерыв!"
         private const val FOREGROUND_MESSAGE_ID = 1000
         private const val ALARM_MESSAGE_ID = 1001
-        private const val MAX_RELAX_TIME_MS = 60000L //todo Увеличить до 10 минут (добавить один нолик). Пока для теста время стоит 1 мин
     }
 }

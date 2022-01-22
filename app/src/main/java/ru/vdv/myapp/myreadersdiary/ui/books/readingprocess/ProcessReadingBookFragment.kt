@@ -12,7 +12,6 @@ import android.os.IBinder
 import android.transition.Fade
 import android.transition.TransitionManager
 import android.view.View
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
@@ -23,6 +22,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.button.MaterialButton
 import ru.vdv.myapp.myreadersdiary.R
 import ru.vdv.myapp.myreadersdiary.databinding.ProcessReadingBookFragmentBinding
+import ru.vdv.myapp.myreadersdiary.domain.Book
 import ru.vdv.myapp.myreadersdiary.services.stopwatch.StopwatchService
 import ru.vdv.myapp.myreadersdiary.ui.CustomBackButtonListener
 import ru.vdv.myapp.myreadersdiary.ui.books.readingprocess.dialogs.EnterCurrentPageDialog
@@ -37,14 +37,20 @@ import ru.vdv.myapp.myreadersdiary.ui.common.ScreenUiState
  */
 class ProcessReadingBookFragment : BaseFragment<ProcessReadingBookFragmentBinding>(),
     CustomBackButtonListener {
+
+    private val book: Book? by lazy { arguments?.getParcelable(BaseConstants.MY_BOOK_BUNDLE_KEY) }
     private val viewModel: ProcessReadingBookViewModel by viewModels {
         ProcessReadingBookViewModelFactory(
-            book = arguments?.getParcelable(BaseConstants.MY_BOOK_BUNDLE_KEY),
+            book = book,
             owner = this
         )
     }
-    private var stopwatchServiceBinder: StopwatchService.StopwatchServiceBinder? = null
     private var isStopwatchServiceBound: Boolean = false
+        set(value) {
+            field = value
+            stopwatchService?.setBoundState(isStopwatchServiceBound)
+        }
+    private var stopwatchService: StopwatchService.StopwatchServiceBinder? = null
     private val stopwatchServiceIntent by lazy {
         Intent(
             requireActivity(),
@@ -54,9 +60,12 @@ class ProcessReadingBookFragment : BaseFragment<ProcessReadingBookFragmentBindin
 
     private val boundServiceConnection = object : ServiceConnection {
         override fun onServiceConnected(componentName: ComponentName, binder: IBinder) {
-            (binder as? StopwatchService.StopwatchServiceBinder)?.apply {
+            stopwatchService = binder as? StopwatchService.StopwatchServiceBinder
+            stopwatchService?.apply {
                 viewModel.setActiveStopwatch(getActiveStopwatch())
                 viewModel.setRelaxStopwatch(getRelaxStopwatch())
+                viewModel.setUiModelServiceHolder(uiModelServiceHolder)
+                setCurrentBook(book)
             }
             isStopwatchServiceBound = true
         }
@@ -85,19 +94,13 @@ class ProcessReadingBookFragment : BaseFragment<ProcessReadingBookFragmentBindin
         bindService()
     }
 
-    override fun onStop() {
-        super.onStop()
-        unbindService()
-    }
-
     override fun onDestroy() {
-        requireActivity().stopService(stopwatchServiceIntent)
+        unbindService()
         super.onDestroy()
     }
 
     override fun backPressed(): Boolean {
-        viewModel.onButtonProcessReadingStopClicked()
-        return true
+        return viewModel.onButtonProcessReadingStopClicked()
     }
 
     //Если все ViewModels будут с поддержкой SavedStateHandle, то тоже можно будет вынести в BaseFragment
@@ -109,6 +112,7 @@ class ProcessReadingBookFragment : BaseFragment<ProcessReadingBookFragmentBindin
     private fun initViews() = with(binding) {
         buttonProcessReadingStartOrPause.setOnClickListener { viewModel.onButtonProcessReadingStartOrPauseClicked() }
         buttonProcessReadingStop.setOnClickListener { viewModel.onButtonProcessReadingStopClicked() }
+        buttonChangeActiveStopwatchMode.setOnClickListener { viewModel.onButtonChangeActiveStopwatchModeClicked() }
     }
 
     private fun observeToLiveData() {
@@ -170,6 +174,7 @@ class ProcessReadingBookFragment : BaseFragment<ProcessReadingBookFragmentBindin
                         currentPage = data.currentPage
                     )
         enterCurrentPageDialog.setOnCurrentPageEnteredListener(viewModel::onCurrentPageEntered)
+        enterCurrentPageDialog.setOnBackToReadingListener {viewModel.onBackToReadingClicked()}
         if (enterCurrentPageDialog.dialog == null) enterCurrentPageDialog.show(
             childFragmentManager,
             CURRENT_PAGE_DIALOG_TAG
@@ -181,34 +186,31 @@ class ProcessReadingBookFragment : BaseFragment<ProcessReadingBookFragmentBindin
             childFragmentManager.findFragmentByTag(READING_RESULTS_DIALOG_TAG) as? ReadingResultsDialog
                 ?: ReadingResultsDialog.newInstance(processReadingBookUiModel = data)
 
-        readingResultsDialog.setOnCloseButtonPressedListener { findNavController().navigateUp() }
+        readingResultsDialog.setOnCloseButtonPressedListener { navigateUpWithStopService() }
         if (readingResultsDialog.dialog == null) readingResultsDialog.show(
             childFragmentManager,
             READING_RESULTS_DIALOG_TAG
         )
     }
 
+    private fun navigateUpWithStopService() {
+        unbindService()
+        requireActivity().stopService(stopwatchServiceIntent)
+        findNavController().navigateUp()
+    }
+
     private fun renderUiData(data: ProcessReadingBookUiModel) {
         with(binding) {
             textViewProcessReadingBookTitle.setIfChanged(data.title)
-            textViewProcessReadingBookAuthors.setIfChanged(data.authors)
             textViewProcessReadingBookPagesCount.setIfChanged(
                 R.string.text_view_process_reading_pages_count,
                 data.pagesCount
             )
-            textViewProcessReadingBookWordsCount.setIfChanged(
-                R.string.text_view_process_reading_book_words_count,
-                data.wordsCount
-            )
-            textViewProcessReadingBookDensityWords.setIfChanged(
-                R.string.text_view_process_reading_book_density_words,
-                data.densityWordsPerPage
-            )
             textViewProcessReadingBookCurrentPage.setIfChanged(
                 R.string.text_view_process_reading_book_current_page,
+                data.currentPageFormattedDate,
                 data.currentPage
             )
-            imageViewProcessReadingBookCover.loadImageIfEmpty(data.coverUrl)
             data.startOrPauseButtonTextAndIcon.let {
                 buttonProcessReadingStartOrPause.setTextAndIconIfChanged(
                     it.first,
@@ -217,6 +219,7 @@ class ProcessReadingBookFragment : BaseFragment<ProcessReadingBookFragmentBindin
             }
             textViewProcessReadingActiveStopwatch.setIfChanged(data.activeStopwatchValue)
             textViewProcessReadingRelaxStopwatch.setIfChanged(data.relaxStopwatchValue)
+            textViewProcessReadingActiveTimeTitle.setIfChanged(getString(data.processReadingTitleResId))
             groupProcessReadingRelax.setVisibilityAnimated(data.isGroupProcessReadingRelaxVisible)
         }
     }
@@ -248,7 +251,7 @@ class ProcessReadingBookFragment : BaseFragment<ProcessReadingBookFragmentBindin
     private fun unbindService() {
         if (isStopwatchServiceBound) {
             requireActivity().unbindService(boundServiceConnection)
-            stopwatchServiceBinder = null
+            isStopwatchServiceBound = false
         }
     }
     // ### end service area ###
@@ -271,6 +274,17 @@ class ProcessReadingBookFragment : BaseFragment<ProcessReadingBookFragmentBindin
         }
     }
 
+    private fun TextView.setIfChanged(@StringRes stringResId: Int, dateFormatted: String, number: Long) {
+        String.format(
+            resources.getString(stringResId),
+            dateFormatted,
+            number
+        ).let { resultString ->
+            if (text.equals(resultString).not()) text = resultString
+            else return
+        }
+    }
+
     private fun MaterialButton.setTextAndIconIfChanged(
         @DrawableRes iconRes: Int,
         @StringRes textRes: Int
@@ -280,11 +294,6 @@ class ProcessReadingBookFragment : BaseFragment<ProcessReadingBookFragmentBindin
             icon = ContextCompat.getDrawable(requireContext(), iconRes)
             text = newButtonText
         } else return
-    }
-
-    private fun ImageView.loadImageIfEmpty(imageUrl: String) {
-        if (drawable == null) imageLoader.loadBookCover(imageUrl, this)
-        else return
     }
 
     private fun View.setVisibilityAnimated(isVisible: Boolean) {
@@ -307,7 +316,7 @@ class ProcessReadingBookFragment : BaseFragment<ProcessReadingBookFragmentBindin
         const val NOTIFICATION_ALARM_CHANNEL_ID = "StopwatchServiceAlarmChannelId"
         private const val NOTIFICATION_FOREGROUND_CHANNEL_NAME = "Контроль чтения - таймер"
         private const val NOTIFICATION_ALARM_CHANNEL_NAME = "Контроль чтения - уведомления"
-        private const val ANIMATION_FADE_DURATION = 1000L
+        private const val ANIMATION_FADE_DURATION = 500L
         private const val ANIMATION_APPEAR_DURATION = 100L
         private const val CURRENT_PAGE_DIALOG_TAG = "CurrentPageDialog"
         private const val READING_RESULTS_DIALOG_TAG = "ReadingResultsDialog"
