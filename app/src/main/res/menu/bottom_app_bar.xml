@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/nav_summary_statistics"
+        android:icon="@drawable/ic_person_24px"
+        android:title="Статистика пользователя"
+        android:contentDescription="Первый пункт"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/nav_settings_fragment"
+        android:icon="@drawable/ic_settings_black_24dp_stat"
+        android:title="Настройки"
+        android:contentDescription="Второй пункт"
+        app:showAsAction="ifRoom"/>
+</menu>

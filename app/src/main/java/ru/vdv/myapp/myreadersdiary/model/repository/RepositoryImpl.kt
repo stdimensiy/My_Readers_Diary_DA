@@ -644,7 +644,8 @@ class RepositoryImpl : Repository {
         callBack: CallBack<List<ShortEventForBook>>
     ) {
         //временный ответ пока готовится API
-        callBack.onResult(shortEventForBookPlug)
+        //с прочтой задержкой для отработки кастомного прогрессбара
+        android.os.Handler().postDelayed({ callBack.onResult(shortEventForBookPlug)}, 2000)
     }
 
     override fun setEvent(callBack: CallBack<Event>) {

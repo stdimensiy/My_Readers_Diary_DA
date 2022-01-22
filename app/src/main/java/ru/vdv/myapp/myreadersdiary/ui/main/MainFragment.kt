@@ -1,15 +1,18 @@
 package ru.vdv.myapp.myreadersdiary.ui.main
 
 import android.graphics.Color
+import android.graphics.drawable.AnimatedVectorDrawable
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.lifecycle.Observer
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import app.futured.donut.DonutSection
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import ru.vdv.myapp.myreadersdiary.R
 import ru.vdv.myapp.myreadersdiary.databinding.MainFragmentBinding
 import ru.vdv.myapp.myreadersdiary.ui.common.BaseFragment
@@ -17,6 +20,7 @@ import ru.vdv.myapp.myreadersdiary.ui.common.BaseFragment
 class MainFragment : BaseFragment<MainFragmentBinding>() {
     private lateinit var adapter: MainEventsAdapter
     private lateinit var viewModel: MainViewModel
+    private lateinit var fab: FloatingActionButton
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,6 +48,7 @@ class MainFragment : BaseFragment<MainFragmentBinding>() {
             adapter.items = it
             adapter.notifyDataSetChanged()
         }
+
         //запрос данных пользователя подписка на результат
         viewModel.currentUser.observe(viewLifecycleOwner, Observer {
             it?.let {
@@ -65,6 +70,7 @@ class MainFragment : BaseFragment<MainFragmentBinding>() {
             amount = 1f
         )
         setDonatChartData(section1, section2)
+
     }
 
     private fun setName(name: String): Unit = with(binding) {
@@ -88,4 +94,21 @@ class MainFragment : BaseFragment<MainFragmentBinding>() {
             donutView.gapWidthDegrees = 60f
             donutView.submitData(listOf(section1, section2))
         }
+    private fun setupFab() {
+//        val adv = { iconRes: Int -> getDrawable(requireContext(), iconRes) as AnimatedVectorDrawable}
+//        fab = requireActivity().findViewById(R.id.fab)
+//        val  icon = adv(R.drawable.ic_cached_rotate_black_24dp_adv)
+//        fab.setImageDrawable(icon)
+//        icon.start()
+        fab = activity?.let {it.findViewById(R.id.fab)}!!
+        val avd = { iconRes: Int ->
+            AppCompatResources.getDrawable(
+                requireContext(),
+                iconRes
+            ) as AnimatedVectorDrawable
+        }
+        val icon = avd(R.drawable.avd_edit_to_reply_all)
+        fab.setImageDrawable(icon)
+        icon.start()
+    }
 }

@@ -1,13 +1,16 @@
 package ru.vdv.myapp.myreadersdiary.ui.books.bookdetails
 
+import android.graphics.drawable.AnimatedVectorDrawable
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import ru.vdv.myapp.myreadersdiary.R
 import ru.vdv.myapp.myreadersdiary.databinding.BookDetailsFragmentBinding
 import ru.vdv.myapp.myreadersdiary.domain.Book
@@ -19,6 +22,7 @@ class BookDetailsFragment : BaseFragment<BookDetailsFragmentBinding>() {
     private lateinit var adapter: BookEventListAdapter
     private lateinit var book: Book
     private lateinit var viewModel: BookDetailsViewModel
+    private lateinit var fab: FloatingActionButton
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,6 +54,43 @@ class BookDetailsFragment : BaseFragment<BookDetailsFragmentBinding>() {
         viewModel.prepareEventList.observe(viewLifecycleOwner) {
             adapter.items = it
             adapter.notifyDataSetChanged()
+            setupFab()
+        }
+        setupFab2(view)
+    }
+
+    private fun setupFab(){
+        Log.d("Моя проверка", "Сработал FAB 1")
+        fab = activity?.let {it.findViewById(R.id.fab)}!!
+        val avd = { iconRes: Int ->
+            AppCompatResources.getDrawable(
+                requireContext(),
+                iconRes
+            ) as AnimatedVectorDrawable
+        }
+        val icon = avd(R.drawable.ic_cached_to_read_black_24dp_adv)
+        fab.setImageDrawable(icon)
+        icon.start()
+    }
+
+    private fun setupFab2(view: View){
+        // режим готовности к чтению
+        Log.d("Моя проверка", "Сработал FAB 2")
+        fab = activity?.let {it.findViewById(R.id.fab)}!!
+        val avd = { iconRes: Int ->
+            AppCompatResources.getDrawable(
+                requireContext(),
+                iconRes
+            ) as AnimatedVectorDrawable
+        }
+        val icon = avd(R.drawable.ic_cached_rotate_black_24dp_adv)
+        fab.setImageDrawable(icon)
+        icon.start()
+        fab.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putParcelable(BaseConstants.MY_BOOK_BUNDLE_KEY, book)
+            view.findNavController().navigate(R.id.nav_process_reading_book_fragment, bundle)
         }
     }
+
 }
