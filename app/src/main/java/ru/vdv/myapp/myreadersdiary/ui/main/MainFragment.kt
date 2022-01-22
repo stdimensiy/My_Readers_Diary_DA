@@ -4,17 +4,20 @@ import android.graphics.Color
 import android.graphics.drawable.AnimatedVectorDrawable
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import app.futured.donut.DonutSection
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import ru.vdv.myapp.myreadersdiary.R
 import ru.vdv.myapp.myreadersdiary.databinding.MainFragmentBinding
+import ru.vdv.myapp.myreadersdiary.ui.common.BaseConstants
 import ru.vdv.myapp.myreadersdiary.ui.common.BaseFragment
 
 class MainFragment : BaseFragment<MainFragmentBinding>() {
@@ -38,15 +41,22 @@ class MainFragment : BaseFragment<MainFragmentBinding>() {
         return super.onCreateView(inflater, container, savedInstanceState)
     }
 
+    override fun onStart() {
+        super.onStart()
+        setupFab()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val listOfEvent = binding.listOfEvents
+        //setupFab()
         listOfEvent.adapter = adapter
         listOfEvent.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         viewModel.prepareEventList.observe(viewLifecycleOwner) {
             adapter.items = it
             adapter.notifyDataSetChanged()
+            setupFab2(view)
         }
 
         //запрос данных пользователя подписка на результат
@@ -95,6 +105,7 @@ class MainFragment : BaseFragment<MainFragmentBinding>() {
             donutView.submitData(listOf(section1, section2))
         }
     private fun setupFab() {
+        Log.d("Моя проверка", "Вызван метод FAB1")
 //        val adv = { iconRes: Int -> getDrawable(requireContext(), iconRes) as AnimatedVectorDrawable}
 //        fab = requireActivity().findViewById(R.id.fab)
 //        val  icon = adv(R.drawable.ic_cached_rotate_black_24dp_adv)
@@ -107,8 +118,26 @@ class MainFragment : BaseFragment<MainFragmentBinding>() {
                 iconRes
             ) as AnimatedVectorDrawable
         }
-        val icon = avd(R.drawable.avd_edit_to_reply_all)
+        val icon = avd(R.drawable.ic_cached_rotate_black_24dp_adv)
         fab.setImageDrawable(icon)
         icon.start()
+    }
+
+    private fun setupFab2(view: View){
+        // режим готовности к чтению
+        Log.d("Моя проверка", "Сработал FAB 2")
+        fab = activity?.let {it.findViewById(R.id.fab)}!!
+        val avd = { iconRes: Int ->
+            AppCompatResources.getDrawable(
+                requireContext(),
+                iconRes
+            ) as AnimatedVectorDrawable
+        }
+        val icon = avd(R.drawable.ic_cached_to_add_black_24dp_adv)
+        fab.setImageDrawable(icon)
+        icon.start()
+        fab.setOnClickListener {
+            view.findNavController().navigate(R.id.nav_create_new_book_Fragment)
+        }
     }
 }

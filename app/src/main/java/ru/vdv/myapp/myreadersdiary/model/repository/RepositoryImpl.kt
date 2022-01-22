@@ -631,7 +631,8 @@ class RepositoryImpl : Repository {
     }
 
     override fun getEventsList(num: Int, callBack: CallBack<List<Event>>) {
-        callBack.onResult(eventPlug)
+        //с прочтой задержкой для отработки кастомного прогрессбара
+        android.os.Handler().postDelayed({callBack.onResult(eventPlug)}, 2000)
     }
 
     override fun getSummaryEventData(callBack: CallBack<List<WeekEvent>>) {
