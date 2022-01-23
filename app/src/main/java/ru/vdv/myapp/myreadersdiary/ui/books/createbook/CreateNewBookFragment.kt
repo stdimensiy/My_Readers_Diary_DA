@@ -22,7 +22,6 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.result.launch
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.core.widget.addTextChangedListener
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import ru.vdv.myapp.myreadersdiary.R
 import ru.vdv.myapp.myreadersdiary.databinding.CreateNewBookFragmentBinding
@@ -109,19 +108,10 @@ class CreateNewBookFragment : BaseFragment<CreateNewBookFragmentBinding>() {
         super.onStart()
         fab = requireActivity().findViewById(R.id.fab)
         setFabStateLoading()
+        checkIsPossibleToSave()
     }
 
     private fun setFabStateLoading() {
-        val icon = avd(R.drawable.ic_cached_rotate_black_24dp_adv)
-        fab.setImageDrawable(icon)
-        icon.start()
-        fab.setOnClickListener {
-            //Обнуляем лиссенер на ыремя загрузки
-            null
-        }
-    }
-
-    private fun setFabStateReadySave() {
         val icon = avd(R.drawable.ic_cached_rotate_black_24dp_adv)
         fab.setImageDrawable(icon)
         icon.start()

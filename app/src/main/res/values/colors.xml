@@ -11,4 +11,10 @@
     <color name="elem_activity_graph_background_tint">#EC5252</color>
     <color name="cod_gray_66">#66090909</color>
     <color name="black_40">#66000000</color>
+<!--   custom them -->
+    <color name="color_primary">#344955</color>
+    <color name="color_primary_dark">#232F34</color>
+    <color name="color_accent">#F8AA34</color>
+    <color name="window_background">#EEF0F2</color>
+    <color name="email_thread_background">#FEFEFE</color>
 </resources>
