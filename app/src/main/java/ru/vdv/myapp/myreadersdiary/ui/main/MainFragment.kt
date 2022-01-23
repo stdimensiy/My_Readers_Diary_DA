@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.preference.PreferenceManager
@@ -24,6 +25,7 @@ class MainFragment : BaseFragment<MainFragmentBinding>() {
     private lateinit var adapter: MainEventsAdapter
     private lateinit var viewModel: MainViewModel
     private lateinit var fab: FloatingActionButton
+    private val avd = { iconRes: Int -> getDrawable(requireContext(), iconRes) as AnimatedVectorDrawable}
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,6 +45,7 @@ class MainFragment : BaseFragment<MainFragmentBinding>() {
 
     override fun onStart() {
         super.onStart()
+        fab = requireActivity().findViewById(R.id.fab)
         setupFab()
     }
 
@@ -106,33 +109,33 @@ class MainFragment : BaseFragment<MainFragmentBinding>() {
         }
     private fun setupFab() {
         Log.d("Моя проверка", "Вызван метод FAB1")
-//        val adv = { iconRes: Int -> getDrawable(requireContext(), iconRes) as AnimatedVectorDrawable}
-//        fab = requireActivity().findViewById(R.id.fab)
-//        val  icon = adv(R.drawable.ic_cached_rotate_black_24dp_adv)
-//        fab.setImageDrawable(icon)
-//        icon.start()
-        fab = activity?.let {it.findViewById(R.id.fab)}!!
-        val avd = { iconRes: Int ->
-            AppCompatResources.getDrawable(
-                requireContext(),
-                iconRes
-            ) as AnimatedVectorDrawable
-        }
-        val icon = avd(R.drawable.ic_cached_rotate_black_24dp_adv)
+        //val adv = { iconRes: Int -> getDrawable(requireContext(), iconRes) as AnimatedVectorDrawable}
+        //fab = requireActivity().findViewById(R.id.fab)
+        val  icon = avd(R.drawable.ic_cached_rotate_black_24dp_adv)
         fab.setImageDrawable(icon)
         icon.start()
+//        fab = activity?.let {it.findViewById(R.id.fab)}!!
+//        val avd = { iconRes: Int ->
+//            AppCompatResources.getDrawable(
+//                requireContext(),
+//                iconRes
+//            ) as AnimatedVectorDrawable
+//        }
+//        val icon = avd(R.drawable.ic_cached_rotate_black_24dp_adv)
+//        fab.setImageDrawable(icon)
+//        icon.start()
     }
 
     private fun setupFab2(view: View){
         // режим готовности к чтению
-        Log.d("Моя проверка", "Сработал FAB 2")
-        fab = activity?.let {it.findViewById(R.id.fab)}!!
-        val avd = { iconRes: Int ->
-            AppCompatResources.getDrawable(
-                requireContext(),
-                iconRes
-            ) as AnimatedVectorDrawable
-        }
+//        Log.d("Моя проверка", "Сработал FAB 2")
+        //fab = activity?.let {it.findViewById(R.id.fab)}!!
+//        val avd = { iconRes: Int ->
+//            AppCompatResources.getDrawable(
+//                requireContext(),
+//                iconRes
+//            ) as AnimatedVectorDrawable
+//        }
         val icon = avd(R.drawable.ic_cached_to_add_black_24dp_adv)
         fab.setImageDrawable(icon)
         icon.start()

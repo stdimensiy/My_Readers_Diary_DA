@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_main,
+                R.id.nav_new_main_fragment,
                 R.id.nav_list_of_books,
                 R.id.nav_summary_statistics
             ), drawerLayout
@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
             Log.d("Моя проверка", "Нажата навигационная кнопка нижнего меню")
             //для простоты это действие просто возвращает пользователя на главный экран.
             //из фрагмента любго уровня вложенности (аналог того сайта с функцией "домой")
-            navController.navigate(R.id.nav_main)
+            navController.navigate(R.id.nav_new_main_fragment)
         }
 
         bottomAppBar.setOnMenuItemClickListener { menuItem ->

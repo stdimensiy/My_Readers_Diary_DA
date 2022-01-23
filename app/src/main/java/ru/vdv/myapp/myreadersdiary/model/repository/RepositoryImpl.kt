@@ -449,6 +449,7 @@ class RepositoryImpl : Repository {
     private val networkService: ApiService = Common.retrofitService
 
     override fun getListOfBooks(callBack: CallBack<List<Book>>) {
+        android.os.Handler().postDelayed({
         networkService.getListOfBooks("123", "0.123", 1)
             .enqueue(object : Callback<List<Book>> {
                 override fun onResponse(
@@ -461,7 +462,7 @@ class RepositoryImpl : Repository {
                 override fun onFailure(call: Call<List<Book>>, t: Throwable) {
                     //TODO("Not yet implemented")
                 }
-            })
+            })}, 2000)
     }
 
     override fun getUserInfo(userLogin: String, callBack: CallBack<User>) {

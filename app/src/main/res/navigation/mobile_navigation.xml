@@ -106,4 +106,8 @@
             android:id="@+id/action_processReadingBookFragment_to_eventsFragment"
             app:destination="@id/nav_events_list_fragment" />
     </fragment>
+    <fragment
+        android:id="@+id/nav_new_main_fragment"
+        android:name="ru.vdv.myapp.myreadersdiary.ui.main.NewMainFragment"
+        android:label="NewMainFragment" />
 </navigation>
