@@ -101,5 +101,6 @@
     <string name="til_new_book_total_words_hint">Всего слов</string>
     <string name="btn_save_new_book_text">Сохранить основные данные</string>
     <string name="fab_base_contentDescription">Основное действие</string>
+    <string name="fab_contentDescription">Основное действие</string>
     <!-- end process reading fragment area-->
 </resources>
