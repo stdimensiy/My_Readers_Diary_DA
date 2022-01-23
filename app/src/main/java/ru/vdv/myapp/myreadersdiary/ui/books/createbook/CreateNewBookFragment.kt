@@ -6,6 +6,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.drawable.AnimatedVectorDrawable
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Build
@@ -20,6 +21,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.result.launch
+import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.widget.addTextChangedListener
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import ru.vdv.myapp.myreadersdiary.R
 import ru.vdv.myapp.myreadersdiary.databinding.CreateNewBookFragmentBinding
 import ru.vdv.myapp.myreadersdiary.ui.common.BaseFragment
 import java.io.File
@@ -30,6 +35,13 @@ class CreateNewBookFragment : BaseFragment<CreateNewBookFragmentBinding>() {
 
     private var image: File? = null
     private var imageUri: Uri? = null
+    private lateinit var fab: FloatingActionButton
+    private val avd = { iconRes: Int ->
+        AppCompatResources.getDrawable(
+            requireContext(),
+            iconRes
+        ) as AnimatedVectorDrawable
+    }
     private val camera =
         registerForActivityResult(ActivityResultContracts.TakePicturePreview()) { bitmap ->
             binding.ivNewBookCover.setImageBitmap(bitmap)
@@ -67,7 +79,95 @@ class CreateNewBookFragment : BaseFragment<CreateNewBookFragmentBinding>() {
         binding.btnCropImage.setOnClickListener {
             performCrop()
         }
+        binding.newBookTitle.setOnFocusChangeListener { v, hasFocus ->
+            if(!hasFocus){
+                Log.d(TAG,"фокус смещен ввод текста закончен")
+                checkIsPossibleToSave()
+            }
+        }
+        binding.newBookAuthor.setOnFocusChangeListener { v, hasFocus ->
+            if(!hasFocus){
+                Log.d(TAG,"фокус смещен ввод текста закончен")
+                checkIsPossibleToSave()
+            }
+        }
+
+        binding.tilNewBookTitle.setEndIconOnClickListener {
+            binding.newBookTitle.setText("")
+            checkIsPossibleToSave()
+            Log.d(TAG,"Нажата кнопка зачистки наименования книги")
+        }
+
+        binding.tilNewBookAuthor.setEndIconOnClickListener {
+            binding.newBookAuthor.setText("")
+            checkIsPossibleToSave()
+            Log.d(TAG,"Нажата кнопка зачистки автора книги")
+        }
     }
+
+    override fun onStart() {
+        super.onStart()
+        fab = requireActivity().findViewById(R.id.fab)
+        setFabStateLoading()
+    }
+
+    private fun setFabStateLoading() {
+        val icon = avd(R.drawable.ic_cached_rotate_black_24dp_adv)
+        fab.setImageDrawable(icon)
+        icon.start()
+        fab.setOnClickListener {
+            //Обнуляем лиссенер на ыремя загрузки
+            null
+        }
+    }
+
+    private fun setFabStateReadySave() {
+        val icon = avd(R.drawable.ic_cached_rotate_black_24dp_adv)
+        fab.setImageDrawable(icon)
+        icon.start()
+        fab.setOnClickListener {
+            //Обнуляем лиссенер на ыремя загрузки
+            null
+        }
+    }
+
+    private fun isPossibleToSave(): Boolean {
+        Log.d(TAG, "Сработал isPossibleToSave")
+        if (!binding.newBookTitle.text.isNullOrBlank() and !binding.newBookAuthor.text.isNullOrBlank()) {
+            Log.d(TAG, "Условие минимальноси данных для сохранения выполнены ")
+            Log.d(TAG, "Условие ${binding.newBookTitle.text}")
+            Log.d(TAG, "Условие ${binding.newBookAuthor.text}")
+            return true
+        }
+        Log.d(TAG, "Для сохранения условия недостаточны")
+        return false
+    }
+
+    private fun checkIsPossibleToSave() {
+        Log.d(TAG, "Сработал checkIsPossibleToSave")
+        if (!isPossibleToSave()) {
+            Log.d(TAG, "checkIsPossibleToSave / Наименование назнвания книги или автор нулевые")
+            fab.setImageResource(R.drawable.ic_edit_24_stat)
+            fab.setOnClickListener {
+                //Обнуляем лиссенер на время загрузки
+                Toast.makeText(
+                    requireContext(),
+                    "Введены не все данные достаточные для сохранения",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        } else {
+            Log.d(TAG, "checkIsPossibleToSave / Все готово к сохранению")
+            val icon = avd(R.drawable.ic_read_to_save_24dp_adv)
+            fab.setImageDrawable(icon)
+            icon.start()
+            fab.setOnClickListener {
+                //Обнуляем лиссенер на ыремя загрузки
+                Log.d(TAG, "Нажата кнопка сохранения")
+            }
+        }
+    }
+
 
     private fun saveBitmapInStorage(bitmap: Bitmap, context: Context) {
         Log.d("Моя проверка", "На обработку получена мапа: ${bitmap.config}")

@@ -466,7 +466,7 @@ class RepositoryImpl : Repository {
     }
 
     override fun getUserInfo(userLogin: String, callBack: CallBack<User>) {
-        networkService.getUserInfo("123-321321321", userLogin)
+        android.os.Handler().postDelayed({ networkService.getUserInfo("123-321321321", userLogin)
             .enqueue(object : Callback<User> {
                 override fun onResponse(call: Call<User>, response: Response<User>) {
                     response.body()?.let {
@@ -478,7 +478,7 @@ class RepositoryImpl : Repository {
                     //TODO("Not yet implemented")
                 }
 
-            })
+            })}, 2000)
     }
 
     override fun postBook(callBack: CallBack<Any>) {
