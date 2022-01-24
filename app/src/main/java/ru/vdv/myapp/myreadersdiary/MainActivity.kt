@@ -91,7 +91,7 @@ class MainActivity : AppCompatActivity() {
     override fun onBackPressed() {
         val fragmentBackButton =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_main)?.childFragmentManager?.fragments?.first() as? CustomBackButtonListener
-        fragmentBackButton?.backPressed() ?: super.onBackPressed()
+        if (fragmentBackButton?.backPressed() != true) super.onBackPressed()
     }
 
     override fun onSupportNavigateUp(): Boolean {
