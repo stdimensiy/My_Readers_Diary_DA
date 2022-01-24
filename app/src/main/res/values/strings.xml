@@ -102,6 +102,8 @@
     <string name="til_new_book_number_of_words_per_page_hint">Слов на странице</string>
     <string name="til_new_book_total_words_hint">Всего слов</string>
     <string name="btn_save_new_book_text">Сохранить основные данные</string>
+    <string name="fab_base_contentDescription">Основное действие</string>
+    <string name="fab_contentDescription">Основное действие</string>
     <string name="button_change_active_stopwatch_mode_text">Изменить режим таймера чтения</string>
     <string name="dialog_process_reading_button_back_to_reading">Вернуться к чтению</string>
     <!-- end process reading fragment area-->

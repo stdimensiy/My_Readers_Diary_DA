@@ -1,22 +1,25 @@
-package ru.vdv.myapp.myreadersdiary.ui.books
+package ru.vdv.myapp.myreadersdiary.ui.main
 
 import android.graphics.drawable.AnimatedVectorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import ru.vdv.myapp.myreadersdiary.R
-import ru.vdv.myapp.myreadersdiary.databinding.FragmentListOfBooksBinding
+import ru.vdv.myapp.myreadersdiary.databinding.NewMainFragmentBinding
 import ru.vdv.myapp.myreadersdiary.ui.common.BaseFragment
 
-class ListOfBooksFragment : BaseFragment<FragmentListOfBooksBinding>() {
-    private lateinit var ofBooksAdapter: ListOfBooksAdapter
-    private lateinit var viewModel: ListOfBooksViewModel
+class NewMainFragment : BaseFragment<NewMainFragmentBinding>() {
+    private lateinit var adapter: MainEventsAdapter
+    private lateinit var viewModel: MainViewModel
     private lateinit var fab: FloatingActionButton
     private val avd = { iconRes: Int ->
         AppCompatResources.getDrawable(
@@ -30,25 +33,29 @@ class ListOfBooksFragment : BaseFragment<FragmentListOfBooksBinding>() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        ofBooksAdapter = ListOfBooksAdapter()
-        viewModel = ViewModelProvider(this).get(ListOfBooksViewModel::class.java)
+        adapter = MainEventsAdapter()
+        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+        fetchData()
         return super.onCreateView(inflater, container, savedInstanceState)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val listOfBooks = binding.listOfBooks
-        listOfBooks.adapter = ofBooksAdapter
-        listOfBooks.layoutManager =
+        val listOfEvent = binding.listOfEvents
+        listOfEvent.adapter = adapter
+        listOfEvent.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        viewModel.prepareItems.observe(viewLifecycleOwner) {
-            it?.let {
-                ofBooksAdapter.items = it
-                ofBooksAdapter.notifyDataSetChanged()
-                setFabStateReady(view)
-            }
+        viewModel.prepareEventList.observe(viewLifecycleOwner) {
+            adapter.items = it
+            adapter.notifyDataSetChanged()
+            setFabStateReady(view)
         }
-        fetchData()
+
+        //запрос данных пользователя подписка на результат
+        viewModel.currentUser.observe(viewLifecycleOwner, Observer {
+            it?.let { Log.d(TAG, "Пользовательл определен: ${it.name}")
+            }
+        })
     }
 
     override fun onStart() {
@@ -76,7 +83,12 @@ class ListOfBooksFragment : BaseFragment<FragmentListOfBooksBinding>() {
         }
     }
 
-    private fun fetchData() {
-        viewModel.fetchData()
+    private fun fetchData(){
+        viewModel.fetchCurrentUser(
+            PreferenceManager.getDefaultSharedPreferences(context).getString(
+                getString(R.string.spref_key_login),
+                getString(R.string.spref_key_login_default)
+            )
+        )
     }
 }
