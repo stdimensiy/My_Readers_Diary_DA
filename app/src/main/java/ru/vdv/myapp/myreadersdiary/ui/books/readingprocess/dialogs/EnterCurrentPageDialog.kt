@@ -14,10 +14,18 @@ import ru.vdv.myapp.myreadersdiary.ui.common.BaseDialogFragment
 class EnterCurrentPageDialog : BaseDialogFragment<DialogEnterBookmarkBinding>() {
 
     private var onCurrentPageEntered: ((Int) -> Unit)? = null
+    private var onBackToReadingListener: (() -> Unit)? = null
+    private val currentPage: Long by lazy { arguments?.getLong(CURRENT_PAGE_BUNDLE_KEY) ?: DEFAULT_CURRENT_PAGE_VALUE }
+    private val pagesCount: Long by lazy { arguments?.getLong(PAGES_COUNT_BUNDLE_KEY) ?: DEFAULT_PAGES_COUNT_VALUE }
 
     /** Установка листенера установки текущей страницы */
     fun setOnCurrentPageEnteredListener(onCurrentPageEntered: (Int) -> Unit) {
         this.onCurrentPageEntered = onCurrentPageEntered
+    }
+
+    /** Установка листенера кнопки возврата к чтению */
+    fun setOnBackToReadingListener(onBackToReadingListener: () -> Unit) {
+        this.onBackToReadingListener = onBackToReadingListener
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -36,15 +44,14 @@ class EnterCurrentPageDialog : BaseDialogFragment<DialogEnterBookmarkBinding>() 
     }
 
     @Suppress("UNCHECKED_CAST")
-    private fun initViews() {
-        binding.buttonEnterBookmark.setOnClickListener { validateCurrentPage() }
+    private fun initViews() = with(binding) {
+        buttonEnterBookmark.setOnClickListener { validateCurrentPage() }
+        buttonBackToReading.setOnClickListener { backToReadingClicked() }
+        editTextInputLayoutEnterBookmark.setText(currentPage.toString())
     }
 
     private fun validateCurrentPage() = with(binding) {
         val newCurrentPage = getNewCurrentPage()
-        val currentPage = arguments?.getLong(CURRENT_PAGE_BUNDLE_KEY) ?: DEFAULT_CURRENT_PAGE_VALUE
-        val pagesCount = arguments?.getLong(PAGES_COUNT_BUNDLE_KEY) ?: DEFAULT_PAGES_COUNT_VALUE
-
         when {
             newCurrentPage == null ->
                 inputLayoutEnterBookmark.error =
@@ -61,6 +68,11 @@ class EnterCurrentPageDialog : BaseDialogFragment<DialogEnterBookmarkBinding>() 
                 dismiss()
             }
         }
+    }
+
+    private fun backToReadingClicked() {
+        onBackToReadingListener?.invoke()
+        dismiss()
     }
 
     private fun getNewCurrentPage(): Int? =

@@ -23,4 +23,11 @@
         android:layout_height="wrap_content"
         android:text="@string/dialog_process_reading_button_enter_bookmark" />
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_back_to_reading"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/dialog_process_reading_button_back_to_reading" />
+
 </LinearLayout>
