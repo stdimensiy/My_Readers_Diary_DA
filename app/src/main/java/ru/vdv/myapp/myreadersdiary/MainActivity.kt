@@ -21,35 +21,15 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: AppBarMainBinding
-    lateinit var fab: FloatingActionButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = AppBarMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-//        setSupportActionBar(binding.appBarMain.toolbar)
-
-
         val bottomAppBar = binding.bottomAppBar
-//        val drawerLayout: DrawerLayout = binding.drawerLayout
-//        val navView: NavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_content_main)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-//        appBarConfiguration = AppBarConfiguration(
-//            setOf(
-//                R.id.nav_new_main_fragment,
-//                R.id.nav_list_of_books,
-//                R.id.nav_summary_statistics
-//            ), drawerLayout
-//        )
-//        setupActionBarWithNavController(navController, appBarConfiguration)
-//        navView.setupWithNavController(navController)
-
         bottomAppBar.setNavigationOnClickListener {
-            Log.d("Моя проверка", "Нажата навигационная кнопка нижнего меню")
             //для простоты это действие просто возвращает пользователя на главный экран.
             //из фрагмента любго уровня вложенности (аналог того сайта с функцией "домой")
             navController.navigate(R.id.nav_new_main_fragment)
@@ -57,6 +37,11 @@ class MainActivity : AppCompatActivity() {
 
         bottomAppBar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
+                R.id.nav_list_of_books-> {
+                    // Отслеживание нажатия на кнопку суммарной статистики пользователя
+                    navController.navigate(R.id.nav_list_of_books)
+                    true
+                }
                 R.id.nav_summary_statistics -> {
                     // Отслеживание нажатия на кнопку суммарной статистики пользователя
                     navController.navigate(R.id.nav_summary_statistics)
@@ -98,6 +83,8 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         val fragmentBackButton =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_main)?.childFragmentManager?.fragments?.first() as? CustomBackButtonListener
-        return fragmentBackButton?.backPressed() ?: false || navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+        return fragmentBackButton?.backPressed() ?: false || navController.navigateUp(
+            appBarConfiguration
+        ) || super.onSupportNavigateUp()
     }
 }
