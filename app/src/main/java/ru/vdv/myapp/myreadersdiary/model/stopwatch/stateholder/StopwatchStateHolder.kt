@@ -6,6 +6,7 @@ interface StopwatchStateHolder {
     fun getCurrentState(): StopwatchState
     fun getStringTimeRepresentation(): String
     fun getElapsedTime(): Long
+    fun format(timestamp: Long): String
     fun start()
     fun pause()
     fun stop()
