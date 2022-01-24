@@ -2,6 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/nav_list_of_books"
+        android:icon="@drawable/ic_baseline_library_add_24"
+        android:title="Временный (старый список книг)"
+        android:contentDescription="Первый пункт"
+        app:showAsAction="ifRoom"/>
+    <item
         android:id="@+id/nav_summary_statistics"
         android:icon="@drawable/ic_person_24px"
         android:title="Статистика пользователя"

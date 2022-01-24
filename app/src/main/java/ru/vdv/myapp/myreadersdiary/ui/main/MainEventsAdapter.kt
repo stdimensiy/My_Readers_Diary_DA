@@ -8,6 +8,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import ru.vdv.myapp.myreadersdiary.R
 import ru.vdv.myapp.myreadersdiary.databinding.EventListItemBinding
+import ru.vdv.myapp.myreadersdiary.databinding.NewEventListItemBinding
 import ru.vdv.myapp.myreadersdiary.domain.Event
 import ru.vdv.myapp.myreadersdiary.glide.GlideImageLoader
 import ru.vdv.myapp.myreadersdiary.glide.ImageLoader
@@ -18,18 +19,19 @@ class MainEventsAdapter : RecyclerView.Adapter<MainEventViewHolder>() {
     val imageLoader: ImageLoader<ImageView> = GlideImageLoader()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainEventViewHolder {
         val binding =
-            EventListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            NewEventListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MainEventViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: MainEventViewHolder, position: Int) {
         val item = items[position]
-        holder.titleEvent.text = item.title
-        holder.fixDataEvent.text = item.representedDateTime.toString()
+        //holder.titleEvent.text = item.title
+        //holder.fixDataEvent.text = item.representedDateTime.toString()
+        holder.bookName.text = item.baseObject.title
         (item.baseObject.producerName + " ${item.baseObject.producerPatronymic}" +
                 " ${item.baseObject.producerSurname}"
                 + " / " + " ${item.baseObject.title}").also {
-            holder.eventBody.text = it
+            //holder.eventBody.text = it
         }
         imageLoader.loadBookCover(item.baseObject.bookCover, holder.coverBook)
     }
