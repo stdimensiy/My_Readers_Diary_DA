@@ -106,5 +106,8 @@
     <string name="fab_contentDescription">Основное действие</string>
     <string name="button_change_active_stopwatch_mode_text">Изменить режим таймера чтения</string>
     <string name="dialog_process_reading_button_back_to_reading">Вернуться к чтению</string>
+    <string name="tv_body_book_description_default_text">Автор Имя Отчество: + описание книги, небольшое сколько прочиено, сколько осталось</string>
+    <string name="tv_bool_name_default_text">Наименование книги</string>
+    <string name="tv_book_item_title_header_default_text">ГГГГ / ММ / ДД - прочитано N стр.</string>
     <!-- end process reading fragment area-->
 </resources>

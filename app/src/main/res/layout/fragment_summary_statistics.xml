@@ -474,7 +474,7 @@
 
 
             <ImageView
-                android:id="@+id/imageView_book_cover"
+                android:id="@+id/iv_book_cover"
                 android:layout_width="21dp"
                 android:layout_height="30dp"
                 android:layout_marginStart="16dp"
@@ -493,8 +493,8 @@
                 android:textAlignment="textStart"
                 android:textSize="12sp"
                 android:textStyle="bold|italic"
-                app:layout_constraintStart_toEndOf="@+id/imageView_book_cover"
-                app:layout_constraintTop_toTopOf="@+id/imageView_book_cover" />
+                app:layout_constraintStart_toEndOf="@+id/iv_book_cover"
+                app:layout_constraintTop_toTopOf="@+id/iv_book_cover" />
 
             <TextView
                 android:id="@+id/textView_fix_data_event"
@@ -542,7 +542,7 @@
                 android:layout_marginTop="8dp"
                 android:contentDescription="@string/ImageView_contentDescription_book_cover"
                 app:layout_constraintStart_toStartOf="@+id/tv_activity_legend_month12_read_books_process_title"
-                app:layout_constraintTop_toBottomOf="@id/imageView_book_cover"
+                app:layout_constraintTop_toBottomOf="@id/iv_book_cover"
                 app:srcCompat="@drawable/book_plug" />
 
             <TextView

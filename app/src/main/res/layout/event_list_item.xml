@@ -15,7 +15,7 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/imageView_book_cover"
+            android:id="@+id/iv_book_cover"
             android:layout_width="50dp"
             android:layout_height="64dp"
             android:contentDescription="@string/ImageView_contentDescription_book_cover"
@@ -35,7 +35,7 @@
             android:textSize="16sp"
             android:textStyle="bold|italic"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/imageView_book_cover"
+            app:layout_constraintStart_toEndOf="@id/iv_book_cover"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:text="@string/textView_fix_data_event_plug"
-            app:layout_constraintStart_toEndOf="@id/imageView_book_cover"
+            app:layout_constraintStart_toEndOf="@id/iv_book_cover"
             app:layout_constraintTop_toBottomOf="@id/textView_event_title" />
 
         <TextView
@@ -54,7 +54,7 @@
             android:layout_marginStart="4dp"
             android:text="@string/textView_event_body_plug"
             android:textStyle="italic"
-            app:layout_constraintStart_toEndOf="@id/imageView_book_cover"
+            app:layout_constraintStart_toEndOf="@id/iv_book_cover"
             app:layout_constraintTop_toBottomOf="@id/textView_fix_data_event" />
 
         <ImageView

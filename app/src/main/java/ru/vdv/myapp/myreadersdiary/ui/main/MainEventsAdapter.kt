@@ -42,7 +42,7 @@ class MainEventsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 return MainEventViewHolder(binding)
             }
             else -> {
-                // dвременно, нужно сделать разметку и холдер для подобного рода ошибок
+                // временно, нужно сделать разметку и холдер для подобного рода ошибок
                 val binding =
                     NewEventListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
                 return MainEventViewHolder(binding)
@@ -51,8 +51,6 @@ class MainEventsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        //holder.titleEvent.text = item.title
-        //holder.fixDataEvent.text = item.representedDateTime.toString()
         when (val item = items[position]) {
             is Event -> {
                 holder as MainEventViewHolder
@@ -60,7 +58,7 @@ class MainEventsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 (item.baseObject.producerName + " ${item.baseObject.producerPatronymic}" +
                         " ${item.baseObject.producerSurname}"
                         + " / " + " ${item.baseObject.title}").also {
-                    //holder.eventBody.text = it
+                    holder.bookDescription.text = it
                 }
                 imageLoader.loadBookCover(item.baseObject.bookCover, holder.coverBook)
             }
