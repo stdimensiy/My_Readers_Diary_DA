@@ -85,7 +85,7 @@ class SummaryStatisticsFragment : BaseFragment<FragmentSummaryStatisticsBinding>
         fab.setImageDrawable(icon)
         icon.start()
         fab.setOnClickListener {
-            view.findNavController().navigate(R.id.nav_new_main_fragment)
+            view.findNavController().navigate(R.id.nav_main)
         }
     }
 

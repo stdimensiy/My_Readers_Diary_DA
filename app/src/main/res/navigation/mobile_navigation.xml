@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@id/nav_new_main_fragment">
+    app:startDestination="@id/nav_main">
 
     <fragment
         android:id="@+id/nav_list_of_books"
@@ -106,8 +106,4 @@
             android:id="@+id/action_processReadingBookFragment_to_eventsFragment"
             app:destination="@id/nav_events_list_fragment" />
     </fragment>
-    <fragment
-        android:id="@+id/nav_new_main_fragment"
-        android:name="ru.vdv.myapp.myreadersdiary.ui.main.NewMainFragment"
-        android:label="NewMainFragment" />
 </navigation>
