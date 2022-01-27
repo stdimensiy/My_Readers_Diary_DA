@@ -10,4 +10,6 @@ class MainEventViewHolder(binding: NewEventListItemBinding) :
     var bookName: TextView = binding.tvBookName
     var bookDescription: TextView = binding.tvBodyBookDescription
     var coverBook: ImageView = binding.ivBookCover
+    var itemFrame = binding.itemFrame
+    var cardView = binding.cardView
 }
