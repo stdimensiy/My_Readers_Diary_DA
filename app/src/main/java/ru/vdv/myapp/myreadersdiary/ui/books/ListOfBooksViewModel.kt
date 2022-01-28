@@ -21,6 +21,7 @@ class ListOfBooksViewModel : BaseViewModel() {
             override fun onResult(result: List<Book>) {
                 //предварительно обкаточное решение без интерактора готовим данные непостредственно
                 //во VM в момент получения
+
                 var prepList: MutableList<ToBookList> = result.toMutableList()
                 _prepareItems.value = result
             }
