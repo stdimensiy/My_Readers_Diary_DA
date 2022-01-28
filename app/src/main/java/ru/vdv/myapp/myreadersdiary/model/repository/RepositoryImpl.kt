@@ -6,7 +6,8 @@ import retrofit2.Response
 import ru.vdv.myapp.myreadersdiary.domain.*
 import ru.vdv.myapp.myreadersdiary.model.api.ApiService
 import ru.vdv.myapp.myreadersdiary.model.retrofit.Common
-import ru.vdv.myapp.myreadersdiary.ui.common.ToMainList
+import ru.vdv.myapp.myreadersdiary.ui.common.interfaces.ToMainList
+import ru.vdv.myapp.myreadersdiary.ui.common.entities.TimeSeparator
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.random.Random.Default.nextInt

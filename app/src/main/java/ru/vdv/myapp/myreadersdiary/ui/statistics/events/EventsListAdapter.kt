@@ -11,7 +11,7 @@ import ru.vdv.myapp.myreadersdiary.domain.Event
 import ru.vdv.myapp.myreadersdiary.glide.GlideImageLoader
 import ru.vdv.myapp.myreadersdiary.glide.ImageLoader
 import ru.vdv.myapp.myreadersdiary.ui.common.BaseConstants
-import ru.vdv.myapp.myreadersdiary.ui.common.ToMainList
+import ru.vdv.myapp.myreadersdiary.ui.common.interfaces.ToMainList
 
 class EventsListAdapter : RecyclerView.Adapter<EventsListViewHolder>() {
     var items: List<ToMainList> = listOf()

@@ -1,7 +1,7 @@
 package ru.vdv.myapp.myreadersdiary.model.repository
 
 import ru.vdv.myapp.myreadersdiary.domain.*
-import ru.vdv.myapp.myreadersdiary.ui.common.ToMainList
+import ru.vdv.myapp.myreadersdiary.ui.common.interfaces.ToMainList
 import java.util.*
 
 interface Repository {

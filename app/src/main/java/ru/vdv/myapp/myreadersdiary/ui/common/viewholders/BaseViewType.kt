@@ -1,4 +1,4 @@
-package ru.vdv.myapp.myreadersdiary.ui.common
+package ru.vdv.myapp.myreadersdiary.ui.common.viewholders
 
 /**
  * Тип представления: (сквозная нумерация всех представлений для RV)

@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import ru.vdv.myapp.myreadersdiary.domain.Book
 import ru.vdv.myapp.myreadersdiary.domain.CallBack
 import ru.vdv.myapp.myreadersdiary.ui.common.BaseViewModel
+import ru.vdv.myapp.myreadersdiary.ui.common.interfaces.ToBookList
 
 class ListOfBooksViewModel : BaseViewModel() {
 
@@ -18,6 +19,9 @@ class ListOfBooksViewModel : BaseViewModel() {
     fun fetchData(){
         repository.getListOfBooks(object : CallBack<List<Book>> {
             override fun onResult(result: List<Book>) {
+                //предварительно обкаточное решение без интерактора готовим данные непостредственно
+                //во VM в момент получения
+                var prepList: MutableList<ToBookList> = result.toMutableList()
                 _prepareItems.value = result
             }
         })

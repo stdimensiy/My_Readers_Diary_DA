@@ -12,10 +12,14 @@ import ru.vdv.myapp.myreadersdiary.databinding.ItemListTimeSeparatorBinding
 import ru.vdv.myapp.myreadersdiary.databinding.NewEventListItemBinding
 import ru.vdv.myapp.myreadersdiary.databinding.UnknownTypeListItemBinding
 import ru.vdv.myapp.myreadersdiary.domain.Event
-import ru.vdv.myapp.myreadersdiary.domain.TimeSeparator
+import ru.vdv.myapp.myreadersdiary.ui.common.entities.TimeSeparator
 import ru.vdv.myapp.myreadersdiary.glide.GlideImageLoader
 import ru.vdv.myapp.myreadersdiary.glide.ImageLoader
 import ru.vdv.myapp.myreadersdiary.ui.common.*
+import ru.vdv.myapp.myreadersdiary.ui.common.interfaces.ToMainList
+import ru.vdv.myapp.myreadersdiary.ui.common.viewholders.BaseViewType
+import ru.vdv.myapp.myreadersdiary.ui.common.viewholders.TimeSeparatorViewHolder
+import ru.vdv.myapp.myreadersdiary.ui.common.viewholders.UnknownTypeViewHolder
 
 class MainEventsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     var items: List<ToMainList> = listOf()
