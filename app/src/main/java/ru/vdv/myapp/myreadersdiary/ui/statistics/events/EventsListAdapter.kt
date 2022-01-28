@@ -31,7 +31,7 @@ class EventsListAdapter : RecyclerView.Adapter<EventsListViewHolder>() {
                 + " / " + " ${item.baseObject.title}").also {
             holder.eventBody.text = it
         }
-        imageLoader.loadBookCover(item.baseObject.bookCover, holder.coverBook)
+//        imageLoader.loadBookCover(item.baseObject.bookCover, holder.coverBook)
     }
 
     override fun onViewAttachedToWindow(holder: EventsListViewHolder) {
