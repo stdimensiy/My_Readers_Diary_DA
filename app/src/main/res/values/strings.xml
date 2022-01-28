@@ -113,5 +113,9 @@
     <string name="tv_unknown_type_title_default_text">ГГГГ / ДД / ММ - элемент ID такойто</string>
     <string name="tv_unknown_type_name_default_text">Неизвестный тип элемента списка</string>
     <string name="tv_unknown_type_body_default_text">Получен не поддерживаемы данным списком тип элемента</string>
+    <string name="creator_separator_title_default_text">Добавлено мной / кемто</string>
+    <string name="author_separator_full_name_default_text">Фамилия Имя отчество (автора)</string>
+    <string name="author_separator_letter_default_text">A</string>
+    <string name="group_separator_title_default_text">Наименование группы</string>
     <!-- end process reading fragment area-->
 </resources>
