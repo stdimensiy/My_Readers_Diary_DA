@@ -4,6 +4,7 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 import ru.vdv.myapp.myreadersdiary.ui.common.interfaces.ToMainList
+import ru.vdv.myapp.myreadersdiary.ui.common.interfaces.ToStatList
 import java.util.*
 
 /**

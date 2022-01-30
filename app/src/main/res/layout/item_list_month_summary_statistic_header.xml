@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mcv_group_separator"
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    android:layout_marginStart="4dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginEnd="4dp"
+    android:checkable="false"
+    android:clickable="false"
+    android:focusable="true"
+    android:padding="0dp"
+    app:cardElevation="4dp"
+    app:cardPreventCornerOverlap="false"
+    app:contentPadding="0dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:rippleColor="#837A33F8"
+    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MaterialCardView.Header">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="0dp">
+
+        <TextView
+            android:id="@+id/tv_header_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="@string/tv_header_title_default_text"
+            android:textSize="14sp"
+            android:textStyle="bold|italic"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_period"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/tv_period_default_text"
+            android:textSize="12sp"
+            android:textStyle="bold|italic"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_header_title" />
+
+        <View
+            android:id="@+id/horizontal_line_view"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_margin="8dp"
+            android:background="#7b7b7b"
+            android:paddingStart="8dp"
+            android:paddingEnd="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_period"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tv_period"
+            app:layout_constraintTop_toTopOf="@+id/tv_period" />
+
+        <View
+            android:id="@+id/vertical_line_view"
+            android:layout_width="1dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="#7b7b7b"
+            app:layout_constraintStart_toStartOf="@+id/tv_period"
+            app:layout_constraintTop_toBottomOf="@+id/tv_period" />
+
+        <TextView
+            android:id="@+id/tv_count_DACoin_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_count_DACoin_title_text"
+            android:textSize="12sp"
+            android:textStyle="bold|italic"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_DACoin_count"
+            app:layout_constraintEnd_toStartOf="@id/iv_DACoin_icon"
+            app:layout_constraintTop_toTopOf="@+id/tv_DACoin_count" />
+
+        <ImageView
+            android:id="@+id/iv_DACoin_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:contentDescription="@string/iv_DACoin_icon_contentDescription"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_DACoin_count"
+            app:layout_constraintEnd_toStartOf="@id/tv_DACoin_count"
+            app:layout_constraintTop_toTopOf="@+id/tv_DACoin_count"
+            app:srcCompat="@drawable/ic_star_checkable_24" />
+
+        <TextView
+            android:id="@+id/tv_DACoin_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="@string/tv_DACoin_count_default_text"
+            android:textColor="#3F51B5"
+            android:textSize="14sp"
+            android:textStyle="bold|italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_period" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

@@ -25,16 +25,10 @@
     </fragment>
 
     <fragment
-        android:id="@+id/nav_temporary_fragment"
-        android:name="ru.vdv.myapp.myreadersdiary.ui.temp.TempFragment"
-        android:label="@string/menu_temporary_fragment"
-        tools:layout="@layout/fragment_temporary_fragment" />
-
-    <fragment
         android:id="@+id/nav_summary_statistics"
         android:name="ru.vdv.myapp.myreadersdiary.ui.statistics.SummaryStatisticsFragment"
         android:label="@string/menu_summary_statistics"
-        tools:layout="@layout/fragment_summary_statistics">
+        tools:layout="@layout/fragment_statistics">
         <action
             android:id="@+id/action_nav_statistics_to_eventsFragment"
             app:destination="@id/nav_events_list_fragment" />
@@ -63,9 +57,6 @@
         <action
             android:id="@+id/action_nav_main_to_nav_home"
             app:destination="@id/nav_list_of_books" />
-        <action
-            android:id="@+id/action_nav_main_to_nav_reading_process"
-            app:destination="@id/nav_temporary_fragment" />
         <action
             android:id="@+id/action_nav_main_to_settingsFragment"
             app:destination="@id/nav_settings_fragment" />
