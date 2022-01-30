@@ -1,11 +1,21 @@
 package ru.vdv.myapp.myreadersdiary.ui.statistics
 
+import android.view.LayoutInflater
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ru.vdv.myapp.myreadersdiary.databinding.ActivityGraphVerticalSimpleItemBinding
 
-class ActivityStatisticsGraphViewHolder(val binding: ActivityGraphVerticalSimpleItemBinding) :
+class ActivityStatisticsGraphViewHolder(
+    li: LayoutInflater,
+    parent: ViewGroup,
+    val binding: ActivityGraphVerticalSimpleItemBinding = ActivityGraphVerticalSimpleItemBinding.inflate(
+        li,
+        parent,
+        false
+    )
+) :
     RecyclerView.ViewHolder(binding.root) {
     var ivMonday: ImageView = binding.ivMon
     var ivTuesday: ImageView = binding.ivTue
