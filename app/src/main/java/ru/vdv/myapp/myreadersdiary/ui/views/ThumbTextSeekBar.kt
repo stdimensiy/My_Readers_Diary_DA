@@ -46,23 +46,23 @@ class ThumbTextSeekBar @JvmOverloads constructor(context: Context, attrs: Attrib
     }
 
     fun setProgress(progress: Int) {
-        if (progress == seekBar!!.progress && progress == 0) {
-            seekBar!!.progress = 1
-            seekBar!!.progress = 0
+        if (progress == seekBar?.progress && progress == 0) {
+            seekBar?.progress = 1
+            seekBar?.progress = 0
         } else {
-            seekBar!!.progress = progress
+            seekBar?.progress = progress
         }
     }
 
     private fun setThumbText(text: String?) {
-        tvThumb!!.text = text
+        tvThumb?.text = text
     }
 
     private fun showText() {
-        tvThumb!!.visibility = VISIBLE
+        tvThumb?.visibility = VISIBLE
     }
 
     private fun hideText() {
-        tvThumb!!.visibility = INVISIBLE
+        tvThumb?.visibility = INVISIBLE
     }
 }

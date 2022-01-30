@@ -2,8 +2,9 @@ package ru.vdv.myapp.myreadersdiary.ui.books.readingprocess.dialogs
 
 import android.content.Context
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
+import android.os.Handler
+import android.os.Looper
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
@@ -11,11 +12,14 @@ import android.widget.SeekBar
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.BlendModeColorFilterCompat
 import androidx.core.graphics.BlendModeCompat
+import androidx.core.os.HandlerCompat
 import androidx.core.os.bundleOf
 import ru.vdv.myapp.myreadersdiary.R
 import ru.vdv.myapp.myreadersdiary.databinding.DialogEnterBookmarkBinding
 import ru.vdv.myapp.myreadersdiary.ui.common.BaseDialogFragment
 import ru.vdv.myapp.myreadersdiary.ui.common.InputFilters
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
 
 /**
  * Диалог ввода номера текущей страницы
@@ -26,11 +30,16 @@ class EnterCurrentPageDialog : BaseDialogFragment<DialogEnterBookmarkBinding>() 
     private var onBackToReadingListener: (() -> Unit)? = null
     private val currentPage: Long by lazy { arguments?.getLong(CURRENT_PAGE_BUNDLE_KEY) ?: DEFAULT_CURRENT_PAGE_VALUE }
     private val pagesCount: Long by lazy { arguments?.getLong(PAGES_COUNT_BUNDLE_KEY) ?: DEFAULT_PAGES_COUNT_VALUE }
+    private var debounceExecutor: ExecutorService? = null
+    private val mainThreadHandler: Handler by lazy { HandlerCompat.createAsync(Looper.getMainLooper()) }
 
     private val onSeekBarChangeListener: SeekBar.OnSeekBarChangeListener by lazy {
         object : SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-                binding.editTextInputLayoutEnterBookmark.setText(progress.toString())
+            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) = with(binding) {
+                editTextInputLayoutEnterBookmark.apply {
+                    setText(progress.toString())
+                    editTextInputLayoutEnterBookmark.setSelection(editTextInputLayoutEnterBookmark.length())
+                }
                 val seekBarColor: Int = when {
                     progress < currentPage -> ResourcesCompat.getColor(resources, R.color.red, null)
                     progress > currentPage -> ResourcesCompat.getColor(resources, R.color.green, null)
@@ -44,19 +53,14 @@ class EnterCurrentPageDialog : BaseDialogFragment<DialogEnterBookmarkBinding>() 
         }
     }
 
-    private val textWatcher: TextWatcher by lazy {
-        object : TextWatcher {
-            override fun onTextChanged(charSequence: CharSequence, start: Int, before: Int, count: Int) = with(binding) {
-                editTextInputLayoutEnterBookmark.setSelection(editTextInputLayoutEnterBookmark.length())
-                /* Обновление SeekBar при ручном изменении текста пока не реализовано.
-                * т.к. может произойти зацикливание (при изменении SeekBar также меняется значение в EditText) и зависание приложения.
-                * При использовании корутин или Rx можно было бы воспользоваться debounce и т.п.
-                */
-            }
+    override fun onStart() {
+        super.onStart()
+        debounceExecutor ?: startDebounceJob()
+    }
 
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-            override fun afterTextChanged(p0: Editable?) {}
-        }
+    override fun onStop() {
+        stopDebounceJob()
+        super.onStop()
     }
 
     /** Установка листенера установки текущей страницы */
@@ -96,7 +100,6 @@ class EnterCurrentPageDialog : BaseDialogFragment<DialogEnterBookmarkBinding>() 
         dialogSeekBar.setMaxValue(pagesCount.toInt())
         dialogSeekBar.setProgress(currentPage.toInt())
         dialogSeekBar.setOnSeekBarChangeListener(onSeekBarChangeListener)
-        editTextInputLayoutEnterBookmark.addTextChangedListener(textWatcher)
     }
 
     private fun validateCurrentPage() = with(binding) {
@@ -140,11 +143,42 @@ class EnterCurrentPageDialog : BaseDialogFragment<DialogEnterBookmarkBinding>() 
         inputMethodManager.hideSoftInputFromWindow(binding.editTextInputLayoutEnterBookmark.windowToken, 0)
     }
 
+    private fun startDebounceJob() {
+        debounceExecutor = Executors.newSingleThreadExecutor()
+        debounceExecutor?.let { executor ->
+            executor.execute {
+                try {
+                    while (!executor.isShutdown) {
+                        Thread.sleep(DEBOUNCE_DELAY_MS)
+                        if (context != null) {
+                            mainThreadHandler.post {
+                                binding.dialogSeekBar.setProgress(getNewCurrentPage() ?: DEFAULT_CURRENT_PAGE_VALUE.toInt())
+                                if (getNewCurrentPage() ?: DEFAULT_CURRENT_PAGE_VALUE.toInt() > pagesCount) {
+                                    binding.editTextInputLayoutEnterBookmark.setText(pagesCount.toString())
+                                }
+                            }
+                        }
+                    }
+                } catch (e: Exception) {
+                    Log.e(TAG, e.message.orEmpty())
+                    e.printStackTrace()
+                }
+            }
+        }
+    }
+
+    private fun stopDebounceJob() {
+        debounceExecutor?.shutdown()
+        debounceExecutor = null
+    }
+
     companion object {
         private const val PAGES_COUNT_BUNDLE_KEY = "pagesCount"
         private const val CURRENT_PAGE_BUNDLE_KEY = "currentPage"
         private const val DEFAULT_PAGES_COUNT_VALUE = 1L
         private const val DEFAULT_CURRENT_PAGE_VALUE = 0L
+        private const val DEBOUNCE_DELAY_MS = 1000L
+        private const val TAG = "EnterCurrentPageDialog"
 
         fun newInstance(
             pagesCount: Long,
