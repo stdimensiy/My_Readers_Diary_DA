@@ -1,12 +1,20 @@
 package ru.vdv.myapp.myreadersdiary.ui.books.bookdetails
 
-import android.view.View
-import android.widget.ImageView
+import android.view.LayoutInflater
+import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import ru.vdv.myapp.myreadersdiary.R
+import ru.vdv.myapp.myreadersdiary.databinding.ItemListEventOfBookBinding
 
-class BookEventListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    var titleEvent: TextView = itemView.findViewById(R.id.textView_event_title)
-    var fixDataEvent: TextView = itemView.findViewById(R.id.textView_fix_data_event)
+class BookEventListViewHolder(
+    li: LayoutInflater,
+    parent: ViewGroup,
+    val binding: ItemListEventOfBookBinding = ItemListEventOfBookBinding.inflate(
+        li,
+        parent,
+        false
+    )
+) : RecyclerView.ViewHolder(binding.root) {
+    var titleEvent: TextView = binding.tvEventTitle
+    var fixDataEvent: TextView = binding.tvFixDataEvent
 }

@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         bottomAppBar.setNavigationOnClickListener {
             //для простоты это действие просто возвращает пользователя на главный экран.
             //из фрагмента любго уровня вложенности (аналог того сайта с функцией "домой")
-            navController.navigate(R.id.nav_new_main_fragment)
+            navController.navigate(R.id.nav_main)
         }
 
         bottomAppBar.setOnMenuItemClickListener { menuItem ->

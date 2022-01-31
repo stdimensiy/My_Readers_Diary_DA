@@ -12,17 +12,20 @@ import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import ru.vdv.myapp.myreadersdiary.R
-import ru.vdv.myapp.myreadersdiary.databinding.FragmentSummaryStatisticsBinding
+import ru.vdv.myapp.myreadersdiary.databinding.FragmentStatisticsBinding
 import ru.vdv.myapp.myreadersdiary.ui.common.BaseFragment
+import ru.vdv.myapp.myreadersdiary.ui.common.interfaces.OnViewReady
 
-class SummaryStatisticsFragment : BaseFragment<FragmentSummaryStatisticsBinding>() {
-    private lateinit var adapter: ActivityStatisticsGraphAdapter
+class SummaryStatisticsFragment : BaseFragment<FragmentStatisticsBinding>() {
+    private lateinit var adapter: SummaryStatisticAdapter
+    private lateinit var eventGraphAdapter: ActivityStatisticsGraphAdapter
     private lateinit var viewModel: SummaryStatisticsViewModel
     private lateinit var fab: FloatingActionButton
-    private val avd = { iconRes: Int -> AppCompatResources.getDrawable(
-        requireContext(),
-        iconRes
-    ) as AnimatedVectorDrawable
+    private val avd = { iconRes: Int ->
+        AppCompatResources.getDrawable(
+            requireContext(),
+            iconRes
+        ) as AnimatedVectorDrawable
     }
 
     override fun onCreateView(
@@ -30,13 +33,12 @@ class SummaryStatisticsFragment : BaseFragment<FragmentSummaryStatisticsBinding>
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        adapter = ActivityStatisticsGraphAdapter()
-        viewModel =
-            ViewModelProvider(this)[SummaryStatisticsViewModel::class.java]
+        adapter = SummaryStatisticAdapter()
+        eventGraphAdapter = ActivityStatisticsGraphAdapter()
+        viewModel = ViewModelProvider(this)[SummaryStatisticsViewModel::class.java]
         viewModel.fetchCurrentUser(
             PreferenceManager.getDefaultSharedPreferences(context).getString(
-                getString(R.string.spref_key_login),
-                getString(R.string.spref_key_login_default)
+                getString(R.string.spref_key_login), getString(R.string.spref_key_login_default)
             )
         )
         return super.onCreateView(inflater, container, savedInstanceState)
@@ -44,24 +46,27 @@ class SummaryStatisticsFragment : BaseFragment<FragmentSummaryStatisticsBinding>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val statisticFragmentList = binding.list
+        statisticFragmentList.adapter = adapter
+        statisticFragmentList.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
-        viewModel.currentUser.observe(viewLifecycleOwner) {
-            it?.let {
-                setImageAvatar(it.avatarUrl)
-                setCustomBackgroundImage(it.backgroundUrl)
-                setFabStateReady(view)
+        adapter.setOnViewReadyListener(
+            object : OnViewReady {
+                override fun onViewReady() {
+                    val eventsGraph = adapter.eventGraph
+                    eventsGraph.adapter = eventGraphAdapter
+                    eventsGraph.layoutManager =
+                        LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                    viewModel.prepareEventList.observe(viewLifecycleOwner) {
+                        eventGraphAdapter.items = it
+                        eventGraphAdapter.notifyDataSetChanged()
+                        setFabStateReady(view)
+                        eventsGraph.scrollToPosition(adapter.itemCount - 1)
+                    }
+                }
             }
-        }
-
-        val eventsGraph = binding.rvEventsGraph
-        eventsGraph.adapter = adapter
-        eventsGraph.layoutManager =
-            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        viewModel.prepareEventList.observe(viewLifecycleOwner) {
-            adapter.items = it
-            adapter.notifyDataSetChanged()
-            eventsGraph.scrollToPosition(adapter.itemCount - 1)
-        }
+        )
     }
 
     override fun onStart() {
@@ -85,11 +90,11 @@ class SummaryStatisticsFragment : BaseFragment<FragmentSummaryStatisticsBinding>
         fab.setImageDrawable(icon)
         icon.start()
         fab.setOnClickListener {
-            view.findNavController().navigate(R.id.nav_new_main_fragment)
+            view.findNavController().navigate(R.id.nav_main)
         }
     }
 
-    private fun fetchData(){
+    private fun fetchData() {
         viewModel.fetchCurrentUser(
             PreferenceManager.getDefaultSharedPreferences(context).getString(
                 getString(R.string.spref_key_login),
@@ -97,14 +102,4 @@ class SummaryStatisticsFragment : BaseFragment<FragmentSummaryStatisticsBinding>
             )
         )
     }
-
-    private fun setImageAvatar(url: String): Unit =
-        with(binding) {
-            imageLoader.loadUserAvatar(url, ivUserAvatar)
-        }
-
-    private fun setCustomBackgroundImage(url: String): Unit =
-        with(binding) {
-            imageLoader.loadUserBackground(url, ivUserCustomBgImage)
-        }
 }

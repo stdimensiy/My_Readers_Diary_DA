@@ -3,7 +3,6 @@ package ru.vdv.myapp.myreadersdiary.ui.statistics
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import ru.vdv.myapp.myreadersdiary.databinding.ActivityGraphVerticalSimpleItemBinding
 import ru.vdv.myapp.myreadersdiary.domain.WeekEvent
 import ru.vdv.myapp.myreadersdiary.ui.common.mark
 
@@ -13,12 +12,7 @@ class ActivityStatisticsGraphAdapter : RecyclerView.Adapter<ActivityStatisticsGr
         parent: ViewGroup,
         viewType: Int
     ): ActivityStatisticsGraphViewHolder {
-        val binding = ActivityGraphVerticalSimpleItemBinding.inflate(
-            LayoutInflater.from(parent.context),
-            parent,
-            false
-        )
-        return ActivityStatisticsGraphViewHolder(binding)
+        return ActivityStatisticsGraphViewHolder(LayoutInflater.from(parent.context), parent)
     }
 
     override fun onBindViewHolder(holder: ActivityStatisticsGraphViewHolder, position: Int) {

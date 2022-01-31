@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.navigation.findNavController
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import ru.vdv.myapp.myreadersdiary.R
@@ -23,6 +24,12 @@ class BookDetailsFragment : BaseFragment<BookDetailsFragmentBinding>() {
     private lateinit var book: Book
     private lateinit var viewModel: BookDetailsViewModel
     private lateinit var fab: FloatingActionButton
+    private val avd = { iconRes: Int ->
+        AppCompatResources.getDrawable(
+            requireContext(),
+            iconRes
+        ) as AnimatedVectorDrawable
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,36 +61,28 @@ class BookDetailsFragment : BaseFragment<BookDetailsFragmentBinding>() {
         viewModel.prepareEventList.observe(viewLifecycleOwner) {
             adapter.items = it
             adapter.notifyDataSetChanged()
-            setupFab()
+            setupFabReadReady(view)
         }
-        setupFab2(view)
     }
 
-    private fun setupFab(){
-        Log.d("Моя проверка", "Сработал FAB 1")
-        fab = activity?.let {it.findViewById(R.id.fab)}!!
-        val avd = { iconRes: Int ->
-            AppCompatResources.getDrawable(
-                requireContext(),
-                iconRes
-            ) as AnimatedVectorDrawable
-        }
-        val icon = avd(R.drawable.ic_cached_to_read_black_24dp_adv)
+    override fun onStart() {
+        super.onStart()
+        fab = requireActivity().findViewById(R.id.fab)
+        setFabStateLoading()
+    }
+
+    private fun setFabStateLoading() {
+        val icon = avd(R.drawable.ic_cached_rotate_black_24dp_adv)
         fab.setImageDrawable(icon)
         icon.start()
+        fab.setOnClickListener {
+            //установка лиссенера на повторное извлечение даных
+            //временно, после отработки дизайна разметки реализовать
+        }
     }
 
-    private fun setupFab2(view: View){
-        // режим готовности к чтению
-        Log.d("Моя проверка", "Сработал FAB 2")
-        fab = activity?.let {it.findViewById(R.id.fab)}!!
-        val avd = { iconRes: Int ->
-            AppCompatResources.getDrawable(
-                requireContext(),
-                iconRes
-            ) as AnimatedVectorDrawable
-        }
-        val icon = avd(R.drawable.ic_cached_rotate_black_24dp_adv)
+    private fun setupFabReadReady(view: View) {
+        val icon = avd(R.drawable.ic_cached_to_read_black_24dp_adv)
         fab.setImageDrawable(icon)
         icon.start()
         fab.setOnClickListener {

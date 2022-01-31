@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?><!--<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mcv_book_in_progress"
+    android:layout_width="match_parent"
+    android:layout_height="36dp"
+    android:layout_marginStart="4dp"
+    android:layout_marginEnd="4dp"
+    android:checkable="false"
+    android:clickable="false"
+    android:focusable="true"
+    android:padding="4dp"
+    app:cardCornerRadius="0dp"
+    app:cardElevation="4dp"
+    app:contentPadding="0dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:rippleColor="#837A33F8">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="0dp">
+
+        <View
+            android:id="@+id/vertical_line_view"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:background="#7b7b7b"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_book_cover"
+            android:layout_width="21dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="16dp"
+            android:contentDescription="@string/ImageView_contentDescription_book_cover"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/vertical_line_view"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/book_plug" />
+
+        <TextView
+            android:id="@+id/tv_event_object"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text=""
+            android:textAlignment="textStart"
+            android:textSize="12sp"
+            android:textStyle="bold|italic"
+            app:layout_constraintStart_toEndOf="@+id/iv_book_cover"
+            app:layout_constraintTop_toTopOf="@+id/iv_book_cover"
+            tools:text="Погружение в паттерны проектирования" />
+
+        <TextView
+            android:id="@+id/tv_event_object_current_result_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="10sp"
+            app:layout_constraintStart_toStartOf="@+id/tv_event_object"
+            app:layout_constraintTop_toBottomOf="@id/tv_event_object"
+            tools:text="Прочтено 45 из 160 стр." />
+
+        <ProgressBar
+            android:id="@+id/pb_event_object_current_result"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="100dp"
+            android:layout_height="12dp"
+            android:layout_marginStart="8dp"
+            android:max="100"
+            android:progress="28"
+            android:progressTint="@color/color_primary_dark"
+            android:secondaryProgress="50"
+            android:secondaryProgressTint="@color/color_accent"
+            android:secondaryProgressTintMode="screen"
+            android:soundEffectsEnabled="false"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_event_object_current_result_title"
+            app:layout_constraintStart_toEndOf="@+id/tv_event_object_current_result_title"
+            app:layout_constraintTop_toTopOf="@+id/tv_event_object_current_result_title" />
+
+        <TextView
+            android:id="@+id/tv_event_object_current_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text=""
+            android:textColor="#3C57EA"
+            android:textSize="12sp"
+            android:textStyle="bold|italic"
+            app:layout_constraintBottom_toBottomOf="@+id/pb_event_object_current_result"
+            app:layout_constraintStart_toEndOf="@+id/pb_event_object_current_result"
+            app:layout_constraintTop_toTopOf="@+id/pb_event_object_current_result"
+            tools:text="99%" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

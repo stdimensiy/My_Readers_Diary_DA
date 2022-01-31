@@ -3,6 +3,7 @@ package ru.vdv.myapp.myreadersdiary.domain
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
+import ru.vdv.myapp.myreadersdiary.ui.common.interfaces.ToStatList
 
 /**
  * Класс **User** (DA) - это модель данных пользователя, получаемых от **[Dad Approves API](https://dadapproves.ru/)**
@@ -22,4 +23,4 @@ data class User(
     val avatarUrl: String,
     @SerializedName("wallpaper_url")
     val backgroundUrl: String
-) : Parcelable
+) : Parcelable, ToStatList

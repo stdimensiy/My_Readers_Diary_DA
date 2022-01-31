@@ -25,58 +25,62 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/imageView_book_cover"
+                android:id="@+id/iv_unknown_type_sign"
                 android:layout_width="80dp"
-                android:layout_height="120dp"
-                android:contentDescription="@string/ImageView_contentDescription_book_cover"
+                android:layout_height="80dp"
+                android:contentDescription="@string/iv_unknown_type_sign_content_description"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/book_plug" />
+                app:srcCompat="@drawable/ic_error" />
 
             <TextView
-                android:id="@+id/sender_text_view"
+                android:id="@+id/tv_unknown_type_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/roboto_thin"
                 android:maxLines="1"
-                android:text="2022 / 10 / 01 - прочитано 8 стр."
+                android:text="@string/tv_unknown_type_title_default_text"
                 android:textAppearance="?attr/textAppearanceBody2"
-                app:layout_constraintStart_toEndOf="@+id/imageView_book_cover"
+                android:textSize="11sp"
+                app:layout_constraintStart_toEndOf="@+id/iv_unknown_type_sign"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="2022 / 10 / 01 - прочитано 8 стр." />
+                tools:text="ГГГГ / ДД / ММ - элемент ID такойто" />
 
             <TextView
-                android:id="@+id/subject_text_view"
+                android:id="@+id/tv_unknown_type_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginEnd="16dp"
-                android:maxLines="1"
-                android:text="Наименование книги"
+                android:layout_marginTop="8dp"
+                android:maxLines="2"
+                android:text="@string/tv_unknown_type_name_default_text"
                 android:textAppearance="?attr/textAppearanceHeadline5"
-                app:layout_constraintStart_toEndOf="@+id/imageView_book_cover"
-                app:layout_constraintTop_toBottomOf="@+id/sender_text_view"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/tv_unknown_type_body"
+                app:layout_constraintStart_toEndOf="@+id/iv_unknown_type_sign"
+                app:layout_constraintTop_toBottomOf="@+id/tv_unknown_type_title"
                 app:layout_goneMarginEnd="16dp"
-                tools:text="Наименование книги" />
+                tools:text="Неизвестный тип элемента списка" />
 
             <TextView
-                android:id="@+id/body_preview_text_view"
+                android:id="@+id/tv_unknown_type_body"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:maxLines="2"
-                android:text="Автор Имя Отчество:  + описание книги, небольшое сколько прочиено, сколько осталось"
+                android:text="@string/tv_unknown_type_body_default_text"
                 android:textAppearance="?attr/textAppearanceBody1"
+                android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageView_book_cover"
-                app:layout_constraintTop_toBottomOf="@+id/subject_text_view"
-                tools:text="Автор Имя Отчество:  + описание книги, небольшое сколько прочиено, сколько осталось" />
+                app:layout_constraintStart_toEndOf="@+id/iv_unknown_type_sign"
+                app:layout_constraintTop_toBottomOf="@+id/tv_unknown_type_name"
+                tools:text="Получен не поддерживаемы данным списком тип элемента" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
