@@ -83,6 +83,8 @@ class ProcessReadingBookViewModel(
                 )?.let { processReadingBookUiModel ->
                     postNewSuccessState(processReadingBookUiModel)
                 }
+            } else {
+                postScreenState(ScreenUiState.Finish())
             }
         }
     }
@@ -124,7 +126,11 @@ class ProcessReadingBookViewModel(
     /** Обработка нажатия кнопки возврата к чтению */
     fun onBackToReadingClicked() {
         uiModel?.let { uiModelNotNull ->
-            performPause(uiModelNotNull)
+            when (uiModelNotNull.startOrPauseButtonMode) {
+                StartOrPauseButtonMode.START -> dismissDialog(uiModelNotNull)
+                StartOrPauseButtonMode.PAUSE -> performResumeReading(uiModelNotNull)
+                StartOrPauseButtonMode.RESUME -> performResumePause(uiModelNotNull)
+            }
         }
     }
 
@@ -212,6 +218,22 @@ class ProcessReadingBookViewModel(
         }
     }
 
+    /** Вызывается при закритии диалога ввода текущего номера страницы, если он был вызван в режиме чтения */
+    private fun performResumeReading(uiModelNotNull: ProcessReadingBookUiModel) {
+        activeStopwatch?.start()
+        uiModelNotNull.copy(
+            dialog = Dialog.NONE,
+            startOrPauseButtonMode = StartOrPauseButtonMode.PAUSE,
+            startOrPauseButtonTextAndIcon = Pair(
+                R.drawable.ic_pause_reading,
+                R.string.button_process_reading_pause_text
+            ),
+            isGroupProcessReadingRelaxVisible = false
+        ).let { processReadingBookUiModel ->
+            postNewSuccessState(processReadingBookUiModel)
+        }
+    }
+
     /** Нажатие на кнопку "Сделать паузу" */
     private fun performPause(uiModelNotNull: ProcessReadingBookUiModel) {
         activeStopwatch?.setMode(StopwatchMode.PASSED_TIME)
@@ -221,6 +243,22 @@ class ProcessReadingBookViewModel(
         relaxStopwatch?.setAlarmInterval(MAX_RELAX_TIME_MS)
         uiModelNotNull.copy(
             activeStopwatchMode = StopwatchMode.PASSED_TIME,
+            dialog = Dialog.NONE,
+            startOrPauseButtonMode = StartOrPauseButtonMode.RESUME,
+            startOrPauseButtonTextAndIcon = Pair(
+                R.drawable.ic_start_reading,
+                R.string.button_process_reading_resume_text
+            ),
+            isGroupProcessReadingRelaxVisible = true
+        ).let { processReadingBookUiModel ->
+            postNewSuccessState(processReadingBookUiModel)
+        }
+    }
+
+    /** Вызывается при закритии диалога ввода текущего номера страницы, если он был вызван в режиме паузы */
+    private fun performResumePause(uiModelNotNull: ProcessReadingBookUiModel) {
+        relaxStopwatch?.start()
+        uiModelNotNull.copy(
             dialog = Dialog.NONE,
             startOrPauseButtonMode = StartOrPauseButtonMode.RESUME,
             startOrPauseButtonTextAndIcon = Pair(
@@ -245,6 +283,15 @@ class ProcessReadingBookViewModel(
                 R.string.button_process_reading_pause_text
             ),
             isGroupProcessReadingRelaxVisible = false
+        ).let { processReadingBookUiModel ->
+            postNewSuccessState(processReadingBookUiModel)
+        }
+    }
+
+    /** Убрать из UI-стейта диалоговое окно */
+    private fun dismissDialog(uiModelNotNull: ProcessReadingBookUiModel) {
+        uiModelNotNull.copy(
+            dialog = Dialog.NONE,
         ).let { processReadingBookUiModel ->
             postNewSuccessState(processReadingBookUiModel)
         }

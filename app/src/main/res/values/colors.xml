@@ -17,4 +17,6 @@
     <color name="color_accent">#F8AA34</color>
     <color name="window_background">#EEF0F2</color>
     <color name="email_thread_background">#FEFEFE</color>
+    <color name="red">#EA0505</color>
+    <color name="green">#027763</color>
 </resources>

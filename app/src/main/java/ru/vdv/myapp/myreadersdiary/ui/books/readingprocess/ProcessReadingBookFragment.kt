@@ -127,6 +127,7 @@ class ProcessReadingBookFragment : BaseFragment<ProcessReadingBookFragmentBindin
             is ScreenUiState.Error -> renderErrorState(screenUiState.error)
             is ScreenUiState.Loading -> renderLoadingState()
             is ScreenUiState.Success -> renderSuccessState(screenUiState.data)
+            is ScreenUiState.Finish -> navigateUpWithStopService()
         }
     }
 
@@ -174,7 +175,7 @@ class ProcessReadingBookFragment : BaseFragment<ProcessReadingBookFragmentBindin
                         currentPage = data.currentPage
                     )
         enterCurrentPageDialog.setOnCurrentPageEnteredListener(viewModel::onCurrentPageEntered)
-        enterCurrentPageDialog.setOnBackToReadingListener {viewModel.onBackToReadingClicked()}
+        enterCurrentPageDialog.setOnBackToReadingListener { viewModel.onBackToReadingClicked() }
         if (enterCurrentPageDialog.dialog == null) enterCurrentPageDialog.show(
             childFragmentManager,
             CURRENT_PAGE_DIALOG_TAG

@@ -71,7 +71,11 @@ class StopwatchImpl(private val stopwatchStateHolder: StopwatchStateHolder) : St
             executor.execute {
                 try {
                     while (!executor.isShutdown) {
+                        //"Первичный" вызов этого метода до паузы нужен для более "гладкого" отображения таймера:
+                        mainThreadHandler.post { callback?.invoke(getFormattedTimeForRender()) }
                         Thread.sleep(DEFAULT_DELAY_MS)
+                        //"Повторный" вызов этого метода после паузы по сути является workaround'ом.
+                        // Т.к. в случае остановки джоба надо, чтоб было также возвращено финальное значение таймера:
                         mainThreadHandler.post { callback?.invoke(getFormattedTimeForRender()) }
                     }
                 } catch (e: Exception) {
@@ -99,8 +103,9 @@ class StopwatchImpl(private val stopwatchStateHolder: StopwatchStateHolder) : St
     }
 
     private fun clearValue() {
-        callback?.invoke(STOPWATCH_INITIAL_VALUE)
-
+        mainThreadHandler.post {
+            callback?.invoke(STOPWATCH_INITIAL_VALUE)
+        }
     }
 
     companion object {
