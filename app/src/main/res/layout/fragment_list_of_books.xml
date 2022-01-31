@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="4dp"
     tools:context=".ui.books.ListOfBooksFragment">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -12,6 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="#D7DDFB"
+        android:clipToPadding="false"
+        android:paddingTop="2dp"
+        android:paddingBottom="88dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

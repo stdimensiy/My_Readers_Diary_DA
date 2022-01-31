@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mcv_user_card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="4dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginEnd="4dp"
+    android:background="#ffffff"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="4dp"
+    app:contentPadding="0dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:rippleColor="#837A33F8">
+
+    <!-- Media -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- Фон медиачасти карточки-->
+        <ImageView
+            android:id="@+id/iv_user_custom_bg"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:alpha="0.3"
+            android:contentDescription="@string/iv_user_custom_bg_contentDescription"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/bg1_01_2"
+            tools:ignore="MissingConstraints" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:orientation="vertical"
+        android:padding="16dp"
+        tools:ignore="MissingClass">
+
+        <ImageView
+            android:id="@+id/iv_user_avatar"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center|center_horizontal"
+            android:layout_margin="0dp"
+            android:background="@drawable/round_border_style"
+            android:contentDescription="@string/iv_userListItem_contentDescription"
+            android:cropToPadding="false"
+            android:padding="4dp"
+            android:src="@drawable/ic_baseline_account_circle_24" />
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

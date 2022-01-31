@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <ru.vdv.myapp.myreadersdiary.ui.views.ThumbTextView
+        android:id="@+id/tvThumb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="4dp"
+        android:visibility="invisible" />
+
+    <SeekBar
+        android:id="@+id/sbProgress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:minHeight="20dp" />
+
+</merge>

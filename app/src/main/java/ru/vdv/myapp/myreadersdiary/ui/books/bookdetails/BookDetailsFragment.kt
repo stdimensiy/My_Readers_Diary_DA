@@ -1,13 +1,17 @@
 package ru.vdv.myapp.myreadersdiary.ui.books.bookdetails
 
+import android.graphics.drawable.AnimatedVectorDrawable
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.navigation.findNavController
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import ru.vdv.myapp.myreadersdiary.R
 import ru.vdv.myapp.myreadersdiary.databinding.BookDetailsFragmentBinding
 import ru.vdv.myapp.myreadersdiary.domain.Book
@@ -19,6 +23,13 @@ class BookDetailsFragment : BaseFragment<BookDetailsFragmentBinding>() {
     private lateinit var adapter: BookEventListAdapter
     private lateinit var book: Book
     private lateinit var viewModel: BookDetailsViewModel
+    private lateinit var fab: FloatingActionButton
+    private val avd = { iconRes: Int ->
+        AppCompatResources.getDrawable(
+            requireContext(),
+            iconRes
+        ) as AnimatedVectorDrawable
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,6 +61,35 @@ class BookDetailsFragment : BaseFragment<BookDetailsFragmentBinding>() {
         viewModel.prepareEventList.observe(viewLifecycleOwner) {
             adapter.items = it
             adapter.notifyDataSetChanged()
+            setupFabReadReady(view)
         }
     }
+
+    override fun onStart() {
+        super.onStart()
+        fab = requireActivity().findViewById(R.id.fab)
+        setFabStateLoading()
+    }
+
+    private fun setFabStateLoading() {
+        val icon = avd(R.drawable.ic_cached_rotate_black_24dp_adv)
+        fab.setImageDrawable(icon)
+        icon.start()
+        fab.setOnClickListener {
+            //установка лиссенера на повторное извлечение даных
+            //временно, после отработки дизайна разметки реализовать
+        }
+    }
+
+    private fun setupFabReadReady(view: View) {
+        val icon = avd(R.drawable.ic_cached_to_read_black_24dp_adv)
+        fab.setImageDrawable(icon)
+        icon.start()
+        fab.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putParcelable(BaseConstants.MY_BOOK_BUNDLE_KEY, book)
+            view.findNavController().navigate(R.id.nav_process_reading_book_fragment, bundle)
+        }
+    }
+
 }

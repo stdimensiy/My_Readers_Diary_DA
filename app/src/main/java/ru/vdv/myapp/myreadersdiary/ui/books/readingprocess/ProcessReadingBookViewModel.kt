@@ -1,15 +1,16 @@
 package ru.vdv.myapp.myreadersdiary.ui.books.readingprocess
 
+import androidx.annotation.StringRes
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import ru.vdv.myapp.myreadersdiary.R
 import ru.vdv.myapp.myreadersdiary.domain.Book
 import ru.vdv.myapp.myreadersdiary.model.stopwatch.Stopwatch
-import ru.vdv.myapp.myreadersdiary.ui.common.BaseViewModel
-import ru.vdv.myapp.myreadersdiary.ui.common.Dialog
-import ru.vdv.myapp.myreadersdiary.ui.common.ScreenUiState
-import ru.vdv.myapp.myreadersdiary.ui.common.StartOrPauseButtonMode
+import ru.vdv.myapp.myreadersdiary.services.stopwatch.UiModelServiceHolder
+import ru.vdv.myapp.myreadersdiary.ui.common.*
+import java.text.SimpleDateFormat
+import java.util.*
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -22,6 +23,19 @@ class ProcessReadingBookViewModel(
 
     private var activeStopwatch: Stopwatch? = null
     private var relaxStopwatch: Stopwatch? = null
+    private var uiModelServiceHolder: UiModelServiceHolder? = null
+    private var uiModel: ProcessReadingBookUiModel? = null
+        set(value) {
+            field = value
+            value?.let { uiModelServiceHolder?.invoke(value) }
+        }
+
+    val liveData: LiveData<ScreenUiState<ProcessReadingBookUiModel>>
+        get() = _liveData
+
+    init {
+        initScreenState()
+    }
 
     fun setActiveStopwatch(activeStopwatch: Stopwatch) {
         this.activeStopwatch = activeStopwatch
@@ -33,13 +47,11 @@ class ProcessReadingBookViewModel(
         this.relaxStopwatch?.observe { timer -> postRelaxStopwatchData(timer) }
     }
 
-    val liveData: LiveData<ScreenUiState<ProcessReadingBookUiModel>>
-        get() = _liveData
-
-    private var uiModel: ProcessReadingBookUiModel? = null
-
-    init {
-        initScreenState()
+    fun setUiModelServiceHolder(uiModelServiceHolder: UiModelServiceHolder) {
+        this.uiModelServiceHolder = uiModelServiceHolder
+        uiModelServiceHolder.invoke(null)?.let { uiModel ->
+            postNewSuccessState(uiModel)
+        }
     }
 
     fun saveCurrentState() {
@@ -57,15 +69,43 @@ class ProcessReadingBookViewModel(
         }
     }
 
-    /** ОБработка нажатия на кнопку "Стоп" */
-    fun onButtonProcessReadingStopClicked() {
-        activeStopwatch?.pause()
-        relaxStopwatch?.pause()
+    /** Обработка нажатия на кнопку "Стоп"
+     * Если таймер запушен не был - возвращает false
+     * Иначе - true
+     */
+    fun onButtonProcessReadingStopClicked(): Boolean {
+        return (uiModel != null && uiModel?.startOrPauseButtonMode != StartOrPauseButtonMode.START).also {
+            if (it) {
+                activeStopwatch?.pause()
+                relaxStopwatch?.pause()
+                uiModel?.copy(
+                    dialog = Dialog.ENTER_CURRENT_PAGE
+                )?.let { processReadingBookUiModel ->
+                    postNewSuccessState(processReadingBookUiModel)
+                }
+            } else {
+                postScreenState(ScreenUiState.Finish())
+            }
+        }
+    }
+
+    /**
+     * Обрабоока нажатия на кнопку "Изменить режим таймера чтения"
+     * Режим таймера можно менять только в при запущенном таймере активности
+     */
+    fun onButtonChangeActiveStopwatchModeClicked() {
         uiModel?.let { uiModelNotNull ->
-            uiModelNotNull.copy(
-                dialog = Dialog.ENTER_CURRENT_PAGE
-            ).let { processReadingBookUiModel ->
-                postNewSuccessState(processReadingBookUiModel)
+            if (uiModelNotNull.startOrPauseButtonMode == StartOrPauseButtonMode.PAUSE) {
+                val newActiveStopwatchMode = when (uiModelNotNull.activeStopwatchMode) {
+                    StopwatchMode.PASSED_TIME -> StopwatchMode.LEFT_TIME
+                    StopwatchMode.LEFT_TIME -> StopwatchMode.PASSED_TIME
+                }
+                activeStopwatch?.setMode(newActiveStopwatchMode)
+                uiModelNotNull.copy(
+                    activeStopwatchMode = newActiveStopwatchMode
+                ).let { processReadingBookUiModel ->
+                    postNewSuccessState(processReadingBookUiModel)
+                }
             }
         }
     }
@@ -83,8 +123,20 @@ class ProcessReadingBookViewModel(
         readingResultsAnalysis()
     }
 
+    /** Обработка нажатия кнопки возврата к чтению */
+    fun onBackToReadingClicked() {
+        uiModel?.let { uiModelNotNull ->
+            when (uiModelNotNull.startOrPauseButtonMode) {
+                StartOrPauseButtonMode.START -> dismissDialog(uiModelNotNull)
+                StartOrPauseButtonMode.PAUSE -> performResumeReading(uiModelNotNull)
+                StartOrPauseButtonMode.RESUME -> performResumePause(uiModelNotNull)
+            }
+        }
+    }
+
     /** Формируем начальное состояние экрана */
     private fun initScreenState() {
+        val currentTime = Calendar.getInstance().time
         val screenUiModel: ScreenUiState<ProcessReadingBookUiModel> =
             if (book == null) ScreenUiState.Error(Throwable(NO_DATA_ERROR))
             else {
@@ -92,12 +144,11 @@ class ProcessReadingBookViewModel(
                     (state.get(UI_MODEL_KEY)
                         ?: ProcessReadingBookUiModel(
                             title = title,
-                            authors = "$producerName $producerSurname $producerPatronymic",
-                            coverUrl = bookCover,
                             pagesCount = pageCount,
                             wordsCount = wordsCount,
                             densityWordsPerPage = densityWordsPerPage,
                             currentPage = currentPage,
+                            currentPageFormattedDate = SimpleDateFormat(DATE_FORMAT, Locale.getDefault()).format(currentTime),  //это значение вероятно будет приходить с бэка
                             newCurrentPage = currentPage,
                             startOrPauseButtonMode = StartOrPauseButtonMode.START,
                             startOrPauseButtonTextAndIcon = Pair(
@@ -108,7 +159,9 @@ class ProcessReadingBookViewModel(
                             activeStopwatchElapsingTime = STOPWATCH_INITIAL_VALUE_MS,
                             relaxStopwatchValue = STOPWATCH_INITIAL_VALUE,
                             isGroupProcessReadingRelaxVisible = false,
-                            dialog = Dialog.NONE
+                            dialog = Dialog.NONE,
+                            activeStopwatchMode = StopwatchMode.PASSED_TIME,
+                            processReadingTitleResId = R.string.text_view_process_reading_active_time_title
                         )).let { processReadingBookUiModel ->
                         uiModel = processReadingBookUiModel
                         ScreenUiState.Success(processReadingBookUiModel)
@@ -133,7 +186,8 @@ class ProcessReadingBookViewModel(
     private fun postActiveStopwatchData(timer: String) {
         uiModel?.copy(
             activeStopwatchValue = timer,
-            activeStopwatchElapsingTime = activeStopwatch?.getElapsedTime() ?: ZERO_TIME
+            activeStopwatchElapsingTime = activeStopwatch?.getElapsedTime() ?: STOPWATCH_INITIAL_VALUE_MS,
+            processReadingTitleResId = getNewProcessReadingTitleResId()
         )?.let { processReadingBookUiModel ->
             postNewSuccessState(processReadingBookUiModel)
         }
@@ -151,7 +205,24 @@ class ProcessReadingBookViewModel(
     /** Нажатие на кнопку "Начать чтение" */
     private fun performStart(uiModelNotNull: ProcessReadingBookUiModel) {
         activeStopwatch?.start()
+        activeStopwatch?.setAlarmInterval(MAX_ACTIVE_TIME_MS)
         uiModelNotNull.copy(
+            startOrPauseButtonMode = StartOrPauseButtonMode.PAUSE,
+            startOrPauseButtonTextAndIcon = Pair(
+                R.drawable.ic_pause_reading,
+                R.string.button_process_reading_pause_text
+            ),
+            isGroupProcessReadingRelaxVisible = false
+        ).let { processReadingBookUiModel ->
+            postNewSuccessState(processReadingBookUiModel)
+        }
+    }
+
+    /** Вызывается при закритии диалога ввода текущего номера страницы, если он был вызван в режиме чтения */
+    private fun performResumeReading(uiModelNotNull: ProcessReadingBookUiModel) {
+        activeStopwatch?.start()
+        uiModelNotNull.copy(
+            dialog = Dialog.NONE,
             startOrPauseButtonMode = StartOrPauseButtonMode.PAUSE,
             startOrPauseButtonTextAndIcon = Pair(
                 R.drawable.ic_pause_reading,
@@ -165,10 +236,30 @@ class ProcessReadingBookViewModel(
 
     /** Нажатие на кнопку "Сделать паузу" */
     private fun performPause(uiModelNotNull: ProcessReadingBookUiModel) {
+        activeStopwatch?.setMode(StopwatchMode.PASSED_TIME)
         activeStopwatch?.pause()
         relaxStopwatch?.stop()
         relaxStopwatch?.start()
+        relaxStopwatch?.setAlarmInterval(MAX_RELAX_TIME_MS)
         uiModelNotNull.copy(
+            activeStopwatchMode = StopwatchMode.PASSED_TIME,
+            dialog = Dialog.NONE,
+            startOrPauseButtonMode = StartOrPauseButtonMode.RESUME,
+            startOrPauseButtonTextAndIcon = Pair(
+                R.drawable.ic_start_reading,
+                R.string.button_process_reading_resume_text
+            ),
+            isGroupProcessReadingRelaxVisible = true
+        ).let { processReadingBookUiModel ->
+            postNewSuccessState(processReadingBookUiModel)
+        }
+    }
+
+    /** Вызывается при закритии диалога ввода текущего номера страницы, если он был вызван в режиме паузы */
+    private fun performResumePause(uiModelNotNull: ProcessReadingBookUiModel) {
+        relaxStopwatch?.start()
+        uiModelNotNull.copy(
+            dialog = Dialog.NONE,
             startOrPauseButtonMode = StartOrPauseButtonMode.RESUME,
             startOrPauseButtonTextAndIcon = Pair(
                 R.drawable.ic_start_reading,
@@ -184,6 +275,7 @@ class ProcessReadingBookViewModel(
     private fun performResume(uiModelNotNull: ProcessReadingBookUiModel) {
         relaxStopwatch?.pause()
         activeStopwatch?.start()
+        activeStopwatch?.setAlarmInterval(MAX_ACTIVE_TIME_MS)
         uiModelNotNull.copy(
             startOrPauseButtonMode = StartOrPauseButtonMode.PAUSE,
             startOrPauseButtonTextAndIcon = Pair(
@@ -191,6 +283,15 @@ class ProcessReadingBookViewModel(
                 R.string.button_process_reading_pause_text
             ),
             isGroupProcessReadingRelaxVisible = false
+        ).let { processReadingBookUiModel ->
+            postNewSuccessState(processReadingBookUiModel)
+        }
+    }
+
+    /** Убрать из UI-стейта диалоговое окно */
+    private fun dismissDialog(uiModelNotNull: ProcessReadingBookUiModel) {
+        uiModelNotNull.copy(
+            dialog = Dialog.NONE,
         ).let { processReadingBookUiModel ->
             postNewSuccessState(processReadingBookUiModel)
         }
@@ -212,13 +313,24 @@ class ProcessReadingBookViewModel(
         }
     }
 
+    @StringRes
+    private fun getNewProcessReadingTitleResId(): Int {
+        return when {
+            uiModel?.activeStopwatchMode == StopwatchMode.LEFT_TIME && activeStopwatch?.checkAlarm() == false -> R.string.text_view_process_reading_active_time_left_title
+            uiModel?.activeStopwatchMode == StopwatchMode.LEFT_TIME && activeStopwatch?.checkAlarm() == true -> R.string.text_view_process_reading_active_time_over_plan_title
+            else -> R.string.text_view_process_reading_active_time_title
+        }
+    }
+
     companion object {
         private const val UI_MODEL_KEY = "uiModel"
         private const val NO_DATA_ERROR = "Ошибка. Нет данных для отображения!"
-        private const val STOPWATCH_INITIAL_VALUE = "00:00:000"
+        private const val STOPWATCH_INITIAL_VALUE = "00:00:00"
         private const val STOPWATCH_INITIAL_VALUE_MS = 0L
         private const val READING_RESULTS_ANALYSIS_DELAY =
             2000L  //временная задержка, пока не появится метод на бэкенде
-        private const val ZERO_TIME = 0L
+        private const val DATE_FORMAT = "dd.MM.yyyy"
+        private const val MAX_RELAX_TIME_MS = 6000L //todo Увеличить до 10 минут
+        private const val MAX_ACTIVE_TIME_MS = 30000L  //todo Увеличть до 30 минут
     }
 }

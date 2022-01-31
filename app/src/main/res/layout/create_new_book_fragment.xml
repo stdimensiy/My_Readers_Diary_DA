@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/iv_new_book_cover"
-        android:layout_width="234dp"
-        android:layout_height="360dp"
+        android:layout_width="222dp"
+        android:layout_height="340dp"
         android:layout_margin="8dp"
         android:contentDescription="@string/iv_new_book_cover_contentDescription_text"
         android:src="@drawable/book_plug"
@@ -172,14 +172,4 @@
             android:inputType="number" />
 
     </com.google.android.material.textfield.TextInputLayout>
-
-    <Button
-        android:id="@+id/btn_save"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:text="@string/btn_save_new_book_text"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/til_new_book_total_words"
-        app:layout_constraintStart_toStartOf="@+id/til_new_book_number_of_pages"
-        app:layout_constraintTop_toBottomOf="@+id/til_new_book_number_of_words_per_page" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,7 @@
 package ru.vdv.myapp.myreadersdiary.model.repository
 
 import ru.vdv.myapp.myreadersdiary.domain.*
+import ru.vdv.myapp.myreadersdiary.ui.common.interfaces.ToMainList
 import java.util.*
 
 interface Repository {
@@ -25,7 +26,7 @@ interface Repository {
      * @return возвращает список объектов *[Event]*
      * @throws NullPointerException
      **/
-    fun getEventsList(num: Int, callBack: CallBack<List<Event>>)
+    fun getEventsList(num: Int, callBack: CallBack<List<ToMainList>>)
 
     /**
     ### "Получить список N последних событий относительно конктерной книги и пользователя этого приложения"

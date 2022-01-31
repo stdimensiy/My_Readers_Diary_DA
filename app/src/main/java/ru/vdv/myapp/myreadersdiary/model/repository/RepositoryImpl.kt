@@ -6,6 +6,8 @@ import retrofit2.Response
 import ru.vdv.myapp.myreadersdiary.domain.*
 import ru.vdv.myapp.myreadersdiary.model.api.ApiService
 import ru.vdv.myapp.myreadersdiary.model.retrofit.Common
+import ru.vdv.myapp.myreadersdiary.ui.common.interfaces.ToMainList
+import ru.vdv.myapp.myreadersdiary.ui.common.entities.TimeSeparator
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.random.Random.Default.nextInt
@@ -115,7 +117,8 @@ class RepositoryImpl : Repository {
         }
 
     //Заглушка на период подготовки BackEnd
-    private val eventPlug: List<Event> = listOf(
+    private val eventPlug: List<ToMainList> = listOf(
+        TimeSeparator("Недавние книги"),
         Event(
             "00000001",
             "Чтение/прогрес +10 (31 из 406)",
@@ -161,6 +164,7 @@ class RepositoryImpl : Repository {
                 "https://dadapproves.ru/usercontent/book/covers/00000039.jpg"
             )
         ),
+        TimeSeparator("На прошлой неделе..."),
         Event(
             "0000000037",
             "Чтение/прогрес +6 (120 из 1070)",
@@ -218,6 +222,7 @@ class RepositoryImpl : Repository {
                 "https://dadapproves.ru/usercontent/book/covers/000000044.jpg"
             )
         ),
+        TimeSeparator("Более года назад..."),
         Event(
             "0000000037", "Чтение/прогрес +14 (102 из 368)",
             Date(convertDateToLong("2021.12.22 17:25")),
@@ -449,6 +454,7 @@ class RepositoryImpl : Repository {
     private val networkService: ApiService = Common.retrofitService
 
     override fun getListOfBooks(callBack: CallBack<List<Book>>) {
+        android.os.Handler().postDelayed({
         networkService.getListOfBooks("123", "0.123", 1)
             .enqueue(object : Callback<List<Book>> {
                 override fun onResponse(
@@ -461,11 +467,11 @@ class RepositoryImpl : Repository {
                 override fun onFailure(call: Call<List<Book>>, t: Throwable) {
                     //TODO("Not yet implemented")
                 }
-            })
+            })}, 2000)
     }
 
     override fun getUserInfo(userLogin: String, callBack: CallBack<User>) {
-        networkService.getUserInfo("123-321321321", userLogin)
+        android.os.Handler().postDelayed({ networkService.getUserInfo("123-321321321", userLogin)
             .enqueue(object : Callback<User> {
                 override fun onResponse(call: Call<User>, response: Response<User>) {
                     response.body()?.let {
@@ -477,7 +483,7 @@ class RepositoryImpl : Repository {
                     //TODO("Not yet implemented")
                 }
 
-            })
+            })}, 2000)
     }
 
     override fun postBook(callBack: CallBack<Any>) {
@@ -630,8 +636,9 @@ class RepositoryImpl : Repository {
         })
     }
 
-    override fun getEventsList(num: Int, callBack: CallBack<List<Event>>) {
-        callBack.onResult(eventPlug)
+    override fun getEventsList(num: Int, callBack: CallBack<List<ToMainList>>) {
+        //с прочтой задержкой для отработки кастомного прогрессбара
+        android.os.Handler().postDelayed({callBack.onResult(eventPlug)}, 2000)
     }
 
     override fun getSummaryEventData(callBack: CallBack<List<WeekEvent>>) {
@@ -644,7 +651,8 @@ class RepositoryImpl : Repository {
         callBack: CallBack<List<ShortEventForBook>>
     ) {
         //временный ответ пока готовится API
-        callBack.onResult(shortEventForBookPlug)
+        //с прочтой задержкой для отработки кастомного прогрессбара
+        android.os.Handler().postDelayed({ callBack.onResult(shortEventForBookPlug)}, 2000)
     }
 
     override fun setEvent(callBack: CallBack<Event>) {

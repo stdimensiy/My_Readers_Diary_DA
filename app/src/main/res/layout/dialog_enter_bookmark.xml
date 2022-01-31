@@ -17,10 +17,22 @@
             android:inputType="number" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <ru.vdv.myapp.myreadersdiary.ui.views.ThumbTextSeekBar
+        android:id="@+id/dialog_seek_bar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_enter_bookmark"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/dialog_process_reading_button_enter_bookmark" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_back_to_reading"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/dialog_process_reading_button_back_to_reading" />
 
 </LinearLayout>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/nav_list_of_books"
+        android:contentDescription="@string/nav_list_of_books_contentDescription"
+        android:icon="@drawable/ic_baseline_library_add_24"
+        android:title="@string/nav_list_of_books_title"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/nav_summary_statistics"
+        android:contentDescription="@string/nav_summary_statistics_contentDescription"
+        android:icon="@drawable/ic_person_24px"
+        android:title="@string/nav_summary_statistics_title"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/nav_settings_fragment"
+        android:contentDescription="@string/nav_settings_fragment_contentDescription"
+        android:icon="@drawable/ic_settings_black_24dp_stat"
+        android:title="@string/nav_settings_fragment_title"
+        app:showAsAction="ifRoom" />
+</menu>

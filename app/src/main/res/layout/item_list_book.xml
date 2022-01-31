@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/item_frame"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="4dp"
+    android:layout_marginVertical="2dp"
+    android:background="?attr/colorSecondary"
+    tools:ignore="UnusedAttribute">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:clickable="true"
+        android:elevation="2dp"
+        android:focusable="true"
+        app:cardPreventCornerOverlap="false">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/iv_book_cover"
+                android:layout_width="80dp"
+                android:layout_height="120dp"
+                android:contentDescription="@string/ImageView_contentDescription_book_cover"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/book_plug" />
+
+            <TextView
+                android:id="@+id/tv_book_item_title_header"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/roboto_thin"
+                android:maxLines="1"
+                android:text="@string/tv_book_item_title_header_default_text"
+                android:textAppearance="?attr/textAppearanceBody2"
+                android:textSize="10sp"
+                app:layout_constraintStart_toEndOf="@+id/iv_book_cover"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="2022 / 10 / 01 - прочитано 8 стр." />
+
+            <TextView
+                android:id="@+id/tv_book_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:maxLines="2"
+                android:text="@string/tv_bool_name_default_text"
+                android:textAppearance="?attr/textAppearanceHeadline5"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/tv_body_book_description"
+                app:layout_constraintStart_toEndOf="@+id/iv_book_cover"
+                app:layout_constraintTop_toBottomOf="@+id/tv_book_item_title_header"
+                app:layout_goneMarginEnd="16dp"
+                tools:text="Наименование книги" />
+
+            <TextView
+                android:id="@+id/tv_body_book_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:maxLines="2"
+                android:text="@string/tv_body_book_description_default_text"
+                android:textAppearance="?attr/textAppearanceBody1"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/iv_book_cover"
+                app:layout_constraintTop_toBottomOf="@+id/tv_book_name"
+                tools:text="Автор Имя Отчество:  + описание книги, небольшое сколько прочиено, сколько осталось" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</FrameLayout>

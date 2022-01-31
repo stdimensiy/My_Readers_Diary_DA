@@ -3,6 +3,7 @@ package ru.vdv.myapp.myreadersdiary.domain
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
+import ru.vdv.myapp.myreadersdiary.ui.common.interfaces.ToBookList
 
 /**
  * Класс Book (DA) - это модель данных, получаемых от **[Dad Approves API](https://dadapproves.ru/)**
@@ -39,4 +40,4 @@ data class Book(
     val densityWordsPerPage: Long = 0,
     @SerializedName("currentPage")
     val currentPage: Long = 0,
-) : Parcelable
+) : Parcelable, ToBookList
