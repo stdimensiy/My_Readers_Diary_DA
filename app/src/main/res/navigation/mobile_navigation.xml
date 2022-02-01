@@ -72,6 +72,9 @@
         <action
             android:id="@+id/action_nav_main_to_processReadingBookFragment"
             app:destination="@id/nav_process_reading_book_fragment" />
+        <action
+            android:id="@+id/action_nav_main_to_userLoginFragment"
+            app:destination="@id/nav_user_login_fragment" />
     </fragment>
     <fragment
         android:id="@+id/nav_events_list_fragment"
@@ -97,4 +100,18 @@
             android:id="@+id/action_processReadingBookFragment_to_eventsFragment"
             app:destination="@id/nav_events_list_fragment" />
     </fragment>
+    <fragment
+        android:id="@+id/nav_user_login_fragment"
+        android:name="ru.vdv.myapp.myreadersdiary.ui.users.login.UserLoginFragment"
+        android:label="@string/nav_user_login_fragment_label"
+        tools:layout="@layout/fragment_user_login" />
+    <fragment
+        android:id="@+id/nav_user_registration_fragment"
+        android:name="ru.vdv.myapp.myreadersdiary.ui.users.registration.UserRegistrationFragment"
+        android:label="Регистрация нового пользователя" />
+    <fragment
+        android:id="@+id/nav_users_list_fragment"
+        android:name="ru.vdv.myapp.myreadersdiary.ui.users.UsersFragment"
+        android:label="Список пользователей"
+        tools:layout="@layout/fragment_users" />
 </navigation>

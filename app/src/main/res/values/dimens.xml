@@ -9,4 +9,6 @@
     <dimen name="elem_activity_graph_height">13dp</dimen>
     <dimen name="elem_activity_graph_margin">2dp</dimen>
     <dimen name="summary_statistic_graph_base_textSize">9sp</dimen>
+    <dimen name="fragment_horizontal_margin">16dp</dimen>
+    <dimen name="fragment_vertical_margin">16dp</dimen>
 </resources>

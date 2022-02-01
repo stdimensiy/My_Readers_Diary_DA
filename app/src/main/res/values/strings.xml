@@ -145,5 +145,10 @@
     <string name="nav_settings_fragment_title">Настройки</string>
     <string name="nav_authorization_user_contentDescription">переход к форме авторизации пользователя</string>
     <string name="nav_authorization_user_title">Авторизация пользователя</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in_short">Войти</string>
+    <string name="action_sign_in">Войти</string>
+    <string name="nav_user_login_fragment_label">Авторизация пользователя</string>
     <!-- end process reading fragment area-->
 </resources>
