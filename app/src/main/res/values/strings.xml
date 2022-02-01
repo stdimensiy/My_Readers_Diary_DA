@@ -143,5 +143,7 @@
     <string name="nav_summary_statistics_title">Статистика пользователя</string>
     <string name="nav_settings_fragment_contentDescription">Настройки</string>
     <string name="nav_settings_fragment_title">Настройки</string>
+    <string name="nav_authorization_user_contentDescription">переход к форме авторизации пользователя</string>
+    <string name="nav_authorization_user_title">Авторизация пользователя</string>
     <!-- end process reading fragment area-->
 </resources>
