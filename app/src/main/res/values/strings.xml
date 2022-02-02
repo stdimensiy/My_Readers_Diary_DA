@@ -150,5 +150,14 @@
     <string name="action_sign_in_short">Войти</string>
     <string name="action_sign_in">Войти</string>
     <string name="nav_user_login_fragment_label">Авторизация пользователя</string>
+    <string name="nav_user_registration_fragment_label">Регистрация нового пользователя</string>
+    <string name="nav_users_list_fragment_label">Список связанных пользователей</string>
+    <string name="nav_search_users_fragment_label">Поиск пользователя</string>
+    <string name="action_sign_up">Зарегистрироваться</string>
+    <string name="prompt_login">UserLogin</string>
+    <string name="search_users_fragment_helper_hint">Ник / имя / фамилия/ пользователя</string>
+    <string name="da_helper_text">поисковый запрос не сформирован</string>
+    <string name="action_forgot_my_password">забыл пароль</string>
+    <string name="nav_restoring_user_access_fragment_label">Восстановление доступа</string>
     <!-- end process reading fragment area-->
 </resources>
