@@ -2,11 +2,15 @@ package ru.vdv.myapp.myreadersdiary.ui.users.login
 
 import android.graphics.drawable.AnimatedVectorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import androidx.annotation.StringRes
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.widget.doAfterTextChanged
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.google.android.material.bottomappbar.BottomAppBar
@@ -14,6 +18,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import ru.vdv.myapp.myreadersdiary.R
 import ru.vdv.myapp.myreadersdiary.databinding.FragmentUserLoginBinding
 import ru.vdv.myapp.myreadersdiary.ui.common.BaseFragment
+import ru.vdv.myapp.myreadersdiary.ui.common.afterTextChanged
 
 class UserLoginFragment : BaseFragment<FragmentUserLoginBinding>() {
     private lateinit var viewModel: UserLoginViewModel
@@ -35,21 +40,69 @@ class UserLoginFragment : BaseFragment<FragmentUserLoginBinding>() {
         return super.onCreateView(inflater, container, savedInstanceState)
     }
 
-    override fun onStart() {
-        super.onStart()
-        fab = requireActivity().findViewById(R.id.fab)
-        bottomAppBar = requireActivity().findViewById(R.id.bottomAppBar)
-        setFabStateLoading()
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val btnLogin = binding.btnLogin
+        val username = binding.username
+        val password = binding.password
+
+        //подписываемся на изменения статуса формы
+        viewModel.loginFormState.observe(viewLifecycleOwner, Observer {
+            val userLoginFragmentState = it ?: return@Observer
+            btnLogin.isEnabled = userLoginFragmentState.isDataValid
+
+            if (userLoginFragmentState.usernameError != null) {
+                username.error = getString(userLoginFragmentState.usernameError)
+            }
+            if (userLoginFragmentState.passwordError != null) {
+                password.error = getString(userLoginFragmentState.passwordError)
+            }
+        })
+
+        binding.username.afterTextChanged {
+            Log.d(TAG, "Сработал afterTextChanged на USERNAME")
+            viewModel.loginDataChanged(
+                username.text.toString(),
+                password.text.toString()
+            )
+        }
+
+        binding.password.apply {
+            afterTextChanged {
+                Log.d(TAG, "Сработал afterTextChanged на password")
+                viewModel.loginDataChanged(
+                    username.text.toString(),
+                    password.text.toString()
+                )
+            }
+
+            setOnEditorActionListener { _, actionId, _ ->
+                when (actionId) {
+                    EditorInfo.IME_ACTION_DONE -> {
+                        Log.d(TAG, "Сработал setOnEditorActionListenerна password")
+                        viewModel.login(
+                            username.text.toString(),
+                            password.text.toString()
+                        )
+                    }
+                }
+                false
+            }
+        }
+
         binding.btnRegister.setOnClickListener {
             view.findNavController().navigate(R.id.nav_user_registration_fragment)
         }
         binding.btnRestoreAccess.setOnClickListener {
             view.findNavController().navigate(R.id.nav_restoring_user_access_fragment)
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        fab = requireActivity().findViewById(R.id.fab)
+        bottomAppBar = requireActivity().findViewById(R.id.bottomAppBar)
+        setFabStateLoading()
     }
 
     private fun setFabStateLoading() {
