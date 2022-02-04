@@ -11,7 +11,7 @@ import java.lang.reflect.ParameterizedType
 
 @Suppress("UNCHECKED_CAST")
 abstract class BaseFragment<VB : ViewBinding> : Fragment() {
-    protected val TAG = "${BaseConstants.MY_PREFIX_LOG} / ${this.javaClass.simpleName}"
+    protected val TAG = "${BaseConstants.MY_TAG} / ${this.javaClass.simpleName}"
     protected val imageLoader = GlideImageLoader()
     private var _binding: VB? = null
     protected val binding: VB get() = _binding!!

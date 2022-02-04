@@ -48,31 +48,25 @@ class UserLoginFragment : BaseFragment<FragmentUserLoginBinding>() {
 
         //подписываемся на изменения статуса формы
         viewModel.loginFormState.observe(viewLifecycleOwner, Observer {
-            val userLoginFragmentState = it ?: return@Observer
-            btnLogin.isEnabled = userLoginFragmentState.isDataValid
-
-            if (userLoginFragmentState.usernameError != null) {
-                username.error = getString(userLoginFragmentState.usernameError)
-            }
-            if (userLoginFragmentState.passwordError != null) {
-                password.error = getString(userLoginFragmentState.passwordError)
-            }
+            btnLogin.isEnabled = it.isDataValid
+            username.error = it?.usernameError?.let(this::getString)
+            password.error = it?.passwordError?.let(this::getString)
         })
 
-        binding.username.afterTextChanged {
+        binding.username.editText?.afterTextChanged {
             Log.d(TAG, "Сработал afterTextChanged на USERNAME")
             viewModel.loginDataChanged(
-                username.text.toString(),
-                password.text.toString()
+                username.editText?.text.toString(),
+                password.editText?.text.toString()
             )
         }
 
-        binding.password.apply {
+        binding.password.editText?.apply {
             afterTextChanged {
                 Log.d(TAG, "Сработал afterTextChanged на password")
                 viewModel.loginDataChanged(
-                    username.text.toString(),
-                    password.text.toString()
+                    username.editText?.text.toString(),
+                    password.editText?.text.toString()
                 )
             }
 
@@ -81,8 +75,8 @@ class UserLoginFragment : BaseFragment<FragmentUserLoginBinding>() {
                     EditorInfo.IME_ACTION_DONE -> {
                         Log.d(TAG, "Сработал setOnEditorActionListenerна password")
                         viewModel.login(
-                            username.text.toString(),
-                            password.text.toString()
+                            username.editText?.text.toString(),
+                            password.editText?.text.toString()
                         )
                     }
                 }
