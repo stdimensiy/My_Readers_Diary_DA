@@ -43,6 +43,8 @@ class UserLoginFragment : BaseFragment<FragmentUserLoginBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val btnLogin = binding.btnLogin
+        val btnRegister = binding.btnRegister
+        val btnRestore = binding.btnRestoreAccess
         val username = binding.username
         val password = binding.password
 
@@ -53,7 +55,7 @@ class UserLoginFragment : BaseFragment<FragmentUserLoginBinding>() {
             password.error = it?.passwordError?.let(this::getString)
         })
 
-        binding.username.editText?.afterTextChanged {
+        username.editText?.afterTextChanged {
             Log.d(TAG, "Сработал afterTextChanged на USERNAME")
             viewModel.loginDataChanged(
                 username.editText?.text.toString(),
@@ -61,7 +63,7 @@ class UserLoginFragment : BaseFragment<FragmentUserLoginBinding>() {
             )
         }
 
-        binding.password.editText?.apply {
+        password.editText?.apply {
             afterTextChanged {
                 Log.d(TAG, "Сработал afterTextChanged на password")
                 viewModel.loginDataChanged(
@@ -84,10 +86,10 @@ class UserLoginFragment : BaseFragment<FragmentUserLoginBinding>() {
             }
         }
 
-        binding.btnRegister.setOnClickListener {
+        btnRegister.setOnClickListener {
             view.findNavController().navigate(R.id.nav_user_registration_fragment)
         }
-        binding.btnRestoreAccess.setOnClickListener {
+        btnRestore.setOnClickListener {
             view.findNavController().navigate(R.id.nav_restoring_user_access_fragment)
         }
     }

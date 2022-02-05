@@ -161,5 +161,7 @@
     <string name="nav_restoring_user_access_fragment_label">Восстановление доступа</string>
     <string name="invalid_username">Некорректное имя пользователя</string>
     <string name="invalid_password">Некорректный пароль</string>
+    <string name="action_restoring_user_access">Восстановить доступ</string>
+    <string name="restore_accaunt_instruction_text">Укажите правильно ваш логин, и по нажатии кнопки восстановления доступа на указанный в учетных данных пользователя основной адрес электронной почты будет выслано письмо со ссылкой на сброс пароля. В ближайшее время проверьте ваш электронный почтовый ящик, перейдите по ссылке, придумайте и введите новый пароль и попытайтесь авторизоваться снова.</string>
     <!-- end process reading fragment area-->
 </resources>

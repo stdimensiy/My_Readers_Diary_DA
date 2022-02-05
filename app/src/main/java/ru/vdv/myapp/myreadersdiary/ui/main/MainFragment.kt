@@ -93,10 +93,12 @@ class MainFragment : BaseFragment<MainFragmentBinding>() {
 
     private fun fetchData() {
         viewModel.fetchCurrentUser(
-            PreferenceManager.getDefaultSharedPreferences(context).getString(
-                getString(R.string.spref_key_login),
-                getString(R.string.spref_key_login_default)
-            )
+            context?.let {
+                PreferenceManager.getDefaultSharedPreferences(it).getString(
+                    getString(R.string.spref_key_login),
+                    getString(R.string.spref_key_login_default)
+                )
+            }
         )
     }
 }

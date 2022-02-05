@@ -5,6 +5,7 @@ package ru.vdv.myapp.myreadersdiary.ui.common
  */
 data class UserLoginFragmentState(
     var usernameError: Int? = null,
+    var emailError: Int? = null,
     var passwordError: Int? = null,
     var isDataValid: Boolean = false
 )
