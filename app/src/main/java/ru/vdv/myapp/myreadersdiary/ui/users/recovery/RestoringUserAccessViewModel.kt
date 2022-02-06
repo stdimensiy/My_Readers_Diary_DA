@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import ru.vdv.myapp.myreadersdiary.R
 import ru.vdv.myapp.myreadersdiary.domain.CallBack
+import ru.vdv.myapp.myreadersdiary.domain.StatusCode
 import ru.vdv.myapp.myreadersdiary.domain.User
 import ru.vdv.myapp.myreadersdiary.ui.common.*
 import java.util.regex.Pattern
@@ -39,35 +40,52 @@ class RestoringUserAccessViewModel : BaseViewModel() {
             if (!isUserNameValid(username) && username.isNotEmpty()) {
                 currentFormState.usernameError = R.string.invalid_username
             } else {
-                currentFormState.usernameError = null
+                currentFormState.usernameError = R.string.user_login_is_empty
             }
+            _loginForm.value = currentFormState
         } else {
             repository.getUserInfo(username, object : CallBack<User> {
                 override fun onResult(value: User) {
-                    Log.d(TAG, "Принципиальный ответ получен сравниваю $currentUserLogin c ${value.login}")
-                    //_currentSearchingUser.value = value
+                    Log.d(TAG, "Ответ получен сравниваю $currentUserLogin c ${value.login}")
                     if (currentUserLogin.equals(value.login, true)) {
                         Log.d(TAG, "Пользователь найден")
                         currentFormState.isDataValid = true
                         currentFormState.usernameError = null
                         _loginForm.value = currentFormState
                     } else {
-                        Log.d(TAG, "Видимо ответ более не актуален: $currentUserLogin c ${value.login}")
+                        Log.d(
+                            TAG, "Ответ более не актуален: $currentUserLogin c ${value.login}"
+                        )
+//                        currentFormState.isDataValid = false
+//                        currentFormState.usernameError = null
+//                        _loginForm.value = currentFormState
                     }
                 }
+
                 override fun onFailure(t: Int) {
-                    if (t==404){
-                        Log.d(TAG, "Получен ответ сервера, что пользователь НЕ найден")
-                        currentFormState.isDataValid = false
-                        currentFormState.usernameError = R.string.no_user_with_username
-                        _loginForm.value = currentFormState
+                    if(username == currentUserLogin){
+                        Log.d(
+                            TAG, "Ответ еще актуален: $username c $currentUserLogin"
+                        )
+                        when (t) {
+                            StatusCode.NOT_FOUND -> {
+                                Log.d(TAG, "Ответ отрицательный $currentUserLogin")
+                                currentFormState.isDataValid = false
+                                currentFormState.usernameError = R.string.no_user_with_username
+                                _loginForm.value = currentFormState
+                            }
+                        }
+                    } else {
+                        Log.d(
+                            TAG, "Ответ более НЕ актуален: $username c $currentUserLogin"
+                        )
                     }
                 }
             })
-            currentFormState.isDataValid = false
-            currentFormState.usernameError = null
+//            currentFormState.isDataValid = false
+//            currentFormState.usernameError = null
         }
-        _loginForm.value = currentFormState
+//        _loginForm.value = currentFormState
     }
 
     private fun isUserNameValid(username: String): Boolean {

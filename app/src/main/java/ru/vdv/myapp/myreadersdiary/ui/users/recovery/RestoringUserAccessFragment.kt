@@ -54,21 +54,24 @@ class RestoringUserAccessFragment : BaseFragment<FragmentUserRestoringAccessBind
         //подписываемся на изменения статуса формы
         viewModel.loginFormState.observe(viewLifecycleOwner, Observer {
             if (it.isDataValid) {
+                username.error = null
                 username.setEndIconDrawable(R.drawable.baseline_check_black_24dp)
                 btnStartRestoring.isEnabled = true
             } else {
                 btnStartRestoring.isEnabled = false
+                Log.d(TAG, "Показываю ошибку")
+                username.error = it?.usernameError?.let(this::getString)
             }
-            username.error = it?.usernameError?.let(this::getString)
         })
 
         username.editText?.apply {
             afterTextChanged {
-                viewModel.loginDataChanged(username.editText?.text.toString())
-                //username.endIconDrawable.apply { R.drawable.baseline_group_remove_black_24dp }3
+                Log.d(TAG, "Меняю на крутилку")
+                username.error = null
                 val icon = avd(R.drawable.ic_cached_rotate_black_24dp_adv)
                 username.endIconDrawable = icon
                 icon.start()
+                viewModel.loginDataChanged(username.editText?.text.toString())
             }
 
             setOnEditorActionListener { _, actionId, _ ->

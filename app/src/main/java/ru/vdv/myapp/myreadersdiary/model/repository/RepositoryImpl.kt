@@ -7,6 +7,7 @@ import retrofit2.Response
 import ru.vdv.myapp.myreadersdiary.domain.*
 import ru.vdv.myapp.myreadersdiary.model.api.ApiService
 import ru.vdv.myapp.myreadersdiary.model.retrofit.Common
+import ru.vdv.myapp.myreadersdiary.ui.common.BaseConstants
 import ru.vdv.myapp.myreadersdiary.ui.common.interfaces.ToMainList
 import ru.vdv.myapp.myreadersdiary.ui.common.entities.TimeSeparator
 import java.text.SimpleDateFormat
@@ -14,6 +15,8 @@ import java.util.*
 import kotlin.random.Random.Default.nextInt
 
 class RepositoryImpl : Repository {
+    val TAG =
+        "${BaseConstants.MY_TAG} / ${this.javaClass.simpleName}" //базовый ключ для сообщений отладки
 
     //Заглушка недельных суммарных активностей (с пустыми значениями активности), пока API готовится.
     /**
@@ -477,24 +480,23 @@ class RepositoryImpl : Repository {
             networkService.getUserInfo("123-321321321", userLogin)
                 .enqueue(object : Callback<User> {
                     override fun onResponse(call: Call<User>, response: Response<User>) {
-                        Log.d("Моя проверка", "РЕПОЗИТОРИЙ Получен ответ ")
+                        Log.d(TAG, "Успех!")
                         if (response.isSuccessful) {
                             response.body()?.let {
                                 callBack.onResult(it)
                             }
                         } else {
-                            Log.d("Моя проверка", "РЕПОЗИТОРИЙ Получена СТАНДАРТНАЯ ошибка ответа сервера $response ")
                             response.code().let {
-                                Log.d("Моя проверка", "РЕПОЗИТОРИЙ код ошибки  ${response.code()} ")
+                                Log.d(TAG, "Kод ошибки:  ${response.code()} ")
                                 callBack.onFailure(response.code())
                             }
                         }
                     }
 
                     override fun onFailure(call: Call<User>, t: Throwable) {
-                        Log.d("Моя проверка", "РЕПОЗИТОРИЙ Получена ошибка работы RETROFIT")
+                        Log.d(TAG, BaseConstants.RETROFIT_FAILURE)
+                        Log.d(TAG, t.message.toString())
                     }
-
                 })
         }, 2000)
     }
