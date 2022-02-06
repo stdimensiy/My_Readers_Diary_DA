@@ -480,14 +480,12 @@ class RepositoryImpl : Repository {
             networkService.getUserInfo("123-321321321", userLogin)
                 .enqueue(object : Callback<User> {
                     override fun onResponse(call: Call<User>, response: Response<User>) {
-                        Log.d(TAG, "Успех!")
                         if (response.isSuccessful) {
                             response.body()?.let {
                                 callBack.onResult(it)
                             }
                         } else {
                             response.code().let {
-                                Log.d(TAG, "Kод ошибки:  ${response.code()} ")
                                 callBack.onFailure(response.code())
                             }
                         }

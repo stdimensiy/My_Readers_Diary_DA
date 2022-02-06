@@ -13,24 +13,10 @@ import java.util.regex.Pattern
 class RestoringUserAccessViewModel : BaseViewModel() {
     private val _loginForm = MutableLiveData<UserLoginFragmentState>()
     private val currentFormState = UserLoginFragmentState()
-    private var currentUserLogin: String = ""
     val loginFormState: LiveData<UserLoginFragmentState> = _loginForm
-    private val _loginResult = MutableLiveData<LoginResult>()
-    val loginResult: LiveData<LoginResult> = _loginResult
-
-    //Реализация поиска пользователя по нику (определение принципиального наличия пользователя)
-    private val _currentSearchingUser = MutableLiveData<User>().apply {
-        value = null
-    }
-    val currentSearchingUser: LiveData<User> = _currentSearchingUser
-
+    private var currentUserLogin: String = ""
     fun startRestoreAccess(username: String) {
         // обращаемся к репозиторию с запросом на восстановление пароля
-    }
-
-    fun isUserExists(username: String): Boolean {
-        // обращаемся к репозиторию с запросом на восстановление пароля
-        return false
     }
 
     fun loginDataChanged(username: String) {
@@ -46,46 +32,25 @@ class RestoringUserAccessViewModel : BaseViewModel() {
         } else {
             repository.getUserInfo(username, object : CallBack<User> {
                 override fun onResult(value: User) {
-                    Log.d(TAG, "Ответ получен сравниваю $currentUserLogin c ${value.login}")
                     if (currentUserLogin.equals(value.login, true)) {
-                        Log.d(TAG, "Пользователь найден")
                         currentFormState.isDataValid = true
                         currentFormState.usernameError = null
                         _loginForm.value = currentFormState
-                    } else {
-                        Log.d(
-                            TAG, "Ответ более не актуален: $currentUserLogin c ${value.login}"
-                        )
-//                        currentFormState.isDataValid = false
-//                        currentFormState.usernameError = null
-//                        _loginForm.value = currentFormState
                     }
                 }
-
                 override fun onFailure(t: Int) {
-                    if(username == currentUserLogin){
-                        Log.d(
-                            TAG, "Ответ еще актуален: $username c $currentUserLogin"
-                        )
+                    if (username == currentUserLogin) {
                         when (t) {
                             StatusCode.NOT_FOUND -> {
-                                Log.d(TAG, "Ответ отрицательный $currentUserLogin")
                                 currentFormState.isDataValid = false
                                 currentFormState.usernameError = R.string.no_user_with_username
                                 _loginForm.value = currentFormState
                             }
                         }
-                    } else {
-                        Log.d(
-                            TAG, "Ответ более НЕ актуален: $username c $currentUserLogin"
-                        )
                     }
                 }
             })
-//            currentFormState.isDataValid = false
-//            currentFormState.usernameError = null
         }
-//        _loginForm.value = currentFormState
     }
 
     private fun isUserNameValid(username: String): Boolean {

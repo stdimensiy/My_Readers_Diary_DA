@@ -1,13 +1,10 @@
 package ru.vdv.myapp.myreadersdiary.ui.users.recovery
 
 import android.graphics.drawable.AnimatedVectorDrawable
-import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.EditorInfo
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -59,51 +56,20 @@ class RestoringUserAccessFragment : BaseFragment<FragmentUserRestoringAccessBind
                 btnStartRestoring.isEnabled = true
             } else {
                 btnStartRestoring.isEnabled = false
-                Log.d(TAG, "Показываю ошибку")
                 username.error = it?.usernameError?.let(this::getString)
             }
         })
 
         username.editText?.apply {
             afterTextChanged {
-                Log.d(TAG, "Меняю на крутилку")
                 username.error = null
                 val icon = avd(R.drawable.ic_cached_rotate_black_24dp_adv)
                 username.endIconDrawable = icon
                 icon.start()
                 viewModel.loginDataChanged(username.editText?.text.toString())
             }
-
-            setOnEditorActionListener { _, actionId, _ ->
-                when (actionId) {
-                    EditorInfo.IME_ACTION_DONE -> {
-                        viewModel.startRestoreAccess(
-                            username.editText?.text.toString()
-                        )
-                    }
-                }
-                false
-            }
         }
     }
-
-//    private fun setFabStateLoading() {
-//        val icon = avd(R.drawable.ic_cached_rotate_black_24dp_adv)
-//        fab.setImageDrawable(icon)
-//        icon.start()
-//        fab.setOnClickListener {
-//            //никаких действий на режим загрузки не назначено
-//        }
-//    }
-//
-//    private fun setFabStateOk(username: String) {
-//        val icon = avd(R.drawable.ic_cached_rotate_black_24dp_adv)
-//        fab.setImageDrawable(icon)
-//        icon.start()
-//        fab.setOnClickListener {
-//            viewModel.startRestoreAccess(username)
-//        }
-//    }
 
     private fun setFabStateBack() {
         val icon = avd(R.drawable.ic_cached_to_back_black_24dp_adv)
