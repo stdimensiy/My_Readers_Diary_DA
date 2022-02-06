@@ -25,6 +25,10 @@ class ListOfBooksViewModel : BaseViewModel() {
                 val prepList: MutableList<ToBookList> = result.toMutableList()
                 _prepareItems.value = prepList
             }
+
+            override fun onFailure(t: Int) {
+                //TODO("Not yet implemented")
+            }
         })
     }
 }

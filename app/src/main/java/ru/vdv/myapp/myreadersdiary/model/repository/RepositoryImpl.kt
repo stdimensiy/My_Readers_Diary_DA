@@ -1,5 +1,6 @@
 package ru.vdv.myapp.myreadersdiary.model.repository
 
+import android.util.Log
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -455,35 +456,47 @@ class RepositoryImpl : Repository {
 
     override fun getListOfBooks(callBack: CallBack<List<Book>>) {
         android.os.Handler().postDelayed({
-        networkService.getListOfBooks("123", "0.123", 1)
-            .enqueue(object : Callback<List<Book>> {
-                override fun onResponse(
-                    call: Call<List<Book>>,
-                    response: Response<List<Book>>
-                ) {
-                    response.body()?.let { callBack.onResult(it) }
-                }
+            networkService.getListOfBooks("123", "0.123", 1)
+                .enqueue(object : Callback<List<Book>> {
+                    override fun onResponse(
+                        call: Call<List<Book>>,
+                        response: Response<List<Book>>
+                    ) {
+                        response.body()?.let { callBack.onResult(it) }
+                    }
 
-                override fun onFailure(call: Call<List<Book>>, t: Throwable) {
-                    //TODO("Not yet implemented")
-                }
-            })}, 2000)
+                    override fun onFailure(call: Call<List<Book>>, t: Throwable) {
+                        //TODO("Not yet implemented")
+                    }
+                })
+        }, 2000)
     }
 
     override fun getUserInfo(userLogin: String, callBack: CallBack<User>) {
-        android.os.Handler().postDelayed({ networkService.getUserInfo("123-321321321", userLogin)
-            .enqueue(object : Callback<User> {
-                override fun onResponse(call: Call<User>, response: Response<User>) {
-                    response.body()?.let {
-                        callBack.onResult(it)
+        android.os.Handler().postDelayed({
+            networkService.getUserInfo("123-321321321", userLogin)
+                .enqueue(object : Callback<User> {
+                    override fun onResponse(call: Call<User>, response: Response<User>) {
+                        Log.d("Моя проверка", "РЕПОЗИТОРИЙ Получен ответ ")
+                        if (response.isSuccessful) {
+                            response.body()?.let {
+                                callBack.onResult(it)
+                            }
+                        } else {
+                            Log.d("Моя проверка", "РЕПОЗИТОРИЙ Получена СТАНДАРТНАЯ ошибка ответа сервера $response ")
+                            response.code().let {
+                                Log.d("Моя проверка", "РЕПОЗИТОРИЙ код ошибки  ${response.code()} ")
+                                callBack.onFailure(response.code())
+                            }
+                        }
                     }
-                }
 
-                override fun onFailure(call: Call<User>, t: Throwable) {
-                    //TODO("Not yet implemented")
-                }
+                    override fun onFailure(call: Call<User>, t: Throwable) {
+                        Log.d("Моя проверка", "РЕПОЗИТОРИЙ Получена ошибка работы RETROFIT")
+                    }
 
-            })}, 2000)
+                })
+        }, 2000)
     }
 
     override fun postBook(callBack: CallBack<Any>) {
@@ -638,7 +651,7 @@ class RepositoryImpl : Repository {
 
     override fun getEventsList(num: Int, callBack: CallBack<List<ToMainList>>) {
         //с прочтой задержкой для отработки кастомного прогрессбара
-        android.os.Handler().postDelayed({callBack.onResult(eventPlug)}, 2000)
+        android.os.Handler().postDelayed({ callBack.onResult(eventPlug) }, 2000)
     }
 
     override fun getSummaryEventData(callBack: CallBack<List<WeekEvent>>) {
@@ -652,7 +665,7 @@ class RepositoryImpl : Repository {
     ) {
         //временный ответ пока готовится API
         //с прочтой задержкой для отработки кастомного прогрессбара
-        android.os.Handler().postDelayed({ callBack.onResult(shortEventForBookPlug)}, 2000)
+        android.os.Handler().postDelayed({ callBack.onResult(shortEventForBookPlug) }, 2000)
     }
 
     override fun setEvent(callBack: CallBack<Event>) {
