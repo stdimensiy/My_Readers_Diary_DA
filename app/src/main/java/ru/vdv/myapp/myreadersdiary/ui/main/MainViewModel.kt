@@ -23,6 +23,10 @@ class MainViewModel : BaseViewModel() {
                 override fun onResult(value: User) {
                     _currentUser.value = value
                 }
+
+                override fun onFailure(t: Int) {
+                   // TODO("Not yet implemented")
+                }
             })
         }
     }
@@ -33,6 +37,10 @@ class MainViewModel : BaseViewModel() {
             @RequiresApi(Build.VERSION_CODES.O)
             override fun onResult(result: List<ToMainList>) {
                 value = result
+            }
+
+            override fun onFailure(t: Int) {
+                TODO("Not yet implemented")
             }
         })
     }

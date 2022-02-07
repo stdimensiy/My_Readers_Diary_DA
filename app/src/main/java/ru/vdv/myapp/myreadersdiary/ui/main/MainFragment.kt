@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import ru.vdv.myapp.myreadersdiary.R
 import ru.vdv.myapp.myreadersdiary.databinding.MainFragmentBinding
@@ -21,6 +22,7 @@ class MainFragment : BaseFragment<MainFragmentBinding>() {
     private lateinit var adapter: MainEventsAdapter
     private lateinit var viewModel: MainViewModel
     private lateinit var fab: FloatingActionButton
+    private lateinit var bottomAppBar: BottomAppBar
     private val avd = { iconRes: Int ->
         AppCompatResources.getDrawable(
             requireContext(),
@@ -42,6 +44,7 @@ class MainFragment : BaseFragment<MainFragmentBinding>() {
     override fun onStart() {
         super.onStart()
         fab = requireActivity().findViewById(R.id.fab)
+        bottomAppBar = requireActivity().findViewById(R.id.bottomAppBar)
         setFabStateLoading()
     }
 
@@ -59,8 +62,12 @@ class MainFragment : BaseFragment<MainFragmentBinding>() {
 
         //запрос данных пользователя подписка на результат
         viewModel.currentUser.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                Log.d(TAG, "Пользовательл определен: ${it.name}")
+            if (it == null) {
+                Log.d(TAG, "Пользователь НЕ определен!")
+                bottomAppBar.replaceMenu(R.menu.bottom_app_bar_main_for_user_not_authorized)
+            } else {
+                bottomAppBar.replaceMenu(R.menu.bottom_app_bar_main)
+                Log.d(TAG, "Пользователь определен: ${it.name}")
             }
         })
     }
@@ -86,10 +93,12 @@ class MainFragment : BaseFragment<MainFragmentBinding>() {
 
     private fun fetchData() {
         viewModel.fetchCurrentUser(
-            PreferenceManager.getDefaultSharedPreferences(context).getString(
-                getString(R.string.spref_key_login),
-                getString(R.string.spref_key_login_default)
-            )
+            context?.let {
+                PreferenceManager.getDefaultSharedPreferences(it).getString(
+                    getString(R.string.spref_key_login),
+                    getString(R.string.spref_key_login_default)
+                )
+            }
         )
     }
 }

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/nav_authorization_user"
+        android:contentDescription="@string/nav_authorization_user_contentDescription"
+        android:icon="@drawable/baseline_how_to_reg_red_24dp"
+        android:title="@string/nav_authorization_user_title"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/nav_settings_fragment"
+        android:contentDescription="@string/nav_settings_fragment_contentDescription"
+        android:icon="@drawable/ic_settings_black_24dp_stat"
+        android:title="@string/nav_settings_fragment_title"
+        app:showAsAction="ifRoom" />
+</menu>

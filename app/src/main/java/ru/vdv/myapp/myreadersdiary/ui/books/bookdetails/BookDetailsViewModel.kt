@@ -16,6 +16,10 @@ class BookDetailsViewModel : BaseViewModel() {
             override fun onResult(result: List<ShortEventForBook>) {
                 value = result
             }
+
+            override fun onFailure(t: Int) {
+                //TODO("Not yet implemented")
+            }
         })
     }
     val prepareEventList: LiveData<List<ShortEventForBook>> = _prepareEventList

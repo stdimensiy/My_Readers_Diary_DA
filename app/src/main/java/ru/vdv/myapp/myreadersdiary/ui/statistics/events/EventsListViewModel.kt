@@ -12,6 +12,10 @@ class EventsListViewModel : BaseViewModel() {
             override fun onResult(result: List<ToMainList>) {
                 value = result
             }
+
+            override fun onFailure(t: Int) {
+                //TODO("Not yet implemented")
+            }
         })
     }
     val prepareEventList: LiveData<List<ToMainList>> = _prepareEventList

@@ -1,11 +1,13 @@
 package ru.vdv.myapp.myreadersdiary.model.repository
 
+import android.util.Log
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import ru.vdv.myapp.myreadersdiary.domain.*
 import ru.vdv.myapp.myreadersdiary.model.api.ApiService
 import ru.vdv.myapp.myreadersdiary.model.retrofit.Common
+import ru.vdv.myapp.myreadersdiary.ui.common.BaseConstants
 import ru.vdv.myapp.myreadersdiary.ui.common.interfaces.ToMainList
 import ru.vdv.myapp.myreadersdiary.ui.common.entities.TimeSeparator
 import java.text.SimpleDateFormat
@@ -13,6 +15,8 @@ import java.util.*
 import kotlin.random.Random.Default.nextInt
 
 class RepositoryImpl : Repository {
+    val TAG =
+        "${BaseConstants.MY_TAG} / ${this.javaClass.simpleName}" //базовый ключ для сообщений отладки
 
     //Заглушка недельных суммарных активностей (с пустыми значениями активности), пока API готовится.
     /**
@@ -455,35 +459,44 @@ class RepositoryImpl : Repository {
 
     override fun getListOfBooks(callBack: CallBack<List<Book>>) {
         android.os.Handler().postDelayed({
-        networkService.getListOfBooks("123", "0.123", 1)
-            .enqueue(object : Callback<List<Book>> {
-                override fun onResponse(
-                    call: Call<List<Book>>,
-                    response: Response<List<Book>>
-                ) {
-                    response.body()?.let { callBack.onResult(it) }
-                }
+            networkService.getListOfBooks("123", "0.123", 1)
+                .enqueue(object : Callback<List<Book>> {
+                    override fun onResponse(
+                        call: Call<List<Book>>,
+                        response: Response<List<Book>>
+                    ) {
+                        response.body()?.let { callBack.onResult(it) }
+                    }
 
-                override fun onFailure(call: Call<List<Book>>, t: Throwable) {
-                    //TODO("Not yet implemented")
-                }
-            })}, 2000)
+                    override fun onFailure(call: Call<List<Book>>, t: Throwable) {
+                        //TODO("Not yet implemented")
+                    }
+                })
+        }, 2000)
     }
 
     override fun getUserInfo(userLogin: String, callBack: CallBack<User>) {
-        android.os.Handler().postDelayed({ networkService.getUserInfo("123-321321321", userLogin)
-            .enqueue(object : Callback<User> {
-                override fun onResponse(call: Call<User>, response: Response<User>) {
-                    response.body()?.let {
-                        callBack.onResult(it)
+        android.os.Handler().postDelayed({
+            networkService.getUserInfo("123-321321321", userLogin)
+                .enqueue(object : Callback<User> {
+                    override fun onResponse(call: Call<User>, response: Response<User>) {
+                        if (response.isSuccessful) {
+                            response.body()?.let {
+                                callBack.onResult(it)
+                            }
+                        } else {
+                            response.code().let {
+                                callBack.onFailure(response.code())
+                            }
+                        }
                     }
-                }
 
-                override fun onFailure(call: Call<User>, t: Throwable) {
-                    //TODO("Not yet implemented")
-                }
-
-            })}, 2000)
+                    override fun onFailure(call: Call<User>, t: Throwable) {
+                        Log.d(TAG, BaseConstants.RETROFIT_FAILURE)
+                        Log.d(TAG, t.message.toString())
+                    }
+                })
+        }, 2000)
     }
 
     override fun postBook(callBack: CallBack<Any>) {
@@ -638,7 +651,7 @@ class RepositoryImpl : Repository {
 
     override fun getEventsList(num: Int, callBack: CallBack<List<ToMainList>>) {
         //с прочтой задержкой для отработки кастомного прогрессбара
-        android.os.Handler().postDelayed({callBack.onResult(eventPlug)}, 2000)
+        android.os.Handler().postDelayed({ callBack.onResult(eventPlug) }, 2000)
     }
 
     override fun getSummaryEventData(callBack: CallBack<List<WeekEvent>>) {
@@ -652,7 +665,7 @@ class RepositoryImpl : Repository {
     ) {
         //временный ответ пока готовится API
         //с прочтой задержкой для отработки кастомного прогрессбара
-        android.os.Handler().postDelayed({ callBack.onResult(shortEventForBookPlug)}, 2000)
+        android.os.Handler().postDelayed({ callBack.onResult(shortEventForBookPlug) }, 2000)
     }
 
     override fun setEvent(callBack: CallBack<Event>) {
