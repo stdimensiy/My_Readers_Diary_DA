@@ -42,6 +42,11 @@ class MainActivity : AppCompatActivity() {
                     navController.navigate(R.id.nav_list_of_books)
                     true
                 }
+                R.id.nav_authorization_user-> {
+                    // Отслеживание нажатия на кнопку авторизации
+                    navController.navigate(R.id.nav_user_login_fragment)
+                    true
+                }
                 R.id.nav_summary_statistics -> {
                     // Отслеживание нажатия на кнопку суммарной статистики пользователя
                     navController.navigate(R.id.nav_summary_statistics)

@@ -1,5 +1,8 @@
 package ru.vdv.myapp.myreadersdiary.ui.common
 
+import android.text.Editable
+import android.text.TextWatcher
+import android.widget.EditText
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import ru.vdv.myapp.myreadersdiary.R
@@ -23,4 +26,19 @@ fun RecyclerView.ViewHolder.mark(count: Int, view: ImageView) {
         in 15..16 -> view.setImageResource(R.drawable.round_square_indigo_800_24dp)
         in 17..10000 -> view.setImageResource(R.drawable.round_square_indigo_900_24dp)
     }
+}
+
+/**
+ * ОТслеживание действия изменения текста
+ */
+fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
+    this.addTextChangedListener(object : TextWatcher {
+        override fun afterTextChanged(editable: Editable?) {
+            afterTextChanged.invoke(editable.toString())
+        }
+
+        override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+
+        override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
+    })
 }

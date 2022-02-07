@@ -22,6 +22,7 @@ class SummaryStatisticAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
     var items: List<ToStatList> = listOf(
         User(
             "DarthVerteliy",
+            "DarthVerteliy",
             "https://dadapproves.ru/usercontent/avatars/da0000002.jpg",
             "https://dadapproves.ru/usercontent/bg/da_bg0000002.jpg"
         ),

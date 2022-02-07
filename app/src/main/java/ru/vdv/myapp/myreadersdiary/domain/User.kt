@@ -19,6 +19,8 @@ import ru.vdv.myapp.myreadersdiary.ui.common.interfaces.ToStatList
 data class User(
     @SerializedName("name")
     val name: String,
+    @SerializedName("login")
+    val login: String,
     @SerializedName("avatar_url")
     val avatarUrl: String,
     @SerializedName("wallpaper_url")

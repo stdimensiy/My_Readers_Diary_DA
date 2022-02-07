@@ -143,5 +143,27 @@
     <string name="nav_summary_statistics_title">Статистика пользователя</string>
     <string name="nav_settings_fragment_contentDescription">Настройки</string>
     <string name="nav_settings_fragment_title">Настройки</string>
+    <string name="nav_authorization_user_contentDescription">переход к форме авторизации пользователя</string>
+    <string name="nav_authorization_user_title">Авторизация пользователя</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in_short">Войти</string>
+    <string name="action_sign_in">Войти</string>
+    <string name="nav_user_login_fragment_label">Авторизация пользователя</string>
+    <string name="nav_user_registration_fragment_label">Регистрация нового пользователя</string>
+    <string name="nav_users_list_fragment_label">Список связанных пользователей</string>
+    <string name="nav_search_users_fragment_label">Поиск пользователя</string>
+    <string name="action_sign_up">Зарегистрироваться</string>
+    <string name="prompt_login">UserLogin</string>
+    <string name="search_users_fragment_helper_hint">Ник / имя / фамилия/ пользователя</string>
+    <string name="da_helper_text">поисковый запрос не сформирован</string>
+    <string name="action_forgot_my_password">забыл пароль</string>
+    <string name="nav_restoring_user_access_fragment_label">Восстановление доступа</string>
+    <string name="invalid_username">Некорректное имя пользователя</string>
+    <string name="invalid_password">Некорректный пароль</string>
+    <string name="action_restoring_user_access">Восстановить доступ</string>
+    <string name="restore_account_instruction_text">Укажите <b>правильно</b> ваш логин, и по нажатии кнопки восстановления доступа на указанный в учетных данных пользователя основной адрес электронной почты будет выслано письмо со ссылкой на сброс пароля. \n      В ближайшее время проверьте ваш электронный почтовый ящик, перейдите по ссылке, придумайте и введите новый пароль и попытайтесь авторизоваться снова.</string>
+    <string name="no_user_with_username">Пользователь с таким логином отсутствует</string>
+    <string name="user_login_is_empty">Логин пользователя не указан</string>
     <!-- end process reading fragment area-->
 </resources>
