@@ -19,6 +19,10 @@ class SummaryStatisticsViewModel : BaseViewModel() {
                 override fun onResult(value: User) {
                     _currentUser.value = value
                 }
+
+                override fun onFailure(t: Int) {
+                    //TODO("Not yet implemented")
+                }
             })
         }
     }
@@ -29,6 +33,10 @@ class SummaryStatisticsViewModel : BaseViewModel() {
         repository.getRandomSummaryEventData(startData, object : CallBack<List<WeekEvent>> {
             override fun onResult(result: List<WeekEvent>) {
                 value = result
+            }
+
+            override fun onFailure(t: Int) {
+                //TODO("Not yet implemented")
             }
         })
     }

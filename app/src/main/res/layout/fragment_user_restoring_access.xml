@@ -5,11 +5,11 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/ic_bg_login_white"
     android:paddingLeft="@dimen/fragment_horizontal_margin"
     android:paddingTop="@dimen/fragment_vertical_margin"
     android:paddingRight="@dimen/fragment_horizontal_margin"
     android:paddingBottom="@dimen/fragment_vertical_margin"
-    android:background="@drawable/ic_bg_login_white"
     tools:context=".ui.users.recovery.RestoringUserAccessFragment">
 
     <com.google.android.material.textfield.TextInputLayout
@@ -19,6 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
         android:hint="@string/prompt_login"
+        app:endIconMode="custom"
         app:hintAnimationEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,7 +29,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textShortMessage"/>
+            android:imeOptions="actionGo"
+            android:inputType="textShortMessage" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -37,7 +39,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="@string/restore_accaunt_instruction_text"
+        android:text="@string/restore_account_instruction_text"
         android:textAlignment="viewStart"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="12sp"
@@ -52,12 +54,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="start"
         android:layout_marginStart="48dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="48dp"
-        android:layout_marginBottom="64dp"
         android:enabled="false"
         android:text="@string/action_restoring_user_access"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/instruction"

@@ -8,11 +8,13 @@ import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import ru.vdv.myapp.myreadersdiary.R
 import ru.vdv.myapp.myreadersdiary.databinding.FragmentUserRestoringAccessBinding
 import ru.vdv.myapp.myreadersdiary.ui.common.BaseFragment
+import ru.vdv.myapp.myreadersdiary.ui.common.afterTextChanged
 
 class RestoringUserAccessFragment : BaseFragment<FragmentUserRestoringAccessBinding>() {
     private lateinit var viewModel: RestoringUserAccessViewModel
@@ -38,7 +40,7 @@ class RestoringUserAccessFragment : BaseFragment<FragmentUserRestoringAccessBind
         super.onStart()
         fab = requireActivity().findViewById(R.id.fab)
         bottomAppBar = requireActivity().findViewById(R.id.bottomAppBar)
-        setFabStateLoading()
+        setFabStateBack()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -48,17 +50,33 @@ class RestoringUserAccessFragment : BaseFragment<FragmentUserRestoringAccessBind
 
         //подписываемся на изменения статуса формы
         viewModel.loginFormState.observe(viewLifecycleOwner, Observer {
-            btnStartRestoring.isEnabled = it.isDataValid
-            username.error = it?.usernameError?.let(this::getString)
+            if (it.isDataValid) {
+                username.error = null
+                username.setEndIconDrawable(R.drawable.baseline_check_black_24dp)
+                btnStartRestoring.isEnabled = true
+            } else {
+                btnStartRestoring.isEnabled = false
+                username.error = it?.usernameError?.let(this::getString)
+            }
         })
+
+        username.editText?.apply {
+            afterTextChanged {
+                username.error = null
+                val icon = avd(R.drawable.ic_cached_rotate_black_24dp_adv)
+                username.endIconDrawable = icon
+                icon.start()
+                viewModel.loginDataChanged(username.editText?.text.toString())
+            }
+        }
     }
 
-    private fun setFabStateLoading() {
-        val icon = avd(R.drawable.ic_cached_rotate_black_24dp_adv)
+    private fun setFabStateBack() {
+        val icon = avd(R.drawable.ic_cached_to_back_black_24dp_adv)
         fab.setImageDrawable(icon)
         icon.start()
         fab.setOnClickListener {
-            //никаких действий на режим загрузки не назначено
+            view?.findNavController()?.navigateUp()
         }
     }
 }
