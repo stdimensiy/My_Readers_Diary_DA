@@ -82,7 +82,7 @@ class ProcessReadingBookFragment : BaseFragment<ProcessReadingBookFragmentBindin
     }
 
     //Если фрагменты будут типовыми, то onViewCreated можно вынести в BaseFragment.
-    // И в BaseFragment определить абстракнтые методы observeToLiveData() и initViews()
+    // И в BaseFragment определить абстрактные методы observeToLiveData() и initViews()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
@@ -259,7 +259,7 @@ class ProcessReadingBookFragment : BaseFragment<ProcessReadingBookFragmentBindin
 
 
     // ### extensions utils area ###
-    //Выполняем диффинг перед обновлением данных
+    //Выполняем проверку изменений перед обновлением данных
     private fun TextView.setIfChanged(data: String) {
         if (text.equals(data).not()) text = data
         else return

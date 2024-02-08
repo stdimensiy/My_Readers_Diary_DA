@@ -78,7 +78,7 @@ class MainFragment : BaseFragment<MainFragmentBinding>() {
         fab.setImageDrawable(icon)
         icon.start()
         fab.setOnClickListener {
-            //установка лиссенера на повторное извлечение даных
+            //установка слушателя на повторное извлечение данных
             fetchData()
         }
     }

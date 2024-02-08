@@ -1,15 +1,13 @@
 package ru.vdv.myapp.myreadersdiary.ui.books.bookdetails
 
 import android.graphics.drawable.AnimatedVectorDrawable
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
-import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import ru.vdv.myapp.myreadersdiary.R
@@ -76,7 +74,7 @@ class BookDetailsFragment : BaseFragment<BookDetailsFragmentBinding>() {
         fab.setImageDrawable(icon)
         icon.start()
         fab.setOnClickListener {
-            //установка лиссенера на повторное извлечение даных
+            //установка слушателя на повторное извлечение данных
             //временно, после отработки дизайна разметки реализовать
         }
     }

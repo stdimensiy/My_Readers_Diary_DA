@@ -1,5 +1,6 @@
 package ru.vdv.myapp.myreadersdiary.model.repository
 
+import android.os.Looper
 import android.util.Log
 import retrofit2.Call
 import retrofit2.Callback
@@ -458,7 +459,7 @@ class RepositoryImpl : Repository {
     private val networkService: ApiService = Common.retrofitService
 
     override fun getListOfBooks(callBack: CallBack<List<Book>>) {
-        android.os.Handler().postDelayed({
+        android.os.Handler(Looper.getMainLooper()).postDelayed({
             networkService.getListOfBooks("123", "0.123", 1)
                 .enqueue(object : Callback<List<Book>> {
                     override fun onResponse(
@@ -476,7 +477,7 @@ class RepositoryImpl : Repository {
     }
 
     override fun getUserInfo(userLogin: String, callBack: CallBack<User>) {
-        android.os.Handler().postDelayed({
+        android.os.Handler(Looper.getMainLooper()).postDelayed({
             networkService.getUserInfo("123-321321321", userLogin)
                 .enqueue(object : Callback<User> {
                     override fun onResponse(call: Call<User>, response: Response<User>) {
@@ -650,8 +651,8 @@ class RepositoryImpl : Repository {
     }
 
     override fun getEventsList(num: Int, callBack: CallBack<List<ToMainList>>) {
-        //с прочтой задержкой для отработки кастомного прогрессбара
-        android.os.Handler().postDelayed({ callBack.onResult(eventPlug) }, 2000)
+        //с простой задержкой для отработки кастомного ProgressBar
+        android.os.Handler(Looper.getMainLooper()).postDelayed({ callBack.onResult(eventPlug) }, 2000)
     }
 
     override fun getSummaryEventData(callBack: CallBack<List<WeekEvent>>) {
@@ -664,8 +665,8 @@ class RepositoryImpl : Repository {
         callBack: CallBack<List<ShortEventForBook>>
     ) {
         //временный ответ пока готовится API
-        //с прочтой задержкой для отработки кастомного прогрессбара
-        android.os.Handler().postDelayed({ callBack.onResult(shortEventForBookPlug) }, 2000)
+        //с простой задержкой для отработки кастомного ProgressBar
+        android.os.Handler(Looper.getMainLooper()).postDelayed({ callBack.onResult(shortEventForBookPlug) }, 2000)
     }
 
     override fun setEvent(callBack: CallBack<Event>) {

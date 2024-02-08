@@ -10,7 +10,7 @@ package ru.vdv.myapp.myreadersdiary.ui.common
  */
 object BaseConstants {
     const val MY_TAG = "Моя проверка"
-    const val RETROFIT_FAILURE = "ОШИБКА при работе компонены RETROFIT"
+    const val RETROFIT_FAILURE = "ОШИБКА при работе компоненты RETROFIT"
     const val MY_BOOK_BUNDLE_KEY = "ARG_BOOK"
     const val MIN_LOGIN_LENGTH = 3
     const val MIN_PASSWORD_LENGTH = 3

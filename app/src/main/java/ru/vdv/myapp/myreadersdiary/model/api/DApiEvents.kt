@@ -20,7 +20,7 @@ interface DApiEvents {
      * **GET** .../events описание -  **[Dad Approves API Docs](https://dadapproves.ru/docs/reference-users.php#patch-user)**
      * @param key Ключ пользователя API key (зарегистрированного приложения)
      * @param user Идентификатор пользователя, список книг которого запрашивается
-     * @param since Крайний идентификатор события, (*выборка будет содержать элементы с большиминдексом*)
+     * @param since Крайний идентификатор события, (*выборка будет содержать элементы с большим индексом*)
      * @return возвращает список объектов *[Book]*
      * @throws NullPointerException
      **/
@@ -30,9 +30,9 @@ interface DApiEvents {
         @Header("user") user: String,
 
         @Query("since") since: Int, //крайний идентификатор, ответ будет содержать элементы с большим или равным значением
-        @Query("until") until: Int, //крайний идентификатор, ответ будет содержать элементы с менишим или равным значением
+        @Query("until") until: Int, //крайний идентификатор, ответ будет содержать элементы с меньшим или равным значением
         @Query("per_page") perPage: Int, //Заявляемое количество результатов (в пределах допустимых API)
-        @Query("component") component: String, //ключ компоненты с которым будут возврящаться данные (в пределах допустимых API) (в случае отсутствия вернутся все)
+        @Query("component") component: String, //ключ компоненты с которым будут возвращаться данные (в пределах допустимых API) (в случае отсутствия вернутся все)
     ): Call<List<Event>>
 
     // запись события для пользователя
@@ -42,7 +42,7 @@ interface DApiEvents {
         @Header("user") user: String,
         @Query("component") component: String,
         @Query("type") type: String,
-        @Body() event: Event, //объект события
+        @Body event: Event, //объект события
     ): Call<Event>
 
     // короткая запись простых событий

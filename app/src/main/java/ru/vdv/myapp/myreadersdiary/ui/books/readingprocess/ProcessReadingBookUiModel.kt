@@ -16,15 +16,15 @@ import ru.vdv.myapp.myreadersdiary.ui.common.StopwatchMode
  * @param densityWordsPerPage Плотность слов (среднее количество слов на страницу)
  * @param currentPage Текущая страница
  * @param currentPageFormattedDate Дата установки номера текущей страницы
- * @param newCurrentPage Новое значение текушей странице (указывается по завершению сеанса чтения)
- * @param startOrPauseButtonMode Режим кнопки (Начать чтение, Сделать паузу, Продолжить чтение)
+ * @param newCurrentPage Новое значение текущей страницы (указывается по завершению сеанса чтения)
+ * @param startOrPauseButtonMode Режим кнопки (Начать чтение / Сделать паузу / Продолжить чтение)
  * @param startOrPauseButtonTextAndIcon Иконка кнопки
  * @param activeStopwatchValue Значение таймера активности (форматированное)
  * @param activeStopwatchElapsingTime Значение таймера активности в мс
  * @param relaxStopwatchValue Значение таймера отдыха (форматированное)
  * @param isGroupProcessReadingRelaxVisible Отображать или нет таймер отдыха
  * @param dialog Отображаемый на экране диалог
- * @param activeStopwatchMode Режим таймиера активности
+ * @param activeStopwatchMode Режим таймера активности
  * @param processReadingTitleResId ID строкового ресурса для заголовка над таймером активности
  */
 @Parcelize
