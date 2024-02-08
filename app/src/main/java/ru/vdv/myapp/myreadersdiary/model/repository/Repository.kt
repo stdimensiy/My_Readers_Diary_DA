@@ -8,7 +8,9 @@ interface Repository {
     fun getClearSummaryEventData(startData: Date, callBack: CallBack<List<WeekEvent>>)
     fun getRandomSummaryEventData(startData: Date, callBack: CallBack<List<WeekEvent>>)
     fun getListOfBooks(callBack: CallBack<List<Book>>)
+    //модуль USER
     fun getUserInfo(userLogin: String, callBack: CallBack<User>)
+
     fun postBook(callBack: CallBack<Any>)
     fun patchBook(callBack: CallBack<Any>)
     fun deleteBook(callBack: CallBack<Any>)
