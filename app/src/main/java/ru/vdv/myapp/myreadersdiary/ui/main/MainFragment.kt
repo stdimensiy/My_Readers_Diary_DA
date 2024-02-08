@@ -64,7 +64,8 @@ class MainFragment : BaseFragment<MainFragmentBinding>() {
         viewModel.currentUser.observe(viewLifecycleOwner, Observer {
             if (it == null) {
                 Log.d(TAG, "Пользователь НЕ определен!")
-                bottomAppBar.replaceMenu(R.menu.bottom_app_bar_main_for_user_not_authorized)
+                //bottomAppBar.replaceMenu(R.menu.bottom_app_bar_main_for_user_not_authorized)
+                bottomAppBar.replaceMenu(R.menu.bottom_app_bar_main)
             } else {
                 bottomAppBar.replaceMenu(R.menu.bottom_app_bar_main)
                 Log.d(TAG, "Пользователь определен: ${it.name}")
