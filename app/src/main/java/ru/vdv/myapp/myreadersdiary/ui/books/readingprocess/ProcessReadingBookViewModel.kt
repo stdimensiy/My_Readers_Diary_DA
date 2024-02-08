@@ -58,7 +58,7 @@ class ProcessReadingBookViewModel(
         state.set(UI_MODEL_KEY, uiModel)
     }
 
-    /** Обработка нажатия на нопку запуска/возобновления/паузы */
+    /** Обработка нажатия на кнопку запуска/возобновления/паузы */
     fun onButtonProcessReadingStartOrPauseClicked() {
         uiModel?.let { uiModelNotNull ->
             when (uiModelNotNull.startOrPauseButtonMode) {
@@ -90,7 +90,7 @@ class ProcessReadingBookViewModel(
     }
 
     /**
-     * Обрабоока нажатия на кнопку "Изменить режим таймера чтения"
+     * Обработка нажатия на кнопку "Изменить режим таймера чтения"
      * Режим таймера можно менять только в при запущенном таймере активности
      */
     fun onButtonChangeActiveStopwatchModeClicked() {
@@ -171,13 +171,13 @@ class ProcessReadingBookViewModel(
         postScreenState(screenUiModel)
     }
 
-    /** Для отображения успешного стейта */
+    /** Для отображения успешного состояния */
     private fun postNewSuccessState(newUiModel: ProcessReadingBookUiModel) {
         uiModel = newUiModel
         postScreenState(ScreenUiState.Success(newUiModel))
     }
 
-    /** Отображение стейта */
+    /** Отображение состояния */
     private fun postScreenState(screenUiModel: ScreenUiState<ProcessReadingBookUiModel>) {
         _liveData.postValue(screenUiModel)
     }
@@ -218,7 +218,7 @@ class ProcessReadingBookViewModel(
         }
     }
 
-    /** Вызывается при закритии диалога ввода текущего номера страницы, если он был вызван в режиме чтения */
+    /** Вызывается при закрытии диалога ввода текущего номера страницы, если он был вызван в режиме чтения */
     private fun performResumeReading(uiModelNotNull: ProcessReadingBookUiModel) {
         activeStopwatch?.start()
         uiModelNotNull.copy(
@@ -255,7 +255,7 @@ class ProcessReadingBookViewModel(
         }
     }
 
-    /** Вызывается при закритии диалога ввода текущего номера страницы, если он был вызван в режиме паузы */
+    /** Вызывается при закрытии диалога ввода текущего номера страницы, если он был вызван в режиме паузы */
     private fun performResumePause(uiModelNotNull: ProcessReadingBookUiModel) {
         relaxStopwatch?.start()
         uiModelNotNull.copy(
@@ -288,7 +288,7 @@ class ProcessReadingBookViewModel(
         }
     }
 
-    /** Убрать из UI-стейта диалоговое окно */
+    /** Убрать из UI-состояния диалоговое окно */
     private fun dismissDialog(uiModelNotNull: ProcessReadingBookUiModel) {
         uiModelNotNull.copy(
             dialog = Dialog.NONE,
@@ -303,8 +303,9 @@ class ProcessReadingBookViewModel(
         val newUiModel = uiModel?.copy(
             dialog = Dialog.READING_RESULTS
         )
-        //todo тут будет вызов метода репозитория для отправки данных на сервер. Но пока еще не ясно, какой именнно метод и будет ли он возвращать какие-либо результаты.
-        // но пока заглушка с таймаутом для проверки корректности работы лоадера:
+        //TODO тут будет вызов метода репозитория для отправки данных на сервер. Но пока еще не ясно,
+        // какой именно метод и будет ли он возвращать какие-либо результаты.
+        // но пока заглушка с таймаутом для проверки корректности работы загрузчика:
         val executor: ExecutorService = Executors.newSingleThreadExecutor()
         executor.execute {
             Thread.sleep(READING_RESULTS_ANALYSIS_DELAY)
@@ -330,7 +331,7 @@ class ProcessReadingBookViewModel(
         private const val READING_RESULTS_ANALYSIS_DELAY =
             2000L  //временная задержка, пока не появится метод на бэкенде
         private const val DATE_FORMAT = "dd.MM.yyyy"
-        private const val MAX_RELAX_TIME_MS = 6000L //todo Увеличить до 10 минут
-        private const val MAX_ACTIVE_TIME_MS = 30000L  //todo Увеличть до 30 минут
+        private const val MAX_RELAX_TIME_MS = 6000L //TODO Увеличить до 10 минут
+        private const val MAX_ACTIVE_TIME_MS = 30000L  //TODO Увеличить до 30 минут
     }
 }

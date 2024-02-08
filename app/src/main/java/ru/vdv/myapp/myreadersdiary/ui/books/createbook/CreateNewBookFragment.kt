@@ -139,7 +139,7 @@ class CreateNewBookFragment : BaseFragment<CreateNewBookFragmentBinding>() {
             Log.d(TAG, "checkIsPossibleToSave / Наименование назнвания книги или автор нулевые")
             fab.setImageResource(R.drawable.ic_edit_24_stat)
             fab.setOnClickListener {
-                //Обнуляем лиссенер на время загрузки
+                //Обнуляем слушателя на время загрузки
                 Toast.makeText(
                     requireContext(),
                     "Введены не все данные достаточные для сохранения",
@@ -152,7 +152,7 @@ class CreateNewBookFragment : BaseFragment<CreateNewBookFragmentBinding>() {
             fab.setImageDrawable(icon)
             icon.start()
             fab.setOnClickListener {
-                //Обнуляем лиссенер на ыремя загрузки
+                //Обнуляем слушателя на время загрузки
                 Log.d(TAG, "Нажата кнопка сохранения")
             }
         }

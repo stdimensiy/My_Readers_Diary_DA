@@ -14,7 +14,7 @@ import ru.vdv.myapp.myreadersdiary.domain.Book
 - **@DELETE**   [deleteBook]
 - **@HEAD**     [headBook]
 - **@OPTION**   [optionsBook] (*временно снят с разработки*)
-- **@HTTP**     [httpBook] (*только для разработки! В релизе должен быть исколючен*)
+- **@HTTP**     [httpBook] (*только для разработки! В релизе должен быть исключен*)
  */
 interface DApiBooks {
     /**
@@ -74,9 +74,9 @@ interface DApiBooks {
      * **@DELETE** .../books описание -  **[Dad Approves API Docs](https://dadapproves.ru/docs/reference-users.php#patch-user)**
      * @param key Ключ <code>пользователя API</code> key
      * @param user Идентификатор пользователя, список книг которого запрашивается
-     * @param book создаваемый объект (книга) записи
-     * @return возвращает созданный объект *[Book]*
-     *  *на самом деле информация о книге (запись) не удаляется сразу а помечается "на удаление"
+     * @param id идентификатор удаляемой записи (книги)
+     * @return возвращает удаленный объект *[Book]*
+     *  *на самом деле информация о книге (запись) не удаляется сразу, а помечается "на удаление"
      *  фактическое удаление записи с пометкой "на удаление" происходит автоматически
      *  через определенный промежуток времени*
      * @throws NullPointerException
