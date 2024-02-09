@@ -28,25 +28,46 @@ class EnterCurrentPageDialog : BaseDialogFragment<DialogEnterBookmarkBinding>() 
 
     private var onCurrentPageEntered: ((Int) -> Unit)? = null
     private var onBackToReadingListener: (() -> Unit)? = null
-    private val currentPage: Long by lazy { arguments?.getLong(CURRENT_PAGE_BUNDLE_KEY) ?: DEFAULT_CURRENT_PAGE_VALUE }
-    private val pagesCount: Long by lazy { arguments?.getLong(PAGES_COUNT_BUNDLE_KEY) ?: DEFAULT_PAGES_COUNT_VALUE }
+    private val currentPage: Long by lazy {
+        arguments?.getLong(CURRENT_PAGE_BUNDLE_KEY) ?: DEFAULT_CURRENT_PAGE_VALUE
+    }
+    private val pagesCount: Long by lazy {
+        arguments?.getLong(PAGES_COUNT_BUNDLE_KEY) ?: DEFAULT_PAGES_COUNT_VALUE
+    }
     private var debounceExecutor: ExecutorService? = null
     private val mainThreadHandler: Handler by lazy { HandlerCompat.createAsync(Looper.getMainLooper()) }
 
     private val onSeekBarChangeListener: SeekBar.OnSeekBarChangeListener by lazy {
         object : SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) = with(binding) {
-                editTextInputLayoutEnterBookmark.apply {
-                    setText(progress.toString())
-                    editTextInputLayoutEnterBookmark.setSelection(editTextInputLayoutEnterBookmark.length())
+            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) =
+                with(binding) {
+                    editTextInputLayoutEnterBookmark.apply {
+                        setText(progress.toString())
+                        editTextInputLayoutEnterBookmark.setSelection(
+                            editTextInputLayoutEnterBookmark.length()
+                        )
+                    }
+                    val seekBarColor: Int = when {
+                        progress < currentPage -> ResourcesCompat.getColor(
+                            resources,
+                            R.color.red,
+                            null
+                        )
+
+                        progress > currentPage -> ResourcesCompat.getColor(
+                            resources,
+                            R.color.green,
+                            null
+                        )
+
+                        else -> ResourcesCompat.getColor(resources, R.color.color_accent, null)
+                    }
+                    seekBar.thumb.colorFilter =
+                        BlendModeColorFilterCompat.createBlendModeColorFilterCompat(
+                            seekBarColor,
+                            BlendModeCompat.SRC_IN
+                        )
                 }
-                val seekBarColor: Int = when {
-                    progress < currentPage -> ResourcesCompat.getColor(resources, R.color.red, null)
-                    progress > currentPage -> ResourcesCompat.getColor(resources, R.color.green, null)
-                    else -> ResourcesCompat.getColor(resources, R.color.color_accent, null)
-                }
-                seekBar.thumb.colorFilter = BlendModeColorFilterCompat.createBlendModeColorFilterCompat(seekBarColor, BlendModeCompat.SRC_IN)
-            }
 
             override fun onStartTrackingTouch(seekBar: SeekBar) {}
             override fun onStopTrackingTouch(seekBar: SeekBar) {}
@@ -108,9 +129,11 @@ class EnterCurrentPageDialog : BaseDialogFragment<DialogEnterBookmarkBinding>() 
             newCurrentPage == null ->
                 inputLayoutEnterBookmark.error =
                     resources.getString(R.string.dialog_process_reading_error_is_empty)
+
             newCurrentPage > pagesCount ->
                 inputLayoutEnterBookmark.error =
                     resources.getString(R.string.dialog_process_reading_error_more_than_pages_count)
+
             else -> {
                 inputLayoutEnterBookmark.error = null
                 onCurrentPageEntered?.invoke(newCurrentPage)
@@ -134,13 +157,21 @@ class EnterCurrentPageDialog : BaseDialogFragment<DialogEnterBookmarkBinding>() 
         }
 
     private fun showKeyboard() {
-        val inputMethodManager = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputMethodManager.showSoftInput(binding.editTextInputLayoutEnterBookmark, InputMethodManager.SHOW_FORCED)
+        val inputMethodManager =
+            activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.showSoftInput(
+            binding.editTextInputLayoutEnterBookmark,
+            InputMethodManager.SHOW_FORCED
+        )
     }
 
     private fun hideKeyboard() {
-        val inputMethodManager = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputMethodManager.hideSoftInputFromWindow(binding.editTextInputLayoutEnterBookmark.windowToken, 0)
+        val inputMethodManager =
+            activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(
+            binding.editTextInputLayoutEnterBookmark.windowToken,
+            0
+        )
     }
 
     private fun startDebounceJob() {
@@ -152,7 +183,9 @@ class EnterCurrentPageDialog : BaseDialogFragment<DialogEnterBookmarkBinding>() 
                         Thread.sleep(DEBOUNCE_DELAY_MS)
                         if (context != null) {
                             mainThreadHandler.post {
-                                binding.dialogSeekBar.setProgress(getNewCurrentPage() ?: DEFAULT_CURRENT_PAGE_VALUE.toInt())
+                                binding.dialogSeekBar.setProgress(
+                                    getNewCurrentPage() ?: DEFAULT_CURRENT_PAGE_VALUE.toInt()
+                                )
                                 if (getNewCurrentPage() ?: DEFAULT_CURRENT_PAGE_VALUE.toInt() > pagesCount) {
                                     binding.editTextInputLayoutEnterBookmark.setText(pagesCount.toString())
                                 }

@@ -6,8 +6,12 @@ import android.widget.LinearLayout
 import android.widget.SeekBar
 import androidx.appcompat.widget.AppCompatTextView
 
-class ThumbTextView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null) : AppCompatTextView(context, attrs) {
-    private val tvLayoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+class ThumbTextView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null) :
+    AppCompatTextView(context, attrs) {
+    private val tvLayoutParams = LinearLayout.LayoutParams(
+        LinearLayout.LayoutParams.WRAP_CONTENT,
+        LinearLayout.LayoutParams.WRAP_CONTENT
+    )
     private var tvWidth = 0
 
     fun attachToSeekBar(seekBar: SeekBar) {

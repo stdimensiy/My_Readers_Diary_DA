@@ -60,8 +60,8 @@ class ListOfBooksAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             }
             is AuthorSeparatorViewHolder -> {
                 item as AuthorSeparator
-                holder.letter.text = item.AuthorFullName[0].toString()
-                holder.name.text = item.AuthorFullName
+                holder.letter.text = item.authorFullName[0].toString()
+                holder.name.text = item.authorFullName
             }
             is GroupSeparatorViewHolder -> {
                 item as GroupSeparator

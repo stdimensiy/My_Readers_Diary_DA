@@ -165,9 +165,9 @@ class SummaryStatisticAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
         TotalMonthlyActivityFuter("Проба пера"),
     )
     private var onViewReadyListener: OnViewReady? = null
-    val imageLoader: ImageLoader<ImageView> = GlideImageLoader()
+    private val imageLoader: ImageLoader<ImageView> = GlideImageLoader()
 
-    lateinit var eventGraphAdapter: ActivityStatisticsGraphAdapter
+    private lateinit var eventGraphAdapter: ActivityStatisticsGraphAdapter
     lateinit var eventGraph: RecyclerView
 
 
@@ -204,6 +204,7 @@ class SummaryStatisticAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
                 imageLoader.loadUserAvatar(item.avatarUrl, holder.userAvatar)
                 imageLoader.loadUserBackground(item.backgroundUrl, holder.userBackground)
             }
+
             is SummaryStatisticGraphViewHolder -> {
                 item as SummaryUserActivity
                 eventGraphAdapter = ActivityStatisticsGraphAdapter()
@@ -211,17 +212,20 @@ class SummaryStatisticAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
                 // вот именно сейчас необходимо сообщить выше о том что RV готов и готов принимать данные
                 onViewReadyListener?.onViewReady()
             }
+
             is MonthSummaryStatisticHeaderViewHolder -> {
                 item as TotalMonthlyActivityHeader
                 holder.countDACoin.text = item.numValue.toString()
                 holder.period.text = item.content
                 holder.title.text = item.title
             }
+
             is mSSGroupSeparatorVH -> {
                 item as StatisticsGroupSeparator
                 holder.title.text = item.groupTitle
                 holder.count.text = item.groupSummaryValue.toString()
             }
+
             is MonthSummaryStatisticEventViewHolder -> {
                 item as EventWithProgress
                 holder.bookTitle.text = item.baseObject.title
@@ -235,18 +239,26 @@ class SummaryStatisticAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
                 holder.process.secondaryProgress = item.progressPercentSecondary
                 imageLoader.loadBookCover(item.baseObject.bookCover, holder.bookCover)
             }
+
             is mSSBookVH -> {
                 item as SingleEvent
                 holder.bookTitle.text = item.baseObject.title
                 holder.eventDescription.text = item.eventDescription
                 imageLoader.loadBookCover(item.baseObject.bookCover, holder.bookCover)
             }
+
             is MonthSummaryStatisticFuterViewHolder -> {
 
             }
+
             else -> {
                 holder as UnknownTypeViewHolder
-                holder.title.text = "ID: $position, type: ${item.javaClass.simpleName}"
+                holder.title.text = buildString {
+                    append("ID: ")
+                    append(position)
+                    append(", type: ")
+                    append(item.javaClass.simpleName)
+                }
             }
         }
     }
@@ -255,7 +267,7 @@ class SummaryStatisticAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
         return items.size
     }
 
-    fun setOnViewReadyListener(onViewReadyListener: OnViewReady){
+    fun setOnViewReadyListener(onViewReadyListener: OnViewReady) {
         this.onViewReadyListener = onViewReadyListener
     }
 }

@@ -1,13 +1,15 @@
 package ru.vdv.myapp.myreadersdiary.ui.users.recovery
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import ru.vdv.myapp.myreadersdiary.R
 import ru.vdv.myapp.myreadersdiary.domain.CallBack
 import ru.vdv.myapp.myreadersdiary.domain.StatusCode
 import ru.vdv.myapp.myreadersdiary.domain.User
-import ru.vdv.myapp.myreadersdiary.ui.common.*
+import ru.vdv.myapp.myreadersdiary.ui.common.BaseConstants
+import ru.vdv.myapp.myreadersdiary.ui.common.BaseViewModel
+import ru.vdv.myapp.myreadersdiary.ui.common.RegExPattern
+import ru.vdv.myapp.myreadersdiary.ui.common.UserLoginFragmentState
 import java.util.regex.Pattern
 
 class RestoringUserAccessViewModel : BaseViewModel() {
@@ -38,6 +40,7 @@ class RestoringUserAccessViewModel : BaseViewModel() {
                         _loginForm.value = currentFormState
                     }
                 }
+
                 override fun onFailure(t: Int) {
                     if (username == currentUserLogin) {
                         when (t) {

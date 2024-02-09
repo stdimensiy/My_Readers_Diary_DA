@@ -16,7 +16,7 @@ class ListOfBooksViewModel : BaseViewModel() {
     private val _postResult = MutableLiveData<String>()
     val postResult: LiveData<String> = _postResult
 
-    fun fetchData(){
+    fun fetchData() {
         repository.getListOfBooks(object : CallBack<List<Book>> {
             override fun onResult(result: List<Book>) {
                 //предварительно обкаточное решение без интерактора готовим данные непостредственно
