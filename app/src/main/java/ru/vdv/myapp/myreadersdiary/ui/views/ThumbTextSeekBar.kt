@@ -8,7 +8,8 @@ import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
 import ru.vdv.myapp.myreadersdiary.R
 
-class ThumbTextSeekBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null) : LinearLayout(context, attrs) {
+class ThumbTextSeekBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null) :
+    LinearLayout(context, attrs) {
     private var tvThumb: ThumbTextView? = null
     private var seekBar: SeekBar? = null
     private var onSeekBarChangeListener: OnSeekBarChangeListener? = null

@@ -9,7 +9,6 @@ import androidx.navigation.findNavController
 import androidx.preference.PreferenceFragmentCompat
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import ru.vdv.myapp.myreadersdiary.R
-import ru.vdv.myapp.myreadersdiary.ui.common.BaseConstants
 
 class SettingsFragment : PreferenceFragmentCompat() {
     private lateinit var fab: FloatingActionButton
@@ -23,9 +22,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
         setupFab2(view)
     }
 
-    private fun setupFab(){
+    private fun setupFab() {
         Log.d("Моя проверка", "Сработал FAB 1")
-        fab = activity?.let {it.findViewById(R.id.fab)}!!
+        fab = activity?.let { it.findViewById(R.id.fab) }!!
         val avd = { iconRes: Int ->
             AppCompatResources.getDrawable(
                 requireContext(),
@@ -37,10 +36,10 @@ class SettingsFragment : PreferenceFragmentCompat() {
         icon.start()
     }
 
-    private fun setupFab2(view: View){
+    private fun setupFab2(view: View) {
         // режим готовности к возврату из настроек в главный экран
         Log.d("Моя проверка", "Сработал FAB 2")
-        fab = activity?.let {it.findViewById(R.id.fab)}!!
+        fab = activity?.let { it.findViewById(R.id.fab) }!!
         val avd = { iconRes: Int ->
             AppCompatResources.getDrawable(
                 requireContext(),
