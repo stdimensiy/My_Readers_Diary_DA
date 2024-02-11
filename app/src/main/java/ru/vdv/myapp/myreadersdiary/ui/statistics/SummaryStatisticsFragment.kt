@@ -37,9 +37,11 @@ class SummaryStatisticsFragment : BaseFragment<FragmentStatisticsBinding>() {
         eventGraphAdapter = ActivityStatisticsGraphAdapter()
         viewModel = ViewModelProvider(this)[SummaryStatisticsViewModel::class.java]
         viewModel.fetchCurrentUser(
-            PreferenceManager.getDefaultSharedPreferences(context).getString(
-                getString(R.string.spref_key_login), getString(R.string.spref_key_login_default)
-            )
+            context?.let {
+                PreferenceManager.getDefaultSharedPreferences(it).getString(
+                    getString(R.string.spref_key_login), getString(R.string.spref_key_login_default)
+                )
+            }
         )
         return super.onCreateView(inflater, container, savedInstanceState)
     }
@@ -96,10 +98,12 @@ class SummaryStatisticsFragment : BaseFragment<FragmentStatisticsBinding>() {
 
     private fun fetchData() {
         viewModel.fetchCurrentUser(
-            PreferenceManager.getDefaultSharedPreferences(context).getString(
-                getString(R.string.spref_key_login),
-                getString(R.string.spref_key_login_default)
-            )
+            context?.let {
+                PreferenceManager.getDefaultSharedPreferences(it).getString(
+                    getString(R.string.spref_key_login),
+                    getString(R.string.spref_key_login_default)
+                )
+            }
         )
     }
 }
