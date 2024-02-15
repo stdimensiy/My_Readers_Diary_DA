@@ -75,7 +75,7 @@ class UserLoginFragment : BaseFragment<FragmentUserLoginBinding>() {
             setOnEditorActionListener { _, actionId, _ ->
                 when (actionId) {
                     EditorInfo.IME_ACTION_DONE -> {
-                        Log.d(TAG, "Сработал setOnEditorActionListenerна password")
+                        Log.d(TAG, "Сработал setOnEditorActionListener на password")
                         viewModel.login(
                             username.editText?.text.toString(),
                             password.editText?.text.toString()

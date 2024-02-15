@@ -1,8 +1,10 @@
 package ru.vdv.myapp.myreadersdiary
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -17,7 +19,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = AppBarMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val bottomAppBar = binding.bottomAppBar
@@ -27,11 +28,20 @@ class MainActivity : AppCompatActivity() {
             //из фрагмента любого уровня вложенности (аналог того сайта с функцией "домой")
             navController.navigate(R.id.nav_main)
         }
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                // небезопасно пока
+                val fragmentBackButton =
+                    supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_main)?.childFragmentManager?.fragments?.first() as? CustomBackButtonListener
+                supportFragmentManager.popBackStack()
+            }
+        })
 
         bottomAppBar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.nav_list_of_books -> {
                     // Отслеживание нажатия на кнопку суммарной статистики пользователя
+                    Log.i("VDV", "Нажата кнопка суммарной статистики пользователя")
                     navController.navigate(R.id.nav_list_of_books)
                     true
                 }
@@ -73,12 +83,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    override fun onBackPressed() {
-        val fragmentBackButton =
-            supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_main)?.childFragmentManager?.fragments?.first() as? CustomBackButtonListener
-        if (fragmentBackButton?.backPressed() != true) super.onBackPressed()
     }
 
     override fun onSupportNavigateUp(): Boolean {
